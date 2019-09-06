@@ -53,14 +53,12 @@
 	.el-header {
 		background-color: #fff;
 		color: #333;
-		text-align: left !important;
 		line-height: 1;
 	}
 
 	.el-main {
 		background-color: #F8F8F8;
 		color: #333;
-		text-align: left !important;
 		line-height: 1 !important;
 	}
 
