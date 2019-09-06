@@ -17,6 +17,8 @@ import finance_payment from '../components/finance/payment.vue'; //财务待结�
 import finance_voucher from '../components/finance/voucher.vue'; //财务待传凭证
 import finance_pay from '../components/finance/pay.vue'; //财务已结款
 import finance_invoice from '../components/finance/invoice.vue'; //财务已开票
+// import finance_immediate_payment from '../components/finance/immediate_payment.vue'; //财务立即支付
+// import finance_pay_success from '../components/finance/pay_success.vue'; //财务支付成功
 // 配置路由
 const routes = [{
 		path: '/statistics_home',
@@ -25,6 +27,9 @@ const routes = [{
 		children: [{
 			path: '/statistics_buy',
 			component: statistics_buy
+		}, {
+			path: '*',
+			redirect: '/statistics_buy'
 		},{
 			path: '/statistics_recode',
 			component: statistics_recode
@@ -51,20 +56,28 @@ const routes = [{
 	{
 		path: '/finance_index',
 		component: finance_index,
-		children: [{
-				path: '*',
-				redirect: '/finance_payment'
-			}, {
-				path: '/finance_voucher',
-				component: finance_voucher
-			}, {
-				path: '/finance_pay',
-				component: finance_pay
-			},
-			{
-				path: '/finance_invoice',
-				component: finance_invoice
-			}
+		redirect: '/finance_payment',
+		children: [ 
+		{
+			path: '/finance_payment',
+			component: finance_payment,
+		}, {
+			path: '/finance_voucher',
+			component: finance_voucher
+		}, {
+			path: '/finance_pay',
+			component: finance_pay
+		}, {
+			path: '/finance_invoice',
+			component: finance_invoice
+		},
+		// {
+		// 	path: '/finance_immediate_payment',
+		// 	component: finance_immediate_payment,
+		// },{
+		// 	path: '/finance_pay_success',
+		// 	component: finance_pay_success,
+		// }
 		]
 	}
 ]

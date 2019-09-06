@@ -3,21 +3,29 @@
 		<el-container>
 			<el-header>
 				<div class="header flex">
-					<ul class="nav flex tc f18 c333">
-						<li class="active"><router-link to='/finance_payment' class="white">待结款</router-link></li>
-						<li><router-link to='/finance_voucher'>待传凭证</router-link></li>
-						<li><router-link to='/finance_pay'>已结款</router-link></li>
-						<li><router-link to='/finance_invoce'>已开票</router-link></li>
+					<ul class="nav flex tc f14 c333">
+						<li :class="active==0?'active':''" @click="active=0">
+							<router-link to='/finance_payment' :class="active==0?'white':''">待结款</router-link>
+						</li>
+						<li :class="active==1?'active':''"  @click="active=1">
+							<router-link to='/finance_voucher' :class="active==1?'white':''">待传凭证</router-link>
+						</li>
+						<li :class="active==2?'active':''" @click="active=2">
+							<router-link to='/finance_pay' :class="active==2?'white':''">已结款</router-link>
+						</li>
+						<li :class="active==3?'active':''" @click="active=3">
+							<router-link to='/finance_invoice' :class="active==3?'white':''">已开票</router-link>
+						</li>
 					</ul>
-					<div class="f18 c666 user flex">
+					<div class="f14 c666 user flex">
 						<img src="../../assets/img/user.png" />
 						<p>13******99</p>
 					</div>
 				</div>
-				
+
 			</el-header>
 			<el-main>
-			  <router-view></router-view>	
+				<router-view></router-view>
 			</el-main>
 		</el-container>
 	</div>
@@ -27,43 +35,56 @@
 	export default {
 		name: 'app',
 		components: {
-	
-		}
+
+		},
+		data() {
+			return {
+                 active:0
+			}
+		},
+		watch: {}
 	}
 </script>
 
 <style>
-	.header{
+	.header {
 		width: 1200px;
 		margin: 0 auto;
 		justify-content: space-between;
 	}
+
 	.el-header {
 		background-color: #fff;
 		color: #333;
 		text-align: center;
 		line-height: 60px;
 	}
+
 	.el-main {
 		background-color: #F8F8F8;
 		color: #333;
 		text-align: center;
 		line-height: 160px;
 	}
+
 	body>.el-container {
 		margin-bottom: 40px;
 	}
+
 	.nav>li {
 		width: 104px;
 	}
+
 	.active {
 		background-color: #08b963;
 		color: #FFFFFF;
 	}
-	.user{
+
+	.user {
 		align-items: center;
 	}
-	.user img{
+
+	.user img {
 		width: 24px;
 		height: 29px;
 		margin-right: 10px;
