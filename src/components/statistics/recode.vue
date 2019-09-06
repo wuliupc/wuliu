@@ -10,7 +10,7 @@
 					<span class="el-dropdown-link">
 						<div class="sellter bg_white c999">{{checkstr}}</div>
 					</span>
-					<el-dropdown-menu slot="dropdown">
+					<el-dropdown-menu slot="dropdown" style="">
 						<el-dropdown-item  command="0">12位销货方秘钥串</el-dropdown-item>
 						<el-dropdown-item command="1">销货方姓名</el-dropdown-item>
 						<el-dropdown-item  command="2">货车端车牌号</el-dropdown-item>
@@ -19,6 +19,7 @@
 				</el-dropdown>
 				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容">
 				  <el-button type="success" class="recode_find bg_green">查询</el-button>
+				   <el-button class="recode_find">清空</el-button>
 				 
 			</div>
 		</div>
@@ -61,6 +62,9 @@
 </script>
 
 <style>
+	.el-dropdown-menu{
+		left: 350px !important;
+	}
 	.sellter {
 		width: 200px;
 		height: 32px;
