@@ -27,9 +27,12 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .c08b{color: #08B963;}
 .c333{color: #333333;}
 .c666{color: #666666; }
+.c999{color: #999999;}
 .white{color: #FFFFFF;}
 .bg_white{background-color: #FFFFFF;}
+.bg_green{background-color: #08b963;}
 .mt20{margin-top: 20px;}
 .mt25{margin-top: 25px;}
 .mt80{margin-top: 80px;}
 .line1{line-height: 1 !important;}
+.border{border-radius: 4px;}
