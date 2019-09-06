@@ -26,7 +26,7 @@
 	}
 	#success_content{
 		width: 100%;
-		border: 1px solid red;
+		/* border: 1px solid red; */
 	}
 	#success_content p{
 		height: 40px;
@@ -34,6 +34,7 @@
 		padding-left: 25px;
 		border: 2px solid #ececec;
 		background-color: #f8f8f8;
+		box-shadow: inset 2px 2px 15px #ececec;
 	}
 		
 </style>

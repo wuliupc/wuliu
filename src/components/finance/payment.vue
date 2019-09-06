@@ -24,7 +24,7 @@
 			<p>到达地：河北省唐山市</p>
 			<p>状态：已完成</p>
 		</div>
-		<div style="margin-right: 67px;"> <router-link to="/finance_pay_success">查看详情</router-link></div>
+		<div style="margin-right: 67px;"> <router-link to="/finance_immediate_pay">查看详情</router-link></div>
 	</div>
 	</div>
 </template>
