@@ -30,7 +30,7 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .c999{color: #999999;}
 .white{color: #FFFFFF;}
 .bg_white{background-color: #FFFFFF;}
-.bg_green{background-color: #08b963;}
+.bg_green{background-color: #08b963 !important;}
 .mt10{margin-top: 10px;}
 .mt18{margin-top: 18px;}
 .mt20{margin-top: 20px;}
