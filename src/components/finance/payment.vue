@@ -1,52 +1,49 @@
 <template>
-	<div id="app">
-		<div id="payment_img">
-			<img src="../../assets/img/successpay.png" alt="">
-			<p class="c666 f20">支付成功</p>
-			<p class="c999 f14">3秒后自动返回</p>
-			<button class="f20 white bg_green border">立即返回</button>
+	<div class="buy_body">
+		<div>
+		 <div class="block mt20">
+		    <el-date-picker
+		      v-model="value1"
+		      type="daterange"
+		      range-separator="至"
+		      start-placeholder="开始日期"
+		      end-placeholder="结束日期">
+		    </el-date-picker>
+		  </div>
+		  <div>
+			  <div>{{checkstr}}</div>
+		  </div>
 		</div>
+	<div class="buy_list bg_white flex c666 f16 tl line1">
+		<div>
+			<p>12位销货方秘钥串：123456789123</p>
+			<p>销货方姓名：张晓晓</p>
+			<p>货物名称：箱子</p>
+			<p>货物重量：毛重5t 皮重5t 净重5t</p>
+			<p>货物到达实际重量：毛重5t 皮重5t 净重5t 扣5t</p>
+			<p>到达地：河北省唐山市</p>
+			<p>状态：已完成</p>
+		</div>
+		<div style="margin-right: 67px;"> <router-link to="/finance_pay_success">查看详情</router-link></div>
+	</div>
 	</div>
 </template>
 
 <script>
-	export default {
-		name: 'app',
-		data() {
-		      return {
-		        }
-		    },
-		components: {
-
-		},
-		
-	}
+	 export default {
+	    data() {
+	      return {
+			checkstr:'12位销货方秘钥串',
+	        value1: '',
+	      };
+	    },
+		watch:{
+			value1(){
+				console.log(this.value1);
+			}
+		}
+	  };
 </script>
 
 <style>
-	#payment_img{
-		width: 100%;
-	}
-	.el-main{
-		line-height: 0px !important;
-		margin-top: 180px;
-	}
-	#payment_img p:nth-of-type(1),#payment_img p:nth-of-type(2){
-		height: 35px;
-		line-height: 35px;
-	}
-	#payment_img p:nth-of-type(1){
-		margin-top: 10px;
-	}
-	#payment_img p:nth-of-type(2){
-		margin-top: 35px;
-	}
-	#payment_img button{
-		width: 425px;
-		height: 56px;
-		border: none;
-		margin-top: 110px;
-		
-	}
-		
 </style>
