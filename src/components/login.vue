@@ -2,12 +2,12 @@
 	<div id="login">
 		<div class="mask">
 			<div class="main bg_white">
-				<p class="c333 f30 tc">登录</p>
+				<p class="c333 f26 tc">登录</p>
 				<div><input type="tel" placeholder="请输入手机号" maxlength="11" /></div>
 				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" /> <img src="../assets/img/biyan.png" v-show="show"
 					 @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" /> </div>
 				<el-button type="info" disabled class="login_btn">立即登录</el-button>
-				<p class="tc f18 c666 line1"><router-link to="/register">立即注册</router-link></p>
+				<p class="tc f14 c666 line1"><router-link to="/register">立即注册</router-link></p>
 			</div>
 		</div>
 	</div>
@@ -67,6 +67,6 @@
 		width: 429px;
 		height: 60px;
 		margin: 80px auto 48px;
-		font-size: 24px;
+		font-size: 20px;
 	}
 </style>

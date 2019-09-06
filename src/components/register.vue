@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<div class="register_main">
-			<div class="register_top f18 flex">
+			<div class="register_top f14 flex">
 				<p>
 					<span class="c333">已有账号，</span> <router-link to="/login" class="c08b">马上登录</router-link>
 				</p>
 				<span class="c08b" v-on:click="back">返回</span>
 			</div>
 			<div class="main bg_white register">
-				<p class="c333 f30 tc">注册</p>
+				<p class="c333 f26 tc">注册</p>
 				<div><input type="text" placeholder="请输入购货方名称"  /></div>
 				<div><input type="tel"  placeholder="请输入手机号" maxlength="11" /></div>
 				<div class="flex"><input type="text"  placeholder="请输入短信验证码"  />  <el-button type="success"  class="code f14">发送验证码</el-button></div>
@@ -22,8 +22,8 @@
 		<div class="mask register_mask" v-show="show">
 			<img src="../assets/img/x.png" @click="show=false">
 			<div>
-				<p class="tc f30 register_text">恭喜注册成功！</p>
-				<el-button type="success" round class="f30 register_text_btn"><router-link to="/login" class="white">立即登录</router-link></el-button>
+				<p class="tc f26 register_text">恭喜注册成功！</p>
+				<el-button type="success" round class="f26 register_text_btn"><router-link to="/login" class="white">立即登录</router-link></el-button>
 			</div>
 		</div>
 		</transition>

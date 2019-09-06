@@ -15,7 +15,10 @@
 		        
 		      }
 		  },
-		  watch: {}
+		  watch: {},
+		  mounted() {
+		
+		  }
 		     
 	}
 </script>
