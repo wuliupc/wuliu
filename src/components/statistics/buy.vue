@@ -12,7 +12,7 @@
 				<p>到达地：河北省唐山市</p>
 				<p>状态：待发货</p>
 			</div>
-			<div style="margin-right: 67px;">查看详情</div>
+			<div style="margin-right: 67px;"> <router-link to="/statistics_info">查看详情</router-link></div>
 		</div>
 		<div class="buy_list bg_white flex c666 f16 tl line1">
 			<div>
@@ -53,7 +53,7 @@
 	}
 	.buy_list{
 		width: 100%;
-		height: 220px;
+		min-height: 220px;
 		padding: 25px 0 0  15px;
 		border-radius: 4px;
 		justify-content: space-between;

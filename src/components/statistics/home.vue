@@ -22,9 +22,7 @@
 
 			</el-header>
 			<el-main>
-				<transition name="el-fade-in">
 				<router-view></router-view>
-				</transition>
 			</el-main>
 		</el-container>
 	</div>
@@ -55,15 +53,15 @@
 	.el-header {
 		background-color: #fff;
 		color: #333;
-		text-align: center;
-		line-height: 60px;
+		text-align: left !important;
+		line-height: 1;
 	}
 
 	.el-main {
 		background-color: #F8F8F8;
 		color: #333;
-		text-align: center;
-		line-height: 160px;
+		text-align: left !important;
+		line-height: 1 !important;
 	}
 
 	body>.el-container {
