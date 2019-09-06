@@ -29,7 +29,13 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .c666{color: #666666; }
 .white{color: #FFFFFF;}
 .bg_white{background-color: #FFFFFF;}
+.mt10{margin-top: 10px;}
+.mt18{margin-top: 18px;}
 .mt20{margin-top: 20px;}
 .mt25{margin-top: 25px;}
 .mt80{margin-top: 80px;}
 .line1{line-height: 1 !important;}
+.translateY{top:50%;transform:translateY(-50%); }
+.center{top: 50%;left: 50%;transform: translate(-50%,-50%); }
+.relative{position: relative;}
+.absolute{position: absolute;}
