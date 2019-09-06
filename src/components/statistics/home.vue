@@ -29,17 +29,23 @@
 </template>
 
 <script>
+	const S = require('../../module/common.js').S
 	export default {
 		name: 'app',
-		components: {
-
-		},
+		components: {},
 		data() {
 			return {
                  active:0
 			}
 		},
-		watch: {}
+		watch: {
+			active(){
+				S.set('active',this.active)
+			}
+		},
+		mounted(){
+		this.active = S.get('active')||0
+		}
 	}
 </script>
 
