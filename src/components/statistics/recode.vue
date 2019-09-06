@@ -18,7 +18,7 @@
 					</el-dropdown-menu>
 				</el-dropdown>
 				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容">
-				  <el-button type="success" class="recode_find">查询</el-button>
+				  <el-button type="success" class="recode_find bg_green">查询</el-button>
 				 
 			</div>
 		</div>
@@ -77,6 +77,5 @@
 	.recode_find{
 		height: 32px;
 		padding: 0 10px;
-		background-color: #08B963 !important;
 	}
 </style>
