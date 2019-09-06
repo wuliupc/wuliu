@@ -26,10 +26,10 @@
 <style>
 	#payment_img{
 		width: 100%;
+		margin-top: 180px;
 	}
 	.el-main{
 		line-height: 0px !important;
-		margin-top: 180px;
 	}
 	#payment_img p:nth-of-type(1),#payment_img p:nth-of-type(2){
 		height: 35px;
