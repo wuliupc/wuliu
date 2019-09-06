@@ -63,7 +63,7 @@
 
 <style>
 	.el-dropdown-menu{
-		left: 350px !important;
+		width: 230px;
 	}
 	.sellter {
 		width: 200px;
