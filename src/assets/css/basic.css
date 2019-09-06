@@ -9,6 +9,7 @@ button,input,select,textarea{font-size:100%;}
 fieldset,img{border:0;}
 a { text-decoration: none; color: #666; background: none }
 ul, ol { list-style: none; }
+img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display: inline-block;}
 .focus{ outline:none;}
 .clearfix{ clear: both; content: ""; display: block; overflow: hidden }
 .clear{clear: both;}
@@ -19,9 +20,13 @@ ul, ol { list-style: none; }
 .tl{text-align: left;}
 .tr{text-align: right}
 .f18{font-size: 18px;}
+.f30{font-size: 30px;}
+.c08b{color: #08B963;}
 .c333{color: #333333;}
 .c666{color: #666666; }
 .white{color: #FFFFFF;}
 .bg_white{background-color: #FFFFFF;}
 .mt20{margin-top: 20px;}
 .mt25{margin-top: 25px;}
+.mt80{margin-top: 80px;}
+.line1{line-height: 1 !important;}
