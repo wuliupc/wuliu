@@ -94,8 +94,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_immediate_pay" class="f16">确认结款</router-link>
 					</div>
 				</div>
 			</div>
@@ -156,8 +156,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_immediate_pay" class="f16">确认结款</router-link>
 					</div>
 				</div>
 			</div>
@@ -218,8 +218,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_immediate_pay" class="f16">确认结款</router-link>
 					</div>
 				</div>
 			</div>
@@ -447,7 +447,7 @@
 	}
 
 	.payment_list_two_detail {
-		margin-top: 129px;
+		margin-top: 111px;
 		display: flex;
 		flex-flow: row wrap;
 		align-items: center;
@@ -455,16 +455,18 @@
 	}
 
 	.payment_list_two_detail a {
-		height: 20px;
+		height: 40px;
+		line-height: 40px;
 		width: 100%;
 		text-align: center;
 	}
 
 	.payment_list_two_detail a:nth-of-type(2) {
-		height: 20px;
+		height: 40px;
+		line-height: 40px;
 		width: 100%;
 		text-align: center;
-		padding-top: 40px;
+		margin-top: 20px;
 		box-sizing: border-box;
 		color: #08B963;
 	}

@@ -27,7 +27,10 @@ import finance_pay from '../components/finance/pay.vue'; //财务已结款
 import finance_invoice from '../components/finance/invoice.vue'; //财务已开票
 import finance_immediate_pay from '../components/finance/immediate_pay.vue'; //财务立即支付
 import finance_pay_success from '../components/finance/pay_success.vue'; //财务支付成功
-// 配置路由
+import finance_payment_detail from '../components/finance/payment_detail'; //财务查看详情
+import finance_paied_detail from '../components/finance/paied_detail'; //财务查看详情
+import finance_invoice_detail from '../components/finance/invoice_detail'; //财务已开票详情
+// 配置路由import finance_pay_success from '../components/finance/pay_success.vue'; //财务支付成功
 const routes = [{
 		path: '/statistics_home',
 		component: statistics_home,
@@ -120,6 +123,15 @@ const routes = [{
 			}, {
 				path: '/finance_pay_success',
 				component: finance_pay_success,
+			},{
+				path: '/finance_payment_detail',
+				component: finance_payment_detail,
+			},{
+				path: '/finance_paied_detail',
+				component: finance_paied_detail
+			},{
+				path: '/finance_invoice_detail',
+				component: finance_invoice_detail
 			}
 		]
 	}

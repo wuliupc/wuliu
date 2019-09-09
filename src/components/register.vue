@@ -84,6 +84,7 @@
 		position: fixed;
 		top: 0;
 		z-index: 9;
+		left: 0
 	}
 	.register_mask>img{
 		position: absolute;

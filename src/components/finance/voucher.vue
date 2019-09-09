@@ -31,10 +31,67 @@
 						<input id="quan" type="checkbox" @click="checkAll($event)" class="checkItem"> <span>全选</span>
 					</label>
 				</div>
-				<div class="payment_btn">
-					<button>批量结款</button>
-					<button>下载表格</button>
-					<button>下载货车信息</button>
+			</div>
+			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+				<div class="payment_list_one">
+					<div class="payment_list_one_lab">
+						<label>
+							<!-- v-model 双向数据绑定命令 -->
+							<input class="checkItem" type="checkbox" value="apple" v-model="checkData">
+						</label>
+						<ul>
+							<li>位销货方秘钥串</li>
+							<li>123456789123</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>销货方姓名</li>
+							<li style="padding-left: 13px;">张晓晓</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>货车端车牌号</li>
+							<li style="padding-left: 13px;">冀B·F6655</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>货物名称</li>
+							<li style="padding-left: 13px;">箱子</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>货物到达实际重量</li>
+							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>货物金额</li>
+							<li style="padding-left: 13px;">5000元</li>
+						</ul>
+					</div>
+					<div class="payment_list_two_lab">
+						<span></span>
+						<ul>
+							<li>货物到达时间</li>
+							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
+						</ul>
+					</div>
+				</div>
+				<div class="payment_list_two">
+					<div class="payment_list_two_detail">
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<span class="f16" @click="up()">上传结款凭证</span>
+					</div>
 				</div>
 			</div>
 			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
@@ -91,11 +148,11 @@
 							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">上传结款凭证</router-link>
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<span class="f16" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
 			</div>
@@ -153,26 +210,31 @@
 							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">上传结款凭证</router-link>
+						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<span class="f16" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
 			</div>
-			   <div class="mt25">
-			       <!-- <span class="demonstration">直接前往</span> -->
-			       <el-pagination
-			         @size-change="handleSizeChange"
-			         @current-change="handleCurrentChange"
-			         :current-page.sync="currentPage3"
-			         :page-size="2"
-			         layout="prev, pager, next, jumper"
-			         :total="100">
-			       </el-pagination>
-			     </div>
+			<div class="mt20">
+				<!-- <span class="demonstration">直接前往</span> -->
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
+				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
+				</el-pagination>
+			</div>
 		</div>
+		<!-- 注册成功弹框 -->
+		<transition name="el-fade-in">
+		<div class="mask register_mask" v-show="show">
+			<img src="../../assets/img/x.png" @click="show=false">
+			<div>
+				<p class="tc f26 register_text">上传成功！</p>
+				<el-button type="success" round class="f26 register_text_btn" @click="show=false">确定</el-button>
+			</div>
+		</div>
+		</transition>
 	</div>
 </template>
 
@@ -183,7 +245,8 @@
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 5
+				currentPage3: 5,
+				show: false
 			};
 		},
 		methods: {
@@ -202,12 +265,15 @@
 					this.checkData = [];
 				}
 			},
-			 handleSizeChange(val) {
-			        console.log(`每页 ${val} 条`);
-			      },
-			      handleCurrentChange(val) {
-			        console.log(`当前页: ${val}`);
-			      }
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(val) {
+				console.log(`当前页: ${val}`);
+			},
+			up(){
+				this.show=true
+			},
 		},
 		watch: {
 			value1() {
@@ -215,7 +281,7 @@
 			},
 			checkData: {
 				handler() { // 数据数组有变化将触发此函数
-					if (this.checkData.length == 2) {
+					if (this.checkData.length == 3) {
 						document.querySelector('#quan').checked = true;
 					} else {
 						document.querySelector('#quan').checked = false;
@@ -260,7 +326,7 @@
 		align-items: center;
 	}
 
-	.payment_lab label{
+	.payment_lab label {
 		height: 32px;
 		line-height: 32px;
 		display: flex;
@@ -288,27 +354,6 @@
 		/* -webkit-appearance: none; */
 	}
 
-	.payment_btn button {
-		height: 32px;
-		background-color: #fff;
-		border: 1px solid #08B963;
-		color: #08B963;
-		border-radius: 4px;
-		margin-right: 17px;
-		font-size: 14px;
-	}
-
-	.payment_btn button:hover {
-		height: 32px;
-		background-color: #08B963;
-		border: 1px solid #08B963;
-		color: #fff;
-		border-radius: 4px;
-		margin-right: 17px;
-		font-size: 14px;
-		cursor: pointer;
-	}
-
 	.payment_list {
 		width: 100%;
 		min-height: 322px;
@@ -317,7 +362,6 @@
 		border-right: 1px solid #e8e8e8;
 		display: flex;
 		flex-flow: row;
-		/* align-items: center; */
 		justify-content: space-between;
 	}
 
@@ -328,7 +372,8 @@
 		height: 45px;
 	}
 
-	.payment_list_one_lab,.payment_list_two_lab {
+	.payment_list_one_lab,
+	.payment_list_two_lab {
 		width: 100%;
 		height: 45px;
 		display: flex;
@@ -337,27 +382,32 @@
 		border-bottom: 1px solid #e8e8e8;
 	}
 
-	.payment_list_one_lab label,.payment_list_two_lab span{
+	.payment_list_one_lab label,
+	.payment_list_two_lab span {
 		width: 49px;
 	}
-	.payment_list_two_lab span{
+
+	.payment_list_two_lab span {
 		border-bottom: 1px solid #fff;
 	}
-	
-	.payment_list_one_lab label input{
+
+	.payment_list_one_lab label input {
 		width: 49px;
 		margin: 0 auto;
 	}
 
-	.payment_list_one_lab ul,.payment_list_two_lab ul {
+	.payment_list_one_lab ul,
+	.payment_list_two_lab ul {
 		/* width: 100%; */
 		height: 45px;
 		display: flex;
 		flex-flow: row;
 		align-items: center;
 		border-left: 1px solid #e8e8e8;
-}
-	.payment_list_one_lab ul li:nth-of-type(1),.payment_list_two_lab ul li:nth-of-type(1) {
+	}
+
+	.payment_list_one_lab ul li:nth-of-type(1),
+	.payment_list_two_lab ul li:nth-of-type(1) {
 		height: 45px;
 		line-height: 45px;
 		width: 265px;
@@ -374,34 +424,44 @@
 		box-sizing: border-box;
 	}
 
-	.payment_list_two,.payment_list_two_detail {
+	.payment_list_two,
+	.payment_list_two_detail {
 		width: 200px;
 	}
-	.payment_list_two{
+
+	.payment_list_two {
 		border-left: 1px solid #e8e8e8;
 		border-bottom: 1px solid #e8e8e8;
 	}
-	.payment_list_two_detail{
-		margin-top: 129px;
+
+	.payment_list_two_detail {
+		margin-top: 111px;
 		display: flex;
 		flex-flow: row wrap;
 		align-items: center;
-		
+
 	}
+
 	.payment_list_two_detail a {
-		height: 20px;
+		height: 40px;
+		line-height: 40px;
 		width: 100%;
 		text-align: center;
 	}
+
 	.payment_list_two_detail a:nth-of-type(2) {
-		height: 20px;
+		height: 40px;
+		line-height: 40px;
 		width: 100%;
 		text-align: center;
-		padding-top: 40px;
+		margin-top: 20px;
 		box-sizing: border-box;
 		color: #08B963;
 	}
-	.el-pager li,.el-pagination .btn-prev,.el-pagination .btn-next{
+
+	.el-pager li,
+	.el-pagination .btn-prev,
+	.el-pagination .btn-next {
 		width: 32px;
 		height: 32px;
 		line-height: 32px;
@@ -409,15 +469,18 @@
 		margin: 0 8px 0 8px;
 		border-radius: 4px;
 		color: #595959;
-		
+
 	}
-	.el-pagination .btn-prev .el-icon{
+
+	.el-pagination .btn-prev .el-icon {
 		margin-left: 5px;
 	}
-	.el-pagination .btn-next .el-icon{
+
+	.el-pagination .btn-next .el-icon {
 		margin-left: -3px;
 	}
-	.el-pager li.active{
+
+	.el-pager li.active {
 		width: 32px;
 		height: 32px;
 		background-color: #08b963;
@@ -426,4 +489,5 @@
 		font-size: 14px;
 		border: none;
 	}
+
 </style>
