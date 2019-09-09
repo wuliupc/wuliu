@@ -57,6 +57,7 @@
 		margin-top: 60px;
 		margin-bottom: 45px;
 		justify-content: flex-end;
+		white-space: nowrap;
 	}
 	.register_top>p{
 		border-right: 1px solid #333333;

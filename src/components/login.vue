@@ -19,6 +19,10 @@
 			return {
 				show: true
 			}
+		},mounted() {
+			this.$http.post('http://wuliu.aishangts.com/index/index/test',{name:'张三'},{emulateJSON:true}).then(res=>{
+				console.log(res)
+			})
 		}
 	}
 </script>

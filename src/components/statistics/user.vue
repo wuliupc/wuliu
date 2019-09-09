@@ -39,7 +39,7 @@
 		},
 		watch: {
 			 $route(to,from){
-			    console.log(to.path);
+			    //console.log(to.path);
 				if(to.path=="/statistics_business")this.user_active = 0;
 			  },
 			user_active(){

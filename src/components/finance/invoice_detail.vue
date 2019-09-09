@@ -70,7 +70,13 @@
 	.el-submenu__title{
 		padding-left:0px !important ;
 		}
-		.tac el-row{
+		.tac el-row,.el-col-12,.el-row{
 			width: 100%;
 		}
+		.el-menu{
+			width: 100%;
+			background-color:#f8f8f8 !important;
+			border: none;
+		}
+		/* ..el-row{} */
 </style>

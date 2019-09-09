@@ -1,10 +1,10 @@
 <template>
 	<div class="buy_body">
 		<div class="tl">
-			<div class="mt25">
+		<!-- 	<div class="block mt20 ">
 				<el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
 				</el-date-picker>
-			</div>
+			</div> -->
 			<div class="mt10 flex">
 				<el-dropdown trigger="click" @command="handleCommand">
 					<span class="el-dropdown-link">
@@ -31,8 +31,12 @@
 						<input id="quan" type="checkbox" @click="checkAll($event)" class="checkItem"> <span>全选</span>
 					</label>
 				</div>
+				<div class="payment_btn">
+					<button class="bg_green white">批量开票</button>
+					<button>下载表格</button>
+				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" style="min-height: 275px;">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -40,7 +44,7 @@
 							<input class="checkItem" type="checkbox" value="apple" v-model="checkData">
 						</label>
 						<ul>
-							<li>位销货方秘钥串</li>
+							<li>12位销货方秘钥串</li>
 							<li>123456789123</li>
 						</ul>
 					</div>
@@ -79,18 +83,12 @@
 							<li style="padding-left: 13px;">5000元</li>
 						</ul>
 					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
-						</ul>
-					</div>
+					
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/ballot_info" class="f16 c333">查看详情</router-link>
+						<router-link to="/ballot_info" class="f16">开具发票</router-link>
 					</div>
 				</div>
 			</div>
@@ -151,8 +149,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
+						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
 					</div>
 				</div>
 			</div>
@@ -213,28 +211,18 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
+						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
 					</div>
 				</div>
 			</div>
-			<div class="mt20">
+			<div class="block">
 				<!-- <span class="demonstration">直接前往</span> -->
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
 				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
 				</el-pagination>
 			</div>
 		</div>
-		<!-- 注册成功弹框 -->
-		<transition name="el-fade-in">
-		<div class="mask register_mask" v-show="show">
-			<img src="../../assets/img/x.png" @click="show=false">
-			<div>
-				<p class="tc f26 register_text">上传成功！</p>
-				<el-button type="success" round class="f26 register_text_btn" @click="show=false">确定</el-button>
-			</div>
-		</div>
-		</transition>
 	</div>
 </template>
 
@@ -245,8 +233,7 @@
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 5,
-				show: false
+				currentPage3: 5
 			};
 		},
 		methods: {
@@ -270,14 +257,11 @@
 			},
 			handleCurrentChange(val) {
 				console.log(`当前页: ${val}`);
-			},
-			up(){
-				this.show=true
-			},
+			}
 		},
 		watch: {
 			value1() {
-				// console.log(this.value1);
+				console.log(this.value1);
 			},
 			checkData: {
 				handler() { // 数据数组有变化将触发此函数
@@ -294,200 +278,4 @@
 </script>
 
 <style>
-	.el-dropdown-menu {
-		width: 230px;
-	}
-
-	.sellter {
-		width: 200px;
-		height: 32px;
-		line-height: 32px;
-		padding: 0 11px;
-		font-size: 14px;
-		border: 1px solid #ddd;
-		margin-right: 10px;
-	}
-
-	.sellterinput {
-		width: 390px;
-	}
-
-	.recode_find {
-		height: 32px;
-		padding: 0 10px;
-	}
-
-	.payment_all {
-		width: 100%;
-		margin-top: 22px;
-		width: 100%;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-	}
-
-	.payment_lab label {
-		height: 32px;
-		line-height: 32px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-	}
-
-	.payment_lab label span {
-		margin: 0 13px 0 7px;
-		font-size: 14px;
-	}
-
-	.checkItem {
-		display: block;
-		width: 16px;
-		height: 16px;
-		line-height: 16px;
-		border-radius: 4px;
-		background-color: #fff !important;
-		border: 1px solid #d9d9d9;
-	}
-
-	.checkItem {
-		outline: none;
-		/* -webkit-appearance: none; */
-	}
-
-	.payment_list {
-		width: 100%;
-		min-height: 322px;
-		border-top: 1px solid #e8e8e8;
-		border-left: 1px solid #e8e8e8;
-		border-right: 1px solid #e8e8e8;
-		display: flex;
-		flex-flow: row;
-		justify-content: space-between;
-	}
-
-	.payment_list_one {
-		width: 1000px;
-		display: flex;
-		flex-flow: row wrap;
-		height: 45px;
-	}
-
-	.payment_list_one_lab,
-	.payment_list_two_lab {
-		width: 100%;
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab label,
-	.payment_list_two_lab span {
-		width: 49px;
-	}
-
-	.payment_list_two_lab span {
-		border-bottom: 1px solid #fff;
-	}
-
-	.payment_list_one_lab label input {
-		width: 49px;
-		margin: 0 auto;
-	}
-
-	.payment_list_one_lab ul,
-	.payment_list_two_lab ul {
-		/* width: 100%; */
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-left: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(1),
-	.payment_list_two_lab ul li:nth-of-type(1) {
-		height: 45px;
-		line-height: 45px;
-		width: 265px;
-		border-right: 1px solid #e8e8e8;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(2) {
-		height: 45px;
-		line-height: 45px;
-		width: 689px;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_two,
-	.payment_list_two_detail {
-		width: 200px;
-	}
-
-	.payment_list_two {
-		border-left: 1px solid #e8e8e8;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_two_detail {
-		margin-top: 111px;
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
-
-	}
-
-	.payment_list_two_detail a {
-		height: 40px;
-		line-height: 40px;
-		width: 100%;
-		text-align: center;
-	}
-
-	.payment_list_two_detail a:nth-of-type(2),.payment_list_two_detail span{
-		height: 40px;
-		line-height: 40px;
-		width: 100%;
-		text-align: center;
-		margin-top: 20px;
-		box-sizing: border-box;
-		color: #08B963;
-	}
-
-	.el-pager li,
-	.el-pagination .btn-prev,
-	.el-pagination .btn-next {
-		width: 32px;
-		height: 32px;
-		line-height: 32px;
-		border: 1px solid #dfdfdf;
-		margin: 0 8px 0 8px;
-		border-radius: 4px;
-		color: #595959;
-
-	}
-
-	.el-pagination .btn-prev .el-icon {
-		margin-left: 5px;
-	}
-
-	.el-pagination .btn-next .el-icon {
-		margin-left: -3px;
-	}
-
-	.el-pager li.active {
-		width: 32px;
-		height: 32px;
-		background-color: #08b963;
-		border-radius: 4px;
-		color: #fff;
-		font-size: 14px;
-		border: none;
-	}
-
 </style>
