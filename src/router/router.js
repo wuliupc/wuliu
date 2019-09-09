@@ -12,6 +12,13 @@ import statistics_recode from '../components/statistics/recode.vue';
 import statistics_user from '../components/statistics/user.vue';
 import statistics_info from '../components/statistics/info.vue';
 import statistics_recodeinfo from '../components/statistics/recodinfo.vue';
+import statistics_business from '../components/statistics/business.vue'; //营业执照
+import statistics_audit from '../components/statistics/audit.vue'; //审核状态
+import statistics_authentication from '../components/statistics/authentication.vue'; //实名认证
+import statistics_savephone from '../components/statistics/savephone.vue';  //修改手机号
+import statistics_savepass from '../components/statistics/savepass.vue';  //修改密码
+import statistics_financialinfo from '../components/statistics/financialinfo.vue';  //财务端信息
+import statistics_customer from '../components/statistics/customer.vue';  //联系客服
 import finance_index from '../components/finance/index.vue'; //财务首页
 import finance_payment from '../components/finance/payment.vue'; //财务待结款
 import finance_voucher from '../components/finance/voucher.vue'; //财务待传凭证
@@ -30,16 +37,48 @@ const routes = [{
 		}, {
 			path: '*',
 			redirect: '/statistics_buy'
-		},{
+		}, {
 			path: '/statistics_recode',
 			component: statistics_recode
-		},{
+		}, {
 			path: '/statistics_user',
-			component: statistics_user
-		},{
+			component: statistics_user,
+			children: [
+				{
+					path: '/statistics_customer',
+					component: statistics_customer
+				},
+				{
+					path: '/statistics_financialinfo',
+					component: statistics_financialinfo
+				},
+				{
+					path: '/statistics_savepass',
+					component: statistics_savepass
+				},
+				{
+					path: '/statistics_savephone',
+					component: statistics_savephone
+				},
+				{
+					path: '/statistics_authentication',
+					component: statistics_authentication
+				},
+				{
+					path: '/statistics_audit',
+					component: statistics_audit
+				}, {
+					path: '/statistics_business',
+					component: statistics_business
+				}, {
+					path: '/statistics_user*',
+					redirect: '/statistics_business'
+				}
+			]
+		}, {
 			path: '/statistics_info',
 			component: statistics_info
-		},{
+		}, {
 			path: '/statistics_recodeinfo',
 			component: statistics_recodeinfo
 		}]
@@ -57,27 +96,26 @@ const routes = [{
 		path: '/finance_index',
 		component: finance_index,
 		redirect: '/finance_payment',
-		children: [ 
-		{
-			path: '/finance_payment',
-			component: finance_payment,
-		}, {
-			path: '/finance_voucher',
-			component: finance_voucher
-		}, {
-			path: '/finance_pay',
-			component: finance_pay
-		}, {
-			path: '/finance_invoice',
-			component: finance_invoice
-		},
-		{
-			path: '/finance_immediate_pay',
-			component: finance_immediate_pay,
-		},{
-			path: '/finance_pay_success',
-			component: finance_pay_success,
-		}
+		children: [{
+				path: '/finance_payment',
+				component: finance_payment,
+			}, {
+				path: '/finance_voucher',
+				component: finance_voucher
+			}, {
+				path: '/finance_pay',
+				component: finance_pay
+			}, {
+				path: '/finance_invoice',
+				component: finance_invoice
+			},
+			{
+				path: '/finance_immediate_pay',
+				component: finance_immediate_pay,
+			}, {
+				path: '/finance_pay_success',
+				component: finance_pay_success,
+			}
 		]
 	}
 ]
