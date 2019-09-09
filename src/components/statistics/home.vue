@@ -7,7 +7,7 @@
 						<li :class="active==0?'active':''" @click="active=0">
 							<router-link to='/statistics_buy' :class="active==0?'white':''">我要购货</router-link>
 						</li>
-						<li :class="active==1?'active':''"  @click="active=1">
+						<li :class="active==1?'active':''" @click="active=1">
 							<router-link to='/statistics_recode' :class="active==1?'white':''">购货记录</router-link>
 						</li>
 						<li :class="active==2?'active':''" @click="active=2">
@@ -22,7 +22,9 @@
 
 			</el-header>
 			<el-main>
-				<router-view></router-view>
+				<transition name="el-fade-in">
+					<router-view v-show="show"></router-view>
+				</transition>
 			</el-main>
 		</el-container>
 	</div>
@@ -35,23 +37,48 @@
 		components: {},
 		data() {
 			return {
-                 active:0
+				show: true,
+				active: 0
 			}
 		},
 		watch: {
-			active(){
-				S.set('active',this.active)
+			$route(to,from){
+			   console.log(to.path);
+				if(to.path=="/statistics_business") S.set('user_active', 0);
+			 },
+			active() {
+				S.set('active', this.active)
 			}
 		},
-		mounted(){
-		this.active = S.get('active')||0
+		methods:{
+			beforeunloadFn(e) {
+			  console.log('刷新或关闭')
+			 }
+		},
+		created() {
+		 window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
+		},
+		mounted() {
+			 this.active = S.get('active') || 0
+			 let path = this.$route.path;
+			 if(path=='/statistics_buy'||path=='/statistics_info'){
+				 this.active = 0;
+			 }else if(path=='/statistics_recode'||path=='/statistics_recodeinfo'){
+				 this.active = 1; 
+			 }else{
+				 this.active = 2; 
+			 }
+		},
+		destroyed() {
+		 window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
 		}
+
 	}
 </script>
 
 <style>
 	.header {
-		width: 1200px;
+		max-width: 1200px;
 		margin: 0 auto;
 		justify-content: space-between;
 	}
@@ -72,8 +99,9 @@
 		margin-bottom: 40px;
 	}
 
-	.nav>li {
-		width: 104px;
+	.nav a {
+		width: 100%;
+		height: 100%;
 	}
 
 	.active {
