@@ -29,7 +29,7 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .c333{color: #333333;}
 .c666{color: #666666; }
 .c999{color: #999999;}
-.white{color: #FFFFFF;}
+.white{color: #FFFFFF !important;}
 .bg_white{background-color: #FFFFFF;}
 .bg_green{background-color: #08b963 !important;}
 .mt10{margin-top: 10px;}
