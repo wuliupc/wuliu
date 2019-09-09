@@ -43,7 +43,7 @@
 		},
 		watch: {
 			$route(to,from){
-			   console.log(to.path);
+			  // console.log(to.path);
 				if(to.path=="/statistics_business") S.set('user_active', 0);
 			 },
 			active() {
