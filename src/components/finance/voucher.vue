@@ -1,7 +1,7 @@
 <template>
 	<div class="buy_body">
 		<div class="tl">
-			<div class="block mt20 ">
+			<div class="mt25">
 				<el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
 				</el-date-picker>
 			</div>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 			</div>
-			   <div class="block">
+			   <div class="mt25">
 			       <!-- <span class="demonstration">直接前往</span> -->
 			       <el-pagination
 			         @size-change="handleSizeChange"
@@ -400,9 +400,6 @@
 		padding-top: 40px;
 		box-sizing: border-box;
 		color: #08B963;
-	}
-	.block{
-		margin-top: 54px;
 	}
 	.el-pager li,.el-pagination .btn-prev,.el-pagination .btn-next{
 		width: 32px;

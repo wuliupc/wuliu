@@ -1,7 +1,7 @@
 <template>
 	<div class="buy_body">
 		<div class="tl">
-			<div class="block mt20 ">
+			<div class="mt25">
 				<el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
 				</el-date-picker>
 			</div>
@@ -91,7 +91,7 @@
 							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
@@ -153,7 +153,7 @@
 							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
@@ -215,7 +215,7 @@
 							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
@@ -223,17 +223,12 @@
 					</div>
 				</div>
 			</div>
-			   <div class="block">
-			       <!-- <span class="demonstration">直接前往</span> -->
-			       <el-pagination
-			         @size-change="handleSizeChange"
-			         @current-change="handleCurrentChange"
-			         :current-page.sync="currentPage3"
-			         :page-size="2"
-			         layout="prev, pager, next, jumper"
-			         :total="100">
-			       </el-pagination>
-			     </div>
+			<div class="mt20">
+				<!-- <span class="demonstration">直接前往</span> -->
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
+				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
+				</el-pagination>
+			</div>
 		</div>
 	</div>
 </template>
@@ -264,12 +259,12 @@
 					this.checkData = [];
 				}
 			},
-			 handleSizeChange(val) {
-			        console.log(`每页 ${val} 条`);
-			      },
-			      handleCurrentChange(val) {
-			        console.log(`当前页: ${val}`);
-			      }
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(val) {
+				console.log(`当前页: ${val}`);
+			}
 		},
 		watch: {
 			value1() {
@@ -322,7 +317,7 @@
 		align-items: center;
 	}
 
-	.payment_lab label{
+	.payment_lab label {
 		height: 32px;
 		line-height: 32px;
 		display: flex;
@@ -379,7 +374,6 @@
 		border-right: 1px solid #e8e8e8;
 		display: flex;
 		flex-flow: row;
-		/* align-items: center; */
 		justify-content: space-between;
 	}
 
@@ -390,7 +384,8 @@
 		height: 45px;
 	}
 
-	.payment_list_one_lab,.payment_list_two_lab {
+	.payment_list_one_lab,
+	.payment_list_two_lab {
 		width: 100%;
 		height: 45px;
 		display: flex;
@@ -399,27 +394,32 @@
 		border-bottom: 1px solid #e8e8e8;
 	}
 
-	.payment_list_one_lab label,.payment_list_two_lab span{
+	.payment_list_one_lab label,
+	.payment_list_two_lab span {
 		width: 49px;
 	}
-	.payment_list_two_lab span{
+
+	.payment_list_two_lab span {
 		border-bottom: 1px solid #fff;
 	}
-	
-	.payment_list_one_lab label input{
+
+	.payment_list_one_lab label input {
 		width: 49px;
 		margin: 0 auto;
 	}
 
-	.payment_list_one_lab ul,.payment_list_two_lab ul {
+	.payment_list_one_lab ul,
+	.payment_list_two_lab ul {
 		/* width: 100%; */
 		height: 45px;
 		display: flex;
 		flex-flow: row;
 		align-items: center;
 		border-left: 1px solid #e8e8e8;
-}
-	.payment_list_one_lab ul li:nth-of-type(1),.payment_list_two_lab ul li:nth-of-type(1) {
+	}
+
+	.payment_list_one_lab ul li:nth-of-type(1),
+	.payment_list_two_lab ul li:nth-of-type(1) {
 		height: 45px;
 		line-height: 45px;
 		width: 265px;
@@ -436,25 +436,30 @@
 		box-sizing: border-box;
 	}
 
-	.payment_list_two,.payment_list_two_detail {
+	.payment_list_two,
+	.payment_list_two_detail {
 		width: 200px;
 	}
-	.payment_list_two{
+
+	.payment_list_two {
 		border-left: 1px solid #e8e8e8;
 		border-bottom: 1px solid #e8e8e8;
 	}
-	.payment_list_two_detail{
+
+	.payment_list_two_detail {
 		margin-top: 129px;
 		display: flex;
 		flex-flow: row wrap;
 		align-items: center;
-		
+
 	}
+
 	.payment_list_two_detail a {
 		height: 20px;
 		width: 100%;
 		text-align: center;
 	}
+
 	.payment_list_two_detail a:nth-of-type(2) {
 		height: 20px;
 		width: 100%;
@@ -463,10 +468,10 @@
 		box-sizing: border-box;
 		color: #08B963;
 	}
-	.block{
-		margin-top: 54px;
-	}
-	.el-pager li,.el-pagination .btn-prev,.el-pagination .btn-next{
+
+	.el-pager li,
+	.el-pagination .btn-prev,
+	.el-pagination .btn-next {
 		width: 32px;
 		height: 32px;
 		line-height: 32px;
@@ -474,15 +479,18 @@
 		margin: 0 8px 0 8px;
 		border-radius: 4px;
 		color: #595959;
-		
+
 	}
-	.el-pagination .btn-prev .el-icon{
+
+	.el-pagination .btn-prev .el-icon {
 		margin-left: 5px;
 	}
-	.el-pagination .btn-next .el-icon{
+
+	.el-pagination .btn-next .el-icon {
 		margin-left: -3px;
 	}
-	.el-pager li.active{
+
+	.el-pager li.active {
 		width: 32px;
 		height: 32px;
 		background-color: #08b963;
@@ -491,4 +499,5 @@
 		font-size: 14px;
 		border: none;
 	}
+
 </style>
