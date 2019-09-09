@@ -1,7 +1,12 @@
 <template>
 	<div id="app">
-		<div id="success_content">
+		<div id="success_content" class="bg_white">
 			<p class="tl">支付方式</p>
+			<ul>
+				<li>支付金额：</li>
+				<li>5000</li>
+				<li>元</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -26,7 +31,7 @@
 	}
 	#success_content{
 		width: 100%;
-		/* border: 1px solid red; */
+		border: 1px solid red;
 	}
 	#success_content p{
 		height: 40px;
