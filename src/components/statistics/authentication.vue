@@ -1,20 +1,48 @@
 <template>
 	<div class="authentication">
-		<div class="authen_file flex f14 c666">
-			<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12">
+		<div id="payment_img" v-if="show">
+			<img src="../../assets/img/successpay.png" alt="">
+			<p class="c666 f20">已提交审核，请耐心等待</p>
 		</div>
-		<div class="authen_file flex f14 c666">
-			<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12">
+		<div v-else>
+			<div class="authen_file flex f14 c666">
+				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12">
+			</div>
+			<div class="authen_file flex f14 c666">
+				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12">
+			</div>
+			<div class="authen_file flex f14 c666">
+				<p>上传营业执照</p>
+				<div><img src="../../assets/img/camera.png" alt=""></div>
+			</div>
+			<button class="f20 white bg_green border" @click="submit()">提交认证</button>
 		</div>
-		<div class="authen_file flex f14 c666">
-			<p>上传营业执照</p>
-			<div><img src="../../assets/img/camera.png" alt=""></div>
-		</div>
-		<button class="f20 white bg_green border">提交认证</button>
 	</div>
+	
+
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				show:false
+			};
+		},
+		methods:{
+			submit(){
+				this.show=true
+			},
+			 handleCommand(command) {
+			        this.$message('click on item ' + command);
+			      }
+		},
+		watch: {
+			value1() {
+				console.log(this.value1);
+			}
+		}
+	};
 </script>
 
 <style>

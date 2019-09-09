@@ -5,19 +5,21 @@
 			<p class="c666 f20">修改成功</p>
 		</div>
 		<div v-else>
-			<div class="authen_file flex f14 c666">
-				<p>原密码</p> <input type="text" placeholder="请输入原密码" class="f12">
+			<div class="authen_file flex f14 c666" >
+				<p>新密码</p> <input type="tel" maxlength="11" placeholder="请输入新密码" class="f12">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>新密码</p> <input type="text" placeholder="请输入新密码" class="f12">
+				<p>确认新密码</p> <input type="tel" maxlength="11" placeholder="请再次输入密码" class="f12">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>确认新密码</p>
-				<input type="text" placeholder="请再次输入新密码" class="f12">
+				<p>短信验证码</p>
+				<dir class="flex" style="align-items: center;"><input type="text" placeholder="请输入验证码" class="f12" style="width: 107px;">
+				<button class="f12 white bg_green border" style="width: 80px;height:32px;margin: 0 0 0 40px;">发送验证码</button></dir>
+				
 			</div>
-			<button class="f20 white bg_green border" @click="submit()">提交</button>
+			<button class="f20 white bg_green border"  @click="submit()">提交</button>
 		</div>
-		
+	
 	</div>
 </template>
 

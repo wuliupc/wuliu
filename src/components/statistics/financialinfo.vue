@@ -29,7 +29,7 @@
 		</div>
 		<div class="flex mb55">
 			<p　class="c666 f12">忘记密码</p><div>
-			<button class="f12 white bg_green border" style="width: 103px;height:34px;margin: 0 11px 0 0;">设置</button></div>
+			<button class="f12 white bg_green border" style="width: 103px;height:34px;margin: 0 11px 0 0;line-height: 34px;"><router-link to="/statistics_fin_forget" class="white">设置</router-link></button></div>
 		</div>
 	</div>
 </template>
