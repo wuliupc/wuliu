@@ -25,7 +25,9 @@
 
 			</el-header>
 			<el-main>
-				<router-view></router-view>
+				<transition name="el-fade-in">
+					<router-view v-show="show"></router-view>
+				</transition>
 			</el-main>
 		</el-container>
 	</div>
@@ -40,7 +42,8 @@
 		},
 		data() {
 			return {
-				active: 0
+				active: 0,
+				show: true,
 			}
 		},
 		watch: {
