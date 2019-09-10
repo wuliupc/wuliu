@@ -34,7 +34,8 @@ import finance_invoice_detail from '../components/finance/invoice_detail'; //财
 import ballot_home from '../components/ballot/home.vue'; //开票端首页
 import ballot_dopen from '../components/ballot/dopen.vue'; //待开票
 import ballot_yopen from '../components/ballot/yopen.vue'; //已开票 
-import ballot_info from '../components/ballot/info.vue'; //开票详情
+import ballot_info from '../components/ballot/info.vue'; //待开票详情
+import ballot_yinfo from '../components/ballot/yinfo.vue'; //已开票详情
 // 配置路由
 const routes = [{
 		path: '/statistics_home',
@@ -155,6 +156,10 @@ const routes = [{
 			},{
 				path: '/ballot_info',
 				component: ballot_info,
+			},
+			{
+				path: '/ballot_yinfo',
+				component: ballot_yinfo,
 			}
 		]
 	}
