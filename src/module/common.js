@@ -26,7 +26,6 @@ const tools = {
 				VueEvent.$http({
 					url: URL + items.url,
 					body: items.data,
-					headers:{'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
 					emulateJSON:true,
 					method: 'POST'
 				}).then(res => {

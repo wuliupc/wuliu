@@ -7,6 +7,9 @@
 </template>
 
 <script>
+	import tools from './module/common.js'
+	let R = tools.R
+	let S = tools.S
 	export default {
 		name: 'app',
 		components: {},
@@ -17,7 +20,10 @@
 		  },
 		  watch: {},
 		  mounted() {
-		
+			  let login = S.get("logindata")
+			  // if(login.role==3){
+				 //  this.$router.push('/statistics_buy')
+			  // }
 		  }
 		     
 	}
