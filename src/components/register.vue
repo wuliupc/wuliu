@@ -88,9 +88,9 @@
 		left: 0
 	}
 	.register_mask>img{
-		position: absolute;
-		top: 214px;
-		right: 684px;
+		position: relative;
+		    top: 200px;
+		    left: 1200px;
 	}
 	.register_mask>div{
 		position: absolute;
