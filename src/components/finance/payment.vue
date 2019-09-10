@@ -416,6 +416,7 @@
 		flex-flow: row;
 		align-items: center;
 		border-left: 1px solid #e8e8e8;
+		font-size: 14px;
 	}
 
 	.payment_list_one_lab ul li:nth-of-type(1),
@@ -459,9 +460,10 @@
 		line-height: 40px;
 		width: 100%;
 		text-align: center;
+		font-size: 14px;
 	}
 
-	.payment_list_two_detail a:nth-of-type(2) {
+	.payment_list_two_detail a:nth-of-type(2),.payment_list_two_detail span {
 		height: 40px;
 		line-height: 40px;
 		width: 100%;
@@ -469,6 +471,7 @@
 		margin-top: 20px;
 		box-sizing: border-box;
 		color: #08B963;
+		cursor: pointer;
 	}
 
 	.el-pager li,

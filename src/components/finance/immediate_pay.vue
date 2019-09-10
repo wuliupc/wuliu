@@ -85,7 +85,7 @@
 
 	#success_content ul {
 		width: 100%;
-		min-height: 137px;
+		min-height: 120px;
 		display: flex;
 		flex-flow: row;
 		align-items: center;
@@ -104,7 +104,7 @@
 
 	.mode {
 		width: 100%;
-		min-height: 168px;
+		min-height: 130px;
 		text-align: left;
 		background-color: #f3fff9;
 		display: flex;
@@ -130,7 +130,7 @@
 	}
 
 	.mode figure figcaption {
-		font-size: 24px;
+		font-size: 20px;
 		color: #000000;
 	}
 

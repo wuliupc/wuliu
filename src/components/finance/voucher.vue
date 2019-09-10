@@ -89,12 +89,12 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/finance_voucher_detail" class="f14 c333">查看详情</router-link>
+						<span class="f14" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+			<div class="payment_list bg_white c666 flex f14 tl line1 mt20">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -151,12 +151,12 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/finance_voucher_detail" class="f14 c333">查看详情</router-link>
+						<span class="f14" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+			<div class="payment_list bg_white c666 flex f14 tl line1 mt20">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -213,8 +213,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
-						<span class="f16" @click="up()">上传结款凭证</span>
+						<router-link to="/finance_voucher_detail" class="f14 c333">查看详情</router-link>
+						<span class="f14" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
 			</div>
@@ -225,13 +225,13 @@
 				</el-pagination>
 			</div>
 		</div>
-		<!-- 注册成功弹框 -->
+		<!-- 上传成功弹框 -->
 		<transition name="el-fade-in">
-		<div class="mask register_mask" v-show="show">
+		<div class="mask voucher_mask" v-show="show">
 			<img src="../../assets/img/x.png" @click="show=false">
 			<div>
-				<p class="tc f26 register_text">上传成功！</p>
-				<el-button type="success" round class="f26 register_text_btn" @click="show=false">确定</el-button>
+				<p class="tc f26 voucher_text">上传成功！</p>
+				<el-button type="success" round class="f26 voucher_text_btn" @click="show=false">确定</el-button>
 			</div>
 		</div>
 		</transition>
@@ -294,203 +294,38 @@
 </script>
 
 <style>
-	.el-dropdown-menu {
-		width: 230px;
-	}
-
-	.sellter {
-		width: 200px;
-		height: 32px;
-		line-height: 32px;
-		padding: 0 11px;
-		font-size: 14px;
-		border: 1px solid #ddd;
-		margin-right: 10px;
-	}
-
-	.sellterinput {
-		width: 390px;
-	}
-
-	.recode_find {
-		height: 32px;
-		padding: 0 10px;
-	}
-
-	.payment_all {
+	.voucher_mask{
 		width: 100%;
-		margin-top: 22px;
-		width: 100%;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		z-index: 9;
+		left: 0
 	}
-
-	.payment_lab label {
-		height: 32px;
-		line-height: 32px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
+	.voucher_mask>img{
+		position: absolute;
+		top: 214px;
+		right: 684px;
 	}
-
-	.payment_lab label span {
-		margin: 0 13px 0 7px;
-		font-size: 14px;
-	}
-
-	.checkItem {
-		display: block;
-		width: 16px;
-		height: 16px;
-		line-height: 16px;
-		border-radius: 4px;
-		background-color: #fff !important;
-		border: 1px solid #d9d9d9;
-	}
-
-	.checkItem {
-		outline: none;
-		/* -webkit-appearance: none; */
-	}
-
-	.payment_list {
-		width: 100%;
-		min-height: 322px;
-		border-top: 1px solid #e8e8e8;
-		border-left: 1px solid #e8e8e8;
-		border-right: 1px solid #e8e8e8;
-		display: flex;
-		flex-flow: row;
-		justify-content: space-between;
-	}
-
-	.payment_list_one {
-		width: 1000px;
-		display: flex;
-		flex-flow: row wrap;
-		height: 45px;
-	}
-
-	.payment_list_one_lab,
-	.payment_list_two_lab {
-		width: 100%;
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab label,
-	.payment_list_two_lab span {
-		width: 49px;
-	}
-
-	.payment_list_two_lab span {
-		border-bottom: 1px solid #fff;
-	}
-
-	.payment_list_one_lab label input {
-		width: 49px;
-		margin: 0 auto;
-	}
-
-	.payment_list_one_lab ul,
-	.payment_list_two_lab ul {
-		/* width: 100%; */
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-left: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(1),
-	.payment_list_two_lab ul li:nth-of-type(1) {
-		height: 45px;
-		line-height: 45px;
-		width: 265px;
-		border-right: 1px solid #e8e8e8;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(2) {
-		height: 45px;
-		line-height: 45px;
-		width: 689px;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_two,
-	.payment_list_two_detail {
-		width: 200px;
-	}
-
-	.payment_list_two {
-		border-left: 1px solid #e8e8e8;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_two_detail {
-		margin-top: 111px;
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
-
-	}
-
-	.payment_list_two_detail a {
-		height: 40px;
-		line-height: 40px;
-		width: 100%;
-		text-align: center;
-	}
-
-	.payment_list_two_detail a:nth-of-type(2),.payment_list_two_detail span{
-		height: 40px;
-		line-height: 40px;
-		width: 100%;
-		text-align: center;
-		margin-top: 20px;
-		box-sizing: border-box;
-		color: #08B963;
-	}
-
-	.el-pager li,
-	.el-pagination .btn-prev,
-	.el-pagination .btn-next {
-		width: 32px;
-		height: 32px;
-		line-height: 32px;
-		border: 1px solid #dfdfdf;
-		margin: 0 8px 0 8px;
-		border-radius: 4px;
-		color: #595959;
-
-	}
-
-	.el-pagination .btn-prev .el-icon {
-		margin-left: 5px;
-	}
-
-	.el-pagination .btn-next .el-icon {
-		margin-left: -3px;
-	}
-
-	.el-pager li.active {
-		width: 32px;
-		height: 32px;
-		background-color: #08b963;
-		border-radius: 4px;
-		color: #fff;
-		font-size: 14px;
-		border: none;
-	}
-	.register_mask>div{
+	.voucher_mask>div{
+		position: absolute;
+		top: 215px;
+		left: 685px;
 		background-image: url(../../assets/img/upsuccess.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		width: 452px;
+		height: 481px;
+	}
+	.voucher_text{
+		padding-top: 280px;
+	}
+	.voucher_text_btn{
+		display: block;
+		margin:59px auto 0;
+		width: 247px;
+		height: 62px;
+		border-radius: 90px !important;
 	}
 
 </style>

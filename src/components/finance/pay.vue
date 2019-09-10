@@ -89,7 +89,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_detail">
-						<router-link to="/finance_paied_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_paied_detail" class="f14 c333">查看详情</router-link>
 					</div>
 				</div>
 			</div>
@@ -150,7 +150,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_detail">
-						<router-link to="/finance_paied_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_paied_detail" class="f14 c333">查看详情</router-link>
 					</div>
 				</div>
 			</div>
@@ -211,7 +211,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_detail">
-						<router-link to="/finance_paied_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_paied_detail" class="f14 c333">查看详情</router-link>
 					</div>
 				</div>
 			</div>
@@ -277,146 +277,6 @@
 </script>
 
 <style>
-	.el-dropdown-menu {
-		width: 230px;
-	}
-
-	.sellter {
-		width: 200px;
-		height: 32px;
-		line-height: 32px;
-		padding: 0 11px;
-		font-size: 14px;
-		border: 1px solid #ddd;
-		margin-right: 10px;
-	}
-
-	.sellterinput {
-		width: 390px;
-	}
-
-	.recode_find {
-		height: 32px;
-		padding: 0 10px;
-	}
-
-	.payment_all {
-		width: 100%;
-		margin-top: 22px;
-		width: 100%;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-	}
-
-	.payment_lab label {
-		height: 32px;
-		line-height: 32px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-	}
-
-	.payment_lab label span {
-		margin: 0 13px 0 7px;
-		font-size: 14px;
-	}
-
-	.checkItem {
-		display: block;
-		width: 16px;
-		height: 16px;
-		line-height: 16px;
-		border-radius: 4px;
-		background-color: #fff !important;
-		border: 1px solid #d9d9d9;
-	}
-
-	.checkItem {
-		outline: none;
-		/* -webkit-appearance: none; */
-	}
-
-	.payment_list {
-		width: 100%;
-		min-height: 322px;
-		border-top: 1px solid #e8e8e8;
-		border-left: 1px solid #e8e8e8;
-		border-right: 1px solid #e8e8e8;
-		display: flex;
-		flex-flow: row;
-		justify-content: space-between;
-	}
-
-	.payment_list_one {
-		width: 1000px;
-		display: flex;
-		flex-flow: row wrap;
-		height: 45px;
-	}
-
-	.payment_list_one_lab,
-	.payment_list_two_lab {
-		width: 100%;
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab label,
-	.payment_list_two_lab span {
-		width: 49px;
-	}
-
-	.payment_list_two_lab span {
-		border-bottom: 1px solid #fff;
-	}
-
-	.payment_list_one_lab label input {
-		width: 49px;
-		margin: 0 auto;
-	}
-
-	.payment_list_one_lab ul,
-	.payment_list_two_lab ul {
-		/* width: 100%; */
-		height: 45px;
-		display: flex;
-		flex-flow: row;
-		align-items: center;
-		border-left: 1px solid #e8e8e8;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(1),
-	.payment_list_two_lab ul li:nth-of-type(1) {
-		height: 45px;
-		line-height: 45px;
-		width: 265px;
-		border-right: 1px solid #e8e8e8;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_one_lab ul li:nth-of-type(2) {
-		height: 45px;
-		line-height: 45px;
-		width: 689px;
-		padding-left: 13px;
-		box-sizing: border-box;
-	}
-
-	.payment_list_two,
-	.payment_list_two_detail {
-		width: 200px;
-	}
-
-	.payment_list_two {
-		border-left: 1px solid #e8e8e8;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
 	.payment_list_detail {
 		min-height: 322px;
 		display: flex;
@@ -440,36 +300,4 @@
 		box-sizing: border-box;
 		color: #08B963;
 	}
-
-	.el-pager li,
-	.el-pagination .btn-prev,
-	.el-pagination .btn-next {
-		width: 32px;
-		height: 32px;
-		line-height: 32px;
-		border: 1px solid #dfdfdf;
-		margin: 0 8px 0 8px;
-		border-radius: 4px;
-		color: #595959;
-
-	}
-
-	.el-pagination .btn-prev .el-icon {
-		margin-left: 5px;
-	}
-
-	.el-pagination .btn-next .el-icon {
-		margin-left: -3px;
-	}
-
-	.el-pager li.active {
-		width: 32px;
-		height: 32px;
-		background-color: #08b963;
-		border-radius: 4px;
-		color: #fff;
-		font-size: 14px;
-		border: none;
-	}
-
 </style>
