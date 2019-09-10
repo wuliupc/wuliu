@@ -37,6 +37,7 @@
 		background-image: url(../assets/img/1920x1080.png);
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
+		position: fixed;
 	}
 
 	.mask {

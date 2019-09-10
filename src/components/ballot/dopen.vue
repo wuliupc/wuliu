@@ -36,7 +36,7 @@
 					<button>下载表格</button>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+			<div class="payment_list bg_white c666 flex f14 tl line1 mt20">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -94,8 +94,8 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/ballot_info" class="f16 c333">查看详情</router-link>
-						<router-link to="/ballot_info" class="f16">开具发票</router-link>
+						<router-link to="/ballot_info" class="f14 c333">查看详情</router-link>
+						<router-link to="/ballot_info" class="f14">开具发票</router-link>
 					</div>
 				</div>
 			</div>

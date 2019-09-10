@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<transition name="el-fade-in-linear">   
-		<router-view></router-view>
+		<router-view v-show="show"></router-view>
 		</transition>
 	</div>
 </template>
@@ -12,7 +12,7 @@
 		components: {},
 		data(){
 		      return {
-		        
+		        show:true
 		      }
 		  },
 		  watch: {},
