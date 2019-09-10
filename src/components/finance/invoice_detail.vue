@@ -15,46 +15,30 @@
 		<p class="info_cell f16 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		<p class="info_cell f16 c666 tl">上传结款凭证<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		<p class="info_cell f16 c666 tl bg_white">结款时间：2019-9-6 16:15:30</p>
-		<p class="info_cell f16 c666 tl">
-			<el-row class="tac">
-			  <el-col :span="12">
-			    <!-- <h5>默认颜色</h5> -->
-			    <el-menu
-			      default-active="2"
-			      class="el-menu-vertical-demo"
-			      @open="handleOpen"
-			      @close="handleClose">
-			      <el-submenu index="1">
-			        <template slot="title">
-			          <!-- <i class="el-icon-location"></i> -->
-			          <span>导航一</span>
-			        </template>
-			        <el-menu-item-group>
-			          <template slot="title">分组一</template>
-			          <el-menu-item index="1-1">选项1</el-menu-item>
-			          <el-menu-item index="1-2">选项2</el-menu-item>
-			        </el-menu-item-group>
-			        <el-menu-item-group title="分组2">
-			          <el-menu-item index="1-3">选项3</el-menu-item>
-			        </el-menu-item-group>
-			        <el-submenu index="1-4">
-			          <template slot="title">选项4</template>
-			          <el-menu-item index="1-4-1">选项1</el-menu-item>
-			        </el-submenu>
-			      </el-submenu>
-			    </el-menu>
-			  </el-col>
-			  
-			</el-row>
-
-
-		</p>
+		<p class="info_cell f16 c666 tl"  @click="show=!show">开票信息<img src='../../assets/img/rarraw.png' class="fr mt18" v-show="!show">
+		<img src='../../assets/img/barraw.png' class="fr mt18" v-show="show"></p>
+		 <transition name="el-zoom-in-top"  >
+		<div v-show="show">
+			<p class="info_cell f16 c666 tl">单位名称： 北京卓众出版有限公司</p>
+			<p class="info_cell f16 c666 tl">纳税人识别码：1234564564</p>
+			<p class="info_cell f16 c666 tl">注册地址：北京市海淀区</p>
+			<p class="info_cell f16 c666 tl">注册电话：88888888</p>
+			<p class="info_cell f16 c666 tl">开户银行：招商银行</p>
+			<p class="info_cell f16 c666 tl">银行账户：1231231231231231</p>
+		</div>
+			
+		</transition>
 		<p class="info_cell f16 c666 tl bg_white">开票时间：2019-9-6 16:15:30</p>
 	</div>
 </template>
 
 <script>
 	export default {
+		data(){
+			return{
+				show:false
+			}
+		},
 		methods: {
 			handleOpen(key, keyPath) {
 				console.log(key, keyPath);

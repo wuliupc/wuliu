@@ -43,7 +43,7 @@
 					<li>2019.08.30</li>
 				</ul>
 			</div>
-			<button class="f20 white bg_green border immediate_pay"><router-link to="/finance_pay"  class="f20 white bg_green border">立即支付</router-link></button>
+			<button class="f20 white bg_green border immediate_pay"><router-link to="/finance_pay_success"  class="f20 white bg_green border">立即支付</router-link></button>
 		</div>
 	</div>
 </template>

@@ -22,7 +22,8 @@ import statistics_customer from '../components/statistics/customer.vue'; //联�
 import statistics_fin_forget from '../components/statistics/fin_forget.vue'; //忘记密码
 import finance_index from '../components/finance/index.vue'; //财务首页
 import finance_payment from '../components/finance/payment.vue'; //财务待结款
-import finance_voucher from '../components/finance/voucher.vue'; //财务待传凭证
+import finance_voucher from '../components/finance/voucher.vue'; //财务待传凭证待传凭证
+import finance_voucher_detail from '../components/finance/voucher_detail.vue'; //财务待传凭证详情
 import finance_pay from '../components/finance/pay.vue'; //财务已结款
 import finance_invoice from '../components/finance/invoice.vue'; //财务已开票
 import finance_immediate_pay from '../components/finance/immediate_pay.vue'; //财务立即支付
@@ -30,7 +31,6 @@ import finance_pay_success from '../components/finance/pay_success.vue'; //财�
 import finance_payment_detail from '../components/finance/payment_detail'; //财务查看详情
 import finance_paied_detail from '../components/finance/paied_detail'; //财务查看详情
 import finance_invoice_detail from '../components/finance/invoice_detail'; //财务已开票详情
-// 配置路由import finance_pay_success from '../components/finance/pay_success.vue'; //财务支付成功
 import ballot_home from '../components/ballot/home.vue'; //开票端首页
 import ballot_dopen from '../components/ballot/dopen.vue'; //待开票
 import ballot_yopen from '../components/ballot/yopen.vue'; //已开票 
@@ -120,6 +120,9 @@ const routes = [{
 			}, {
 				path: '/finance_invoice',
 				component: finance_invoice
+			},{
+				path: '/finance_invoice_detail',
+				component: finance_invoice_detail
 			},
 			{
 				path: '/finance_immediate_pay',

@@ -89,7 +89,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
 						<span class="f16" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
@@ -151,7 +151,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
 						<span class="f16" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
@@ -213,7 +213,7 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
+						<router-link to="/finance_voucher_detail" class="f16 c333">查看详情</router-link>
 						<span class="f16" @click="up()">上传结款凭证</span>
 					</div>
 				</div>
