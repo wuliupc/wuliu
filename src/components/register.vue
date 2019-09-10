@@ -54,7 +54,7 @@
 		margin: 0 auto;
 	}
 	.register_top{
-		margin-top: 60px;
+		margin-top: 40px;
 		margin-bottom: 45px;
 		justify-content: flex-end;
 		white-space: nowrap;
