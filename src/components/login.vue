@@ -14,15 +14,19 @@
 </template>
 
 <script>
+	import tools from '../module/common.js'
 	export default {
 		data() {
 			return {
 				show: true
 			}
 		},mounted() {
-			this.$http.post('http://wuliu.aishangts.com/index/index/test',{name:'张三'},{emulateJSON:true}).then(res=>{
-				console.log(res)
-			})
+		tools.R.post({url:'index/index/test',data:{uid:123456}}).then(res=>{
+			
+		})
+			// this.$http.post('http://wuliu.aishangts.com/index/index/test',{name:'张三'},{emulateJSON:true}).then(res=>{
+			// 	console.log(res)
+			// })
 		}
 	}
 </script>
