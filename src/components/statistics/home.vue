@@ -78,13 +78,13 @@
 
 <style>
 	.header {
-		max-width: 1200px;
+		max-width: 1200px !important;
 		margin: 0 auto;
 		justify-content: space-between;
 	}
 
 	.el-header {
-		height: 60px;
+		height: 56px !important;
 		background-color: #fff;
 		color: #333;
 		line-height: 1;
