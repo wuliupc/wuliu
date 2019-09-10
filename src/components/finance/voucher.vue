@@ -303,9 +303,9 @@
 		left: 0
 	}
 	.voucher_mask>img{
-		position: absolute;
-		top: 214px;
-		right: 684px;
+		position: relative;
+		top: 200px;
+		left: 6rem;
 	}
 	.voucher_mask>div{
 		position: absolute;
