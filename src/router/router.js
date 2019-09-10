@@ -137,8 +137,8 @@ const routes = [{
 				path: '/finance_paied_detail',
 				component: finance_paied_detail
 			},{
-				path: '/finance_invoice_detail',
-				component: finance_invoice_detail
+				path: '/finance_voucher_detail',
+				component: finance_voucher_detail
 			}
 		]
 	},

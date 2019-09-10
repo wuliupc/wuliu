@@ -7,7 +7,7 @@
 						<li :class="active==0?'active':''" @click="active=0">
 							<router-link to='/finance_payment' :class="active==0?'white':''">待结款</router-link>
 						</li>
-						<li :class="active==1?'active':''"  @click="active=1">
+						<li :class="active==1?'active':''" @click="active=1">
 							<router-link to='/finance_voucher' :class="active==1?'white':''">待传凭证</router-link>
 						</li>
 						<li :class="active==2?'active':''" @click="active=2">
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+	const S = require('../../module/common.js').S
 	export default {
 		name: 'app',
 		components: {
@@ -39,10 +40,26 @@
 		},
 		data() {
 			return {
-                 active:0
+				active: 0
 			}
 		},
-		watch: {}
+		watch: {
+
+		},
+		mounted() {
+			this.active = S.get('active') || 0
+			let path = this.$route.path;
+			if (path == '/finance_payment' || path == '/finance_payment_detail' || path == '/finance_immediate_pay' || path ==
+				'/finance_pay_success') {
+				this.active = 0;
+			} else if (path == '/finance_voucher' || path == '/finance_voucher_detail') {
+				this.active = 1;
+			} else if (path == '/finance_pay' || path == '/finance_paied_detail') {
+				this.active = 2;
+			} else {
+				this.active = 3;
+			}
+		},
 	}
 </script>
 

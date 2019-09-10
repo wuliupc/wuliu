@@ -28,7 +28,7 @@
 		</div>
 			
 		</transition>
-		<p class="info_cell f16 c666 tl bg_white">开票时间：2019-9-6 16:15:30</p>
+		<p class="info_cell f16 c666 tl bg_white">开票时间</p>
 	</div>
 </template>
 

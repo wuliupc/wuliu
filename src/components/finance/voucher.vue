@@ -489,5 +489,8 @@
 		font-size: 14px;
 		border: none;
 	}
+	.register_mask>div{
+		background-image: url(../../assets/img/upsuccess.png);
+	}
 
 </style>

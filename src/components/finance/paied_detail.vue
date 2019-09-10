@@ -14,7 +14,7 @@
 		<p class="info_cell f16 c666 tl">行车时间：2019-9-6 16:15:59</p>
 		<p class="info_cell f16 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		<p class="info_cell f16 c666 tl">上传结款凭证<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
-		<p class="info_cell f16 c666 tl bg_white">结款时间：2019-9-6 16:15:30</p>
+		<p class="info_cell f16 c666 tl bg_white">结款时间</p>
 		
 	</div>
 </template>
