@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	const S = require('../../module/common.js').S
+	import tools from '../../module/common.js'
 	export default {
 		name: 'app',
 		components: {},
@@ -44,14 +44,14 @@
 				//if(to.path=="/statistics_business") S.set('user_active', 0);
 			 },
 			ballot_active() {
-				S.set('ballot_active', this.active)
+				tools.S.set('ballot_active', this.active)
 			}
 		},
 		methods:{
 			
 		},
 		mounted() {
-			 this.ballot_active = S.get('ballot_active') || 0
+			 this.ballot_active = tools.S.get('ballot_active') || 0
 			 // let path = this.$route.path;
 			 // if(path=='/statistics_buy'||path=='/statistics_info'){
 				//  this.active = 0;

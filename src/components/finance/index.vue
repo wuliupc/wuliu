@@ -34,7 +34,7 @@
 </template>
 
 <script>
-	const S = require('../../module/common.js').S
+	import tools from '../../module/common.js'
 	export default {
 		name: 'app',
 		components: {
@@ -50,7 +50,7 @@
 
 		},
 		mounted() {
-			this.active = S.get('active') || 0
+			this.active = tools.S.get('active') || 0
 			let path = this.$route.path;
 			if (path == '/finance_payment' || path == '/finance_payment_detail' || path == '/finance_immediate_pay' || path ==
 				'/finance_pay_success') {

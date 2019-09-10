@@ -23,7 +23,7 @@
 			<img src="../assets/img/x.png" @click="show=false">
 			<div>
 				<p class="tc f26 register_text">恭喜注册成功！</p>
-				<el-button type="success" round class="f26 register_text_btn"><router-link to="/login" class="white">立即登录</router-link></el-button>
+				<el-button type="success" round class="f26 register_text_btn"><router-link to="/login" class="white" style="line-height: 1.5;">立即登录</router-link></el-button>
 			</div>
 		</div>
 		</transition>
@@ -54,7 +54,7 @@
 		margin: 0 auto;
 	}
 	.register_top{
-		margin-top: 40px;
+		margin-top: 5%;
 		margin-bottom: 45px;
 		justify-content: flex-end;
 		white-space: nowrap;

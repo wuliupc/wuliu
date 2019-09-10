@@ -31,7 +31,7 @@
 </template>
 
 <script>
-	const S = require('../../module/common.js').S
+	import tools from '../../module/common.js'
 	export default {
 		name: 'app',
 		components: {},
@@ -44,10 +44,10 @@
 		watch: {
 			$route(to,from){
 			  // console.log(to.path);
-				if(to.path=="/statistics_business") S.set('user_active', 0);
+				if(to.path=="/statistics_business") tools.S.set('user_active', 0);
 			 },
 			active() {
-				S.set('active', this.active)
+				tools.S.set('active', this.active)
 			}
 		},
 		methods:{
@@ -59,7 +59,7 @@
 		 window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
 		},
 		mounted() {
-			 this.active = S.get('active') || 0
+			 this.active = tools.S.get('active') || 0
 			 let path = this.$route.path;
 			 if(path=='/statistics_buy'||path=='/statistics_info'){
 				 this.active = 0;

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	const S = require('../../module/common.js').S
+	import tools from '../../module/common.js'
 	export default {
 		name: 'app',
 		components: {},
@@ -43,11 +43,11 @@
 				if(to.path=="/statistics_business")this.user_active = 0;
 			  },
 			user_active(){
-				S.set('user_active',this.user_active)
+				tools.S.set('user_active',this.user_active)
 			}
 		},
 		mounted(){
-	        	this.user_active = S.get('user_active')||0
+	        	this.user_active = tools.S.get('user_active')||0
 		},
 	}
 </script>
