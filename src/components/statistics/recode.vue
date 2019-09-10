@@ -23,7 +23,7 @@
 				 
 			</div>
 		</div>
-		<div class="buy_list bg_white flex c666 f16 tl line1 mt20">
+		<div class="buy_list bg_white flex c666 f14 tl line1 mt20">
 			<div>
 				<p>12位销货方秘钥串：123456789123</p>
 				<p>销货方姓名：张晓晓</p>

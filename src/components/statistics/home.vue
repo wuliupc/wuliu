@@ -84,6 +84,7 @@
 	}
 
 	.el-header {
+		height: 60px;
 		background-color: #fff;
 		color: #333;
 		line-height: 1;
