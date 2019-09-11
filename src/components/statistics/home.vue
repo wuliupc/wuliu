@@ -38,7 +38,7 @@
 		data() {
 			return {
 				show: true,
-				active: 0
+				active: 0,
 			}
 		},
 		watch: {

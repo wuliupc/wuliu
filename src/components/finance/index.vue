@@ -49,6 +49,9 @@
 		watch: {
 
 		},
+		created() {
+		 window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
+		},
 		mounted() {
 			this.active = tools.S.get('active') || 0
 			let path = this.$route.path;
@@ -63,6 +66,9 @@
 				this.active = 3;
 			}
 		},
+		destroyed() {
+		 window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
+		}
 	}
 </script>
 
