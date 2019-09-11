@@ -54,16 +54,16 @@
 					},
 					{
 						title: '财务端信息',
-						url: '/statistics_financialinfo'
+						url: '/statistics_financialinfo/4'
 					},
 					{
 						title: '开票端信息',
-						url: '/statistics_financialinfo'
+						url: '/statistics_financialinfo/5'
 					},
-					{
-						title: '联系客服',
-						url: '/statistics_customer'
-					},
+					// {
+					// 	title: '联系客服',
+					// 	url: '/statistics_customer'
+					// },
 				]
 			}
 		},
@@ -78,27 +78,20 @@
 			}
 		},
 		methods: {
-			getUserInfo() {
-				R.post('index/personal/getUserInfo').then(res => {
-					if (res.body.code == 400) {
-						this.$message({
-							message: res.body.msg,
-							type: 'warning'
-						});
-						this.$router.push('/login')
-					} else {
-						this.$store.state.userinfo = res.body.data
-						this.userinfo = this.$store.state.userinfo
-					}
-				})
-			},
+		
+			
+		},
+		computed:{
 			
 		},
 		mounted() {
 			this.user_active = tools.S.get('user_active') || 0
-			if (this.$store.state.userinfo == "") {
-				this.getUserInfo();
-			}
+			// if (this.$store.state.userinfo == "") {
+				this.$store.commit('getUserInfo');
+				this.$nextTick(()=>{
+					this.license= this.$store.state.userinfo
+				})
+			// }
 			console.log(this.$store.state.userinfo)
 		},
 	}

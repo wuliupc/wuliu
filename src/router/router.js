@@ -20,6 +20,7 @@ import statistics_savepass from '../components/statistics/savepass.vue'; //修�
 import statistics_financialinfo from '../components/statistics/financialinfo.vue'; //财务端信息
 import statistics_customer from '../components/statistics/customer.vue'; //联系客服
 import statistics_fin_forget from '../components/statistics/fin_forget.vue'; //忘记密码
+import statistics_fin_phone from '../components/statistics/fin_phone.vue'; //财务开票修改手机号
 import finance_index from '../components/finance/index.vue'; //财务首页
 import finance_payment from '../components/finance/payment.vue'; //财务待结款
 import finance_voucher from '../components/finance/voucher.vue'; //财务待传凭证待传凭证
@@ -53,7 +54,12 @@ const routes = [{
 		}, {
 			path: '/statistics_user',
 			component: statistics_user,
-			children: [{
+			children: [
+				{
+					path: '/statistics_fin_phone',
+					component: statistics_fin_phone
+				},
+				{
 					path: '/statistics_fin_forget',
 					component: statistics_fin_forget
 				},
@@ -62,7 +68,7 @@ const routes = [{
 					component: statistics_customer
 				},
 				{
-					path: '/statistics_financialinfo',
+					path: '/statistics_financialinfo/:type',
 					component: statistics_financialinfo
 				},
 				{

@@ -14,10 +14,16 @@
 							<router-link to='/statistics_user' :class="active==2?'white':''">个人中心</router-link>
 						</li>
 					</ul>
-					<div class="f14 c666 user flex">
-						<img src="../../assets/img/user.png" />
-						<p>13******99</p>
-					</div>
+					
+					<el-dropdown @command="logoff()">
+					    <div class="f14 c666 user flex el-dropdown-link">
+					    	<img src="../../assets/img/user.png" />
+					    	<p>13******99</p><i class="el-icon-arrow-down el-icon--right"></i>
+					    </div>
+					  <el-dropdown-menu slot="dropdown" style="width: 120px" >
+					    <el-dropdown-item >注销登录</el-dropdown-item>
+					  </el-dropdown-menu>
+					</el-dropdown>
 				</div>
 
 			</el-header>
@@ -51,6 +57,10 @@
 			}
 		},
 		methods:{
+			logoff(){
+				tools.S.remove('logindata');
+				this.$router.push("/login")
+			},
 			beforeunloadFn(e) {
 			  console.log('刷新或关闭')
 			 }
