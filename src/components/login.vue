@@ -6,8 +6,8 @@
 				<div><input type="tel" placeholder="请输入手机号" maxlength="11"  v-model="mobile"/></div>
 				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" v-model="password" /> <img src="../assets/img/biyan.png" v-show="show"
 					 @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" /> </div>
-				<dir><el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button></dir>
-				<dir style="width: 85%;"><el-button type="info"  class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button></dir>
+				<dir style="width: 80%;margin: 50px 0 30px;"><el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button></dir>
+				<dir style="width: 80%;margin: 50px 0 30px;"><el-button type="info"  class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button></dir>
 				<p class="tc f14 c666 line1">
 					<router-link to="/register">立即注册</router-link>
 				</p>
@@ -129,9 +129,9 @@
 		position: relative;
 		top: 20%;
 		margin: 0 auto;
-		width: 575px;
-		min-height: 585px;
+		width: 400px;
 		border-radius: 4px;
+		padding-bottom: 20px;
 	}
 
 	.main>p {
@@ -139,7 +139,7 @@
 	}
 
 	.main>div {
-		width: 429px;
+		width: 80%;
 		margin: 50px auto 0;
 		border-bottom: 1px solid #e7e7e7;
 	}
@@ -154,9 +154,8 @@
 
 	.login_btn {
 		display: block;
-		width: 429px;
-		height: 60px;
-		margin: 80px auto 48px;
+		width: 100%;
+		height: 50px;
 		font-size: 20px;
 	}
 </style>

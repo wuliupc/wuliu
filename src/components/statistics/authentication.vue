@@ -16,7 +16,7 @@
 				<div v-if="read"><img v-if="imageUrl" :src="imageUrl" class="avatar"></div>
 				<div v-if="!read">
 					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
-					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<img src="../../assets/img/camera.png" v-else>
 					</el-upload>
@@ -53,6 +53,14 @@
 		},
 		store,
 		methods: {
+			uploading(){
+				this.loading = this.$loading({
+				          lock: true,
+				          text: '上传中...',
+				          spinner: 'el-icon-loading',
+				          background: 'rgba(0, 0, 0, 0.7)'
+				        });
+			},
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
 				let formData = new FormData();
@@ -64,6 +72,7 @@
 					url: 'index/personal/upThumb',
 					data: formData
 				}).then(res => {
+					this.loading.close();
 					if (res.body.status) {
 						this.items.license = res.body.url
 						this.$message({
@@ -81,13 +90,13 @@
 				})
 			},
 			beforeAvatarUpload(file) {
-				const isJPG = file.type === 'image/jpeg';
+				const isJPG = file.type === 'image/jpeg'||file.type === 'image/png';
 				const isLt2M = file.size / 1024 / 1024 < 2;
 				if (!isJPG) {
-					this.$message.error('上传头像图片只能是 JPG 格式!');
+					this.$message.error('上传图片只格式错误!');
 				}
 				if (!isLt2M) {
-					this.$message.error('上传头像图片大小不能超过 2MB!');
+					this.$message.error('上传图片大小不能超过 2MB!');
 				}
 				return isJPG && isLt2M;
 			},

@@ -21,10 +21,11 @@
 		watch: {},
 		mounted() {
 			let login = S.get("logindata")
+			let path = this.$route.path;
 			if (login) {
 			
 			} else {
-				this.$router.push('/login')
+				if(path!='/login')this.$router.push('/login')
 			}
 
 

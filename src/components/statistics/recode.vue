@@ -11,16 +11,16 @@
 						<div class="sellter bg_white c999">{{checkstr}}</div>
 					</span>
 					<el-dropdown-menu slot="dropdown" style="">
-						<el-dropdown-item  command="0">12位销货方秘钥串</el-dropdown-item>
+						<el-dropdown-item command="0">12位销货方秘钥串</el-dropdown-item>
 						<el-dropdown-item command="1">销货方姓名</el-dropdown-item>
-						<el-dropdown-item  command="2">货车端车牌号</el-dropdown-item>
-						<el-dropdown-item  command="3">货物名称</el-dropdown-item>
+						<el-dropdown-item command="2">货车端车牌号</el-dropdown-item>
+						<el-dropdown-item command="3">货物名称</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容">
-				  <el-button type="success" class="recode_find bg_green">查询</el-button>
-				   <el-button class="recode_find">清空</el-button>
-				 
+				<el-button type="success" class="recode_find bg_green">查询</el-button>
+				<el-button class="recode_find">清空</el-button>
+
 			</div>
 		</div>
 		<div class="buy_list bg_white flex c666 f14 tl line1 mt20">
@@ -48,10 +48,26 @@
 				value1: '',
 			};
 		},
-		methods:{
-			 handleCommand(command) {
-			        this.$message('click on item ' + command);
-			      }
+		methods: {
+			handleCommand(command) {
+				switch (command) {
+					case '0':
+						this.checkstr = "12位销货方秘钥串";
+						break;
+					case '1':
+						this.checkstr = "销货方姓名";
+						break;
+					case '2':
+						this.checkstr = "货车端车牌号";
+						break;
+					case '3':
+						this.checkstr = "货物名称";
+						break;
+				}
+				
+				// this.$message('click on item ' + command);
+
+			}
 		},
 		watch: {
 			value1() {
@@ -62,9 +78,10 @@
 </script>
 
 <style>
-	.el-dropdown-menu{
+	.el-dropdown-menu {
 		width: 230px;
 	}
+
 	.sellter {
 		width: 200px;
 		height: 32px;
@@ -78,7 +95,8 @@
 	.sellterinput {
 		width: 390px;
 	}
-	.recode_find{
+
+	.recode_find {
 		height: 32px;
 		padding: 0 10px;
 	}
