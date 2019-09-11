@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import VueResource from 'vue-resource'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 Vue.use(ElementUI)
 Vue.use(VueResource)
 

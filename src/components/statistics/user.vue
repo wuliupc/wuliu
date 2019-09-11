@@ -20,6 +20,7 @@
 
 <script>
 	import tools from '../../module/common.js'
+	let R = tools.R
 	export default {
 		name: 'app',
 		components: {},
@@ -46,8 +47,16 @@
 				tools.S.set('user_active',this.user_active)
 			}
 		},
+		methods:{
+			getUserInfo (){
+				R.post('index/personal/getUserInfo').then(res=>{
+					console.log(res)
+				})
+			},
+		},
 		mounted(){
 	        	this.user_active = tools.S.get('user_active')||0
+				this.getUserInfo();
 		},
 	}
 </script>

@@ -21,6 +21,7 @@
 		  watch: {},
 		  mounted() {
 			  let login = S.get("logindata")
+			  console.log(login)
 			  // if(login.role==3){
 				 //  this.$router.push('/statistics_buy')
 			  // }

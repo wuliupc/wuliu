@@ -6,16 +6,16 @@
 		</div>
 		<div v-else>
 			<div class="authen_file flex f14 c666">
-				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12">
+				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12">
+				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber">
 			</div>
 			<div class="authen_file flex f14 c666">
 				<p>上传营业执照</p>
 
 				<div >
-					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+					<el-upload class="avatar-uploader"  action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<img src="../../assets/img/camera.png" v-else>
@@ -30,17 +30,45 @@
 </template>
 
 <script>
+	import tools from '../../module/common.js'
+	let R = tools.R
+	let S = tools.S
 	export default {
 		data() {
 			return {
 				show: false,
-				imageUrl: ''
+				imageUrl: '',
+				items:{
+					businessName:'',  //企业名称
+					businessNumber:'',  //营业执照号
+					license:''  //图片 
+				}
 			};
 		},
 		methods: {
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
-				console.log(this.imageUrl)
+				let formData = new FormData();
+				formData.append('file', file.raw);
+				formData.append("uid",S.get('logindata').uid);
+			    formData.append("token",S.get('logindata').token);
+
+				R.post({url:'index/personal/upThumb',data:formData}).then(res=>{
+					if(res.body.status){
+						this.items.license = res.body.url
+						this.$message({
+							message:  res.body.msg,
+							type: "success"
+						});
+					}else{
+						this.$message({
+							message:  res.body.msg,
+							type: "warning"
+						});
+						
+					}
+					
+				})
 			},
 			beforeAvatarUpload(file) {
 				const isJPG = file.type === 'image/jpeg';
@@ -54,7 +82,34 @@
 				return isJPG && isLt2M;
 			},
 			submit() {
-				this.show = true
+				if(this.items.businessName==""){
+					this.$message({
+						message: "请输入企业名称",
+						type: "warning"
+					});
+				}else if(this.items.businessNumber==""){
+					this.$message({
+						message: "请输入营业执照号",
+						type: "warning"
+					});
+				}else if(this.items.license==""){
+					this.$message({
+						message: "请上传营业执照",
+						type: "warning"
+					});
+				}else{
+					R.post({url:'index/personal/authen',data:this.items}).then(res=>{
+						if(res.body.status){
+							this.show = true
+						}else{
+							this.$message({
+								message:  res.body.msg,
+								type: "warning"
+							});
+						}
+					})
+				}
+					
 			},
 			handleCommand(command) {
 				this.$message('click on item ' + command);
