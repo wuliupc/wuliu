@@ -78,20 +78,34 @@
 			}
 		},
 		methods: {
-		
-			
-		},
-		computed:{
+			getUserInfo() {
+				const loading = this.$loading({
+				          lock: true,
+				          text: 'Loading',
+				          spinner: 'el-icon-loading',
+				          background: 'rgba(0, 0, 0, 0.7)'
+				        });
+				R.post('index/personal/getUserInfo').then(res => {
+					loading.close();
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+					} else {
+						this.$store.state.userinfo = res.body.data
+						this.userinfo = this.$store.state.userinfo
+					}
+				})
+			},
 			
 		},
 		mounted() {
 			this.user_active = tools.S.get('user_active') || 0
-			// if (this.$store.state.userinfo == "") {
-				this.$store.commit('getUserInfo');
-				this.$nextTick(()=>{
-					this.license= this.$store.state.userinfo
-				})
-			// }
+			if (this.$store.state.userinfo == "") {
+				this.getUserInfo();
+			}
 			console.log(this.$store.state.userinfo)
 		},
 	}

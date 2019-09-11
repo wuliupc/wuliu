@@ -25,8 +25,8 @@
 			<div class="mask register_mask" v-show="show">
 				<img src="../assets/img/x.png" @click="show=false">
 				<div>
-					<p class="tc f26 register_text">恭喜注册成功！</p>
-					<el-button type="success" round class="f26 register_text_btn">
+					<p class="tc f20 register_text">恭喜注册成功！</p>
+					<el-button type="success" round class="f20 register_text_btn">
 						<router-link to="/login" class="white" style="line-height: 1.5;">立即登录</router-link>
 					</el-button>
 				</div>
@@ -200,28 +200,28 @@
 
 	.register_mask>img {
 		position: relative;
-		top: 200px;
-		left: 1200px;
+		top: 10%;
+		left: 8%;
 	}
 
 	.register_mask>div {
 		position: absolute;
-		top: 215px;
-		left: 685px;
+		top: 15%;
+		left: 35%;
 		background-image: url(../assets/img/register.png);
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
-		width: 452px;
-		height: 481px;
+		width: 352px;
+		height:381px;
 	}
 
 	.register_text {
-		padding-top: 280px;
+		padding-top: 250px;
 	}
 
 	.register_text_btn {
 		display: block;
-		margin: 59px auto 0;
+		margin: 20px auto 0;
 		width: 247px;
 		height: 62px;
 		border-radius: 90px !important;

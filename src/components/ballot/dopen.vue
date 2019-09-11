@@ -224,7 +224,6 @@
 				</div>
 			</div>
 			<div class="block">
-				<!-- <span class="demonstration">直接前往</span> -->
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
 				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
 				</el-pagination>
