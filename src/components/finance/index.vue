@@ -35,16 +35,20 @@
 
 <script>
 	import tools from '../../module/common.js'
+	let R = tools.R
+	let S = tools.S
 	export default {
 		name: 'app',
 		components: {
-
 		},
 		data() {
 			return {
 				active: 0,
 				show: true,
 			}
+		},
+		methods:{
+			
 		},
 		watch: {
 
@@ -74,7 +78,6 @@
 
 <style>
 	.header {
-		
 		margin: 0 auto;
 		justify-content: space-between;
 	}

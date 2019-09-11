@@ -17,9 +17,9 @@
 						<el-dropdown-item command="3">货物名称</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容">
-				<el-button type="success" class="recode_find bg_green">查询</el-button>
-				<el-button class="recode_find">清空</el-button>
+				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容" v-model="items.key">
+				<el-button type="success" class="recode_find bg_green" @click="invoiceList()">查询</el-button>
+				<el-button class="recode_find" @click="delContent()">清空</el-button>
 
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
+			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" v-for="item in invoices">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -48,164 +48,42 @@
 						<span></span>
 						<ul>
 							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
+							<li style="padding-left: 13px;">{{item.saleName}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
+							<li style="padding-left: 13px;">{{item.carNumber}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
+							<li style="padding-left: 13px;">{{item.name}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
+							<li style="padding-left: 13px;">毛重{{item.arriveRough}}t 皮重{{item.arriveTare}}t 净重{{item.arriveSuttle}}t 扣吨{{item.deductTon}}t</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
+							<li style="padding-left: 13px;">{{item.money}}元</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
-						</ul>
-					</div>
-				</div>
-				<div class="payment_list_two">
-					<div class="payment_list_detail">
-						<router-link to="/finance_invoice_detail" class="f14 c333">查看详情</router-link>
-					</div>
-				</div>
-			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
-				<div class="payment_list_one">
-					<div class="payment_list_one_lab">
-						<label>
-							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="banana" v-model="checkData">
-						</label>
-						<ul>
-							<li>位销货方秘钥串</li>
-							<li>123456789123</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
-						</ul>
-					</div>
-				</div>
-				<div class="payment_list_two">
-					<div class="payment_list_detail">
-						<router-link to="/finance_invoice_detail" class="f14 c333">查看详情</router-link>
-					</div>
-				</div>
-			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
-				<div class="payment_list_one">
-					<div class="payment_list_one_lab">
-						<label>
-							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="orange" v-model="checkData">
-						</label>
-						<ul>
-							<li>位销货方秘钥串</li>
-							<li>123456789123</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
+							<li style="padding-left: 13px;">{{item.arriveTime}}</li>
 						</ul>
 					</div>
 				</div>
@@ -218,7 +96,7 @@
 			<div class="mt20">
 				<!-- <span class="demonstration">直接前往</span> -->
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
-				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
+				 :page-size="10" layout="prev, pager, next, jumper" :total="100">
 				</el-pagination>
 			</div>
 		</div>
@@ -226,18 +104,45 @@
 </template>
 
 <script>
+	import tools from '../../module/common.js'
+	let R = tools.R
 	export default {
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 5
+				currentPage3: 1,
+				invoices: [],
+				items: {
+					page: 1, //参数值 
+					limit: 10, //参数值 
+					startTime: '', //参数值 开始时间
+					endTime: '', //参数值 结束时间
+					type: 4, //参数值 顶部菜单切换
+					key: '', //参数值 搜索内容
+					keyType: 1, ///参数值   	
+				}
 			};
 		},
 		methods: {
 			handleCommand(command) {
-				this.$message('click on item ' + command);
+				switch (command) {
+				     case '0':
+				      this.checkstr = "12位销货方秘钥串";
+				      break;
+				     case '1':
+				      this.checkstr = "销货方姓名";
+				      break;
+				     case '2':
+				      this.checkstr = "货车端车牌号";
+				      break;
+				     case '3':
+				      this.checkstr = "货物名称";
+				      break;
+				    }
+					this.items.keyType=parseInt(command)+1;
+				// this.$message('click on item ' + command);
 			},
 			checkAll(e) { // 点击全选事件函数
 				var checkObj = document.querySelectorAll('.checkItem'); // 获取所有checkbox项
@@ -256,7 +161,36 @@
 			},
 			handleCurrentChange(val) {
 				console.log(`当前页: ${val}`);
+			},
+			//接口
+			invoiceList() {
+				R.post({
+					url: 'index/finance/waitPayment',
+					data: this.items
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+					}
+					console.log(res.body)
+					if (res.body.status) {
+						this.invoices = res.body.data
+					} else {
+						this.invoices=[]
+					}
+				})
+			},
+			//清空内容
+			delContent() {
+				this.items.key = '',
+				this.invoiceList();
 			}
+		},
+		mounted() {
+			this.invoiceList();
 		},
 		watch: {
 			value1() {

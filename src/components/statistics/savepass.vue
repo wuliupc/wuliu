@@ -17,7 +17,7 @@
 			</div>
 			<button class="f20 white bg_green border" @click="submit()">提交</button>
 		</div>
-		
+
 	</div>
 </template>
 
@@ -27,48 +27,48 @@
 	export default {
 		data() {
 			return {
-				show:false,
-				items:{
-					 password:'',  //参数值 原密码
-					 newPassword:'',  //参数值 新密码
-					 rePassword:'' //参数值 重复密码
+				show: false,
+				items: {
+					password: '', //参数值 原密码
+					newPassword: '', //参数值 新密码
+					rePassword: '' //参数值 重复密码
 				}
 			};
 		},
-		methods:{
-			submit(){
+		methods: {
+			submit() {
 				let msg, type;
 				if (this.items.password == "") {
 					msg = "请输入原密码";
 					type = "warning"
-				}else if (this.items.newPassword == "") {
+				} else if (this.items.newPassword == "") {
 					msg = "请输入新密码";
 					type = "warning"
-				}else if (this.items.rePassword == "") {
+				} else if (this.items.rePassword == "") {
 					msg = "请再次输入新密码";
 					type = "warning"
-				}else if (this.items.newPassword!=this.items.rePassword) {
+				} else if (this.items.newPassword != this.items.rePassword) {
 					msg = "新密码两次输入不一致";
 					type = "warning"
-				}else{
+				} else {
 					R.post({
 						url: 'index/personal/amendPassword',
 						data: this.items
 					}).then(res => {
 						console.log(res.body)
 						msg = res.body.msg;
-						if(res.body.status){
-						this.show = true
-						type = "success"
-						}else{
-						type = "warning"	
+						if (res.body.status) {
+							this.show = true
+							type = "success"
+						} else {
+							type = "warning"
 						}
-					this.$message({
-						message: msg,
-						type: type
-					});
+						this.$message({
+							message: msg,
+							type: type
+						});
 					})
-				return false;
+					return false;
 				}
 				this.$message({
 					message: msg,
