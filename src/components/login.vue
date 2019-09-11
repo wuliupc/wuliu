@@ -7,7 +7,7 @@
 				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" v-model="password" /> <img src="../assets/img/biyan.png" v-show="show"
 					 @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" /> </div>
 				<dir><el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button></dir>
-				<dir><el-button type="info"  class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button></dir>
+				<dir style="width: 85%;"><el-button type="info"  class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button></dir>
 				<p class="tc f14 c666 line1">
 					<router-link to="/register">立即注册</router-link>
 				</p>
@@ -77,7 +77,14 @@
 							S.set('logindata',res.body.data)
 							this.show = true
 							type = "success";
-						this.$router.push({ path: '/statistics_buy' })
+							
+							if (res.body.data.role == 3) {
+								this.$router.push('/statistics_buy')
+							} else if (res.body.data.role == 4) {
+								this.$router.push('/finance_index')
+							} else {
+								this.$router.push('/ballot_dopen')
+							}
 						} else {
 							type = "warning"
 						}

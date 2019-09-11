@@ -6,23 +6,26 @@
 		</div>
 		<div v-else>
 			<div class="authen_file flex f14 c666">
-				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName">
+				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName" :readonly="read">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber">
+				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="read">
 			</div>
 			<div class="authen_file flex f14 c666">
 				<p>上传营业执照</p>
-
-				<div >
-					<el-upload class="avatar-uploader"  action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+				<div v-if="read"><img v-if="imageUrl" :src="imageUrl" class="avatar"></div>
+				<div v-if="!read">
+					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<img src="../../assets/img/camera.png" v-else>
 					</el-upload>
 				</div>
 			</div>
-			<button class="f20 white bg_green border" @click="submit()">提交认证</button>
+			<button class="f20 white bg_green border" @click="submit()" v-if="!read">提交认证</button>
+			<button class="f20 white  border" v-if="status==0&&read">审核中...</button>
+			<button class="f20 white  border" v-if="status==1&&read">已通过审核</button>
+			
 		</div>
 	</div>
 
@@ -31,43 +34,50 @@
 
 <script>
 	import tools from '../../module/common.js'
+	import store from '../../vuex/store.js'
 	let R = tools.R
 	let S = tools.S
 	export default {
 		data() {
 			return {
+				read: false,
 				show: false,
 				imageUrl: '',
-				items:{
-					businessName:'',  //企业名称
-					businessNumber:'',  //营业执照号
-					license:''  //图片 
+				status:"",
+				items: {
+					businessName: '', //企业名称
+					businessNumber: '', //营业执照号
+					license: '' //图片 
 				}
 			};
 		},
+		store,
 		methods: {
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
 				let formData = new FormData();
 				formData.append('file', file.raw);
-				formData.append("uid",S.get('logindata').uid);
-			    formData.append("token",S.get('logindata').token);
+				formData.append("uid", S.get('logindata').uid);
+				formData.append("token", S.get('logindata').token);
 
-				R.post({url:'index/personal/upThumb',data:formData}).then(res=>{
-					if(res.body.status){
+				R.post({
+					url: 'index/personal/upThumb',
+					data: formData
+				}).then(res => {
+					if (res.body.status) {
 						this.items.license = res.body.url
 						this.$message({
-							message:  res.body.msg,
+							message: res.body.msg,
 							type: "success"
 						});
-					}else{
+					} else {
 						this.$message({
-							message:  res.body.msg,
+							message: res.body.msg,
 							type: "warning"
 						});
-						
+
 					}
-					
+
 				})
 			},
 			beforeAvatarUpload(file) {
@@ -82,34 +92,37 @@
 				return isJPG && isLt2M;
 			},
 			submit() {
-				if(this.items.businessName==""){
+				if (this.items.businessName == "") {
 					this.$message({
 						message: "请输入企业名称",
 						type: "warning"
 					});
-				}else if(this.items.businessNumber==""){
+				} else if (this.items.businessNumber == "") {
 					this.$message({
 						message: "请输入营业执照号",
 						type: "warning"
 					});
-				}else if(this.items.license==""){
+				} else if (this.items.license == "") {
 					this.$message({
 						message: "请上传营业执照",
 						type: "warning"
 					});
-				}else{
-					R.post({url:'index/personal/authen',data:this.items}).then(res=>{
-						if(res.body.status){
+				} else {
+					R.post({
+						url: 'index/personal/authen',
+						data: this.items
+					}).then(res => {
+						if (res.body.status) {
 							this.show = true
-						}else{
+						} else {
 							this.$message({
-								message:  res.body.msg,
+								message: res.body.msg,
 								type: "warning"
 							});
 						}
 					})
 				}
-					
+
 			},
 			handleCommand(command) {
 				this.$message('click on item ' + command);
@@ -119,6 +132,20 @@
 			value1() {
 				console.log(this.value1);
 			}
+		},
+		mounted() {
+			setTimeout(rs=>{
+				if (this.$store.state.userinfo.businessName) {
+					this.items.businessName = this.$store.state.userinfo.businessName
+					this.items.businessNumber = this.$store.state.userinfo.businessNumber
+					this.items.license = this.$store.state.userinfo.license
+					this.imageUrl = this.$store.state.userinfo.license
+					this.status = this.$store.state.userinfo.status
+					this.read = true;
+				}
+			},50)
+			
+
 		}
 	};
 </script>
@@ -161,10 +188,11 @@
 	.authen_file img {
 		margin-top: 70%;
 	}
-	  .avatar {
-	    width: 100%;
-	    height: 173px;
+
+	.avatar {
+		width: 100%;
+		height: 173px;
 		margin: 0 !important;
-	    display: block;
-	  }
+		display: block;
+	}
 </style>

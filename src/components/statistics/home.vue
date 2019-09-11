@@ -115,8 +115,8 @@
 	}
 
 	.user img {
-		width: 24px;
-		height: 29px;
+		width: 20px;
+		height: 25px;
 		margin-right: 10px;
 	}
 </style>

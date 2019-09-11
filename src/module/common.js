@@ -23,13 +23,10 @@ const tools = {
 				}
 				if (!items.url) return console.log('缺少url参数.', items);
 				if (!items.data) items.data = {};
-				// let data = {
-				// 	'uid':logindata.uid,
-				// 	'token':logindata.token
-				// }
-				// Object.assign(items.data,data)
-				items.data['uid'] = logindata.uid;
-				items.data['token'] = logindata.token;
+				if(logindata){
+					items.data['uid'] = logindata.uid;
+					items.data['token'] = logindata.token;
+				}
 				VueEvent.$http({
 					url: URL + items.url,
 					body: items.data,

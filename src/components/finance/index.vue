@@ -103,9 +103,4 @@
 		align-items: center;
 	}
 
-	.user img {
-		width: 24px;
-		height: 29px;
-		margin-right: 10px;
-	}
 </style>
