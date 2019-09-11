@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import tools from '../module/common.js';
+
+let R = tools.R
 Vue.use(Vuex);
 /*1.state在vuex中用于存储数据*/
 var state={
@@ -9,6 +12,19 @@ var state={
 */
 var mutations={
 	
+	getUserInfo() {
+		R.post('index/personal/getUserInfo').then(res => {
+			if (res.body.code == 400) {
+				this.$message({
+					message: res.body.msg,
+					type: 'warning'
+				});
+				this.$router.push('/login')
+			} else {
+				state.userinfo = res.body.data
+			}
+		})
+	},
   
 }
 /*3、类似计算属性   ，  改变state里面的count数据的时候会触发 getters里面的方法 获取新的值 (基本用不到)*/

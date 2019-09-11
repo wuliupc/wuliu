@@ -13,9 +13,10 @@
 			}
 		},store,
 		mounted() {
-			setTimeout(rs=>{
+			this.$nextTick(()=>{
 				this.license= this.$store.state.userinfo.license
-			},50)
+			})
+		
 			
 		}
 	}
