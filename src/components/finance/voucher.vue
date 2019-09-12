@@ -37,7 +37,7 @@
 					<div class="payment_list_one_lab">
 						<label>
 							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="apple" v-model="checkData">
+							<input class="checkItem" type="checkbox" :value="item.id" v-model="checkData">
 						</label>
 						<ul>
 							<li>位销货方秘钥串</li>
@@ -89,15 +89,18 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_voucher_detail" class="f14 c333">查看详情</router-link>
-						<span class="f14" @click="up()">上传结款凭证</span>
+						<router-link :to="'/finance_voucher_detail?id='+item.id" class="f14 c333">查看详情</router-link>
+						<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+						 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
+							<span class="f14" @click="getid(item.id)">上传结款凭证</span>
+						</el-upload>
 					</div>
 				</div>
 			</div>
-			<div class="mt20">
+			<div class="mt20" v-show="count>1">
 				<!-- <span class="demonstration">直接前往</span> -->
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
-				 :page-size="10" layout="prev, pager, next, jumper" :total="100">
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="items.page"
+				 :page-size="10" layout="prev, pager, next, jumper" :total="count">
 				</el-pagination>
 			</div>
 		</div>
@@ -116,16 +119,23 @@
 
 <script>
 	import tools from '../../module/common.js'
+	import store from '../../vuex/store.js'
+	let U = tools.U
 	let R = tools.R
+	let S = tools.S
 	export default {
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 1,
 				show: false,
-				voucher: [],
+				voucher: [], //数据
+				count: 1, //分页
+				upFinace:{
+					id:'',
+					thumb:''
+				},
 				items: {
 					page: 1, //参数值 
 					limit: 10, //参数值 
@@ -138,23 +148,26 @@
 			};
 		},
 		methods: {
+			getid(id){ //获取打款凭证id
+				// console.log(id)
+				this.upFinace.id = id;
+			},
 			handleCommand(command) {
 				switch (command) {
-				     case '0':
-				      this.checkstr = "12位销货方秘钥串";
-				      break;
-				     case '1':
-				      this.checkstr = "销货方姓名";
-				      break;
-				     case '2':
-				      this.checkstr = "货车端车牌号";
-				      break;
-				     case '3':
-				      this.checkstr = "货物名称";
-				      break;
-				    }
-					this.items.keyType=parseInt(command)+1;
-				// this.$message('click on item ' + command);
+					case '0':
+						this.checkstr = "12位销货方秘钥串";
+						break;
+					case '1':
+						this.checkstr = "销货方姓名";
+						break;
+					case '2':
+						this.checkstr = "货车端车牌号";
+						break;
+					case '3':
+						this.checkstr = "货物名称";
+						break;
+				}
+				this.items.keyType = parseInt(command) + 1;
 			},
 			checkAll(e) { // 点击全选事件函数
 				var checkObj = document.querySelectorAll('.checkItem'); // 获取所有checkbox项
@@ -169,13 +182,90 @@
 				}
 			},
 			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
+				// console.log(`每页 ${val} 条`);
+				this.items.page = val;
+				this.voucherList();
 			},
 			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
+				// console.log(`当前页: ${val}`);
+				this.items.page = val;
+				this.voucherList();
 			},
-			up() {
-				this.show = true
+			uploading(id) {
+				// console.log(id)
+				this.loading = this.$loading({
+					lock: true,
+					text: '上传中...',
+					spinner: 'el-icon-loading',
+					background: 'rgba(0, 0, 0, 0.7)'
+				});
+			},
+			handleAvatarSuccess(res, file) {
+				this.imageUrl = URL.createObjectURL(file.raw);
+				let formData = new FormData();
+				formData.append('file', file.raw);
+				formData.append("uid", S.get('logindata').uid);
+				formData.append("token", S.get('logindata').token);
+
+				R.post({
+					url: 'index/personal/upThumb',
+					data: formData
+				}).then(res => {
+					this.loading.close();
+					if (res.body.status) {
+						this.upFinace.thumb = res.body.url
+						// this.show = true
+						this.up()
+					} else {
+						this.$message({
+							message: res.body.msg,
+							type: "warning"
+						});
+
+					}
+
+				})
+			},
+			beforeAvatarUpload(file) {
+				const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+				if (!isJPG) {
+					this.$message.error('上传图片只格式错误!');
+				}
+				if (!isLt2M) {
+					this.$message.error('上传图片大小不能超过 2MB!');
+				}
+				return isJPG && isLt2M;
+			},
+			//上传凭证接口
+			up(id) {
+				R.post({
+					url: 'index/Finance/upFinaceThumb',
+					data: this.upFinace
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+					}
+					console.log(res.body)
+					if (res.body.status) {
+						this.up = res.body.data
+						this.show = true
+						this.voucherList()
+						// this.$message({
+						// 	message: res.body.msg,
+						// 	type: 'success'
+						// });
+					} else {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+					}
+				})
 			},
 			//接口
 			voucherList() {
@@ -194,14 +284,25 @@
 					if (res.body.status) {
 						this.voucher = res.body.data
 					} else {
-						this.voucher=[]
+						this.voucher = []
 					}
 				})
 			},
 			//清空内容
 			delContent() {
-				this.items.key = '',
-				this.voucherList();
+				this.items.page = 1 //参数值   页码
+				this.items.key = '' //参数值   搜索内容
+				this.voucherList()
+			},
+			//日期转换
+			formatDate(now) {
+				var year = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var date = now.getDate();
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var second = now.getSeconds();
+				return year + "-" + month + "-" + date;
 			}
 		},
 		mounted() {
@@ -209,11 +310,22 @@
 		},
 		watch: {
 			value1() {
+				if (this.value1 == null) {
+					this.items.startTime = ""
+					this.items.endTime = ""
+				} else {
+					this.items.startTime = this.formatDate(this.value1[0])
+					this.items.endTime = this.formatDate(this.value1[1])
+				}
 				// console.log(this.value1);
+				// console.log(this.items.startTime)
+				// console.log(this.items.endTime)
+				this.item.page = 1;
+				this.voucherList();
 			},
 			checkData: {
 				handler() { // 数据数组有变化将触发此函数
-					if (this.checkData.length == 3) {
+					if (this.checkData.length == this.voucher.length) {
 						document.querySelector('#quan').checked = true;
 					} else {
 						document.querySelector('#quan').checked = false;
@@ -262,5 +374,9 @@
 		width: 247px;
 		height: 62px;
 		border-radius: 90px !important;
+	}
+	.payment_list_two_detail div{
+		width: 100%;
+		text-align: center;
 	}
 </style>

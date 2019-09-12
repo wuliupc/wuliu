@@ -49,13 +49,47 @@
 </template>
 
 <script>
+	import tools from '../../module/common.js';
+	let R = tools.R
 	export default {
 		name: 'app',
 		data() {
-			return {}
+			return {
+				pay:[]
+			}
 		},
-		components: {
-
+		methods:{
+			//接口
+			immediatePay(id){
+				R.post({
+					url:'index/finance/setPayment',
+					data:{
+						id
+					}
+				}).then(res =>{
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					console.log(res)
+					if (res.body.status) {
+						this.pay = res.body.data
+					} else {
+						// this.$message({
+						// 	message: res.body.msg,
+						// 	type: 'warning'
+						// });
+					}
+				})
+			},
+		},
+		mounted() {
+			// console.log(this.$route.query);
+			this.immediatePay(this.$route.query.id);
 		},
 
 	}

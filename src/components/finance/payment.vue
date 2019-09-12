@@ -42,7 +42,7 @@
 					<div class="payment_list_one_lab">
 						<label>
 							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="apple" v-model="checkData">
+							<input class="checkItem" type="checkbox" :value="payment.id" v-model="checkData">
 						</label>
 						<ul>
 							<li>位销货方秘钥串</li>
@@ -95,15 +95,15 @@
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/finance_payment_detail" class="f16 c333">查看详情</router-link>
-						<router-link to="/finance_immediate_pay" class="f16">确认结款</router-link>
+						<router-link :to="'/finance_payment_detail?id='+payment.id" class="f16 c333">查看详情</router-link>
+						<p class="f16" @click="pay(payment.id)" v-if="payment.status==5">确认结款</p>
 					</div>
 				</div>
 			</div>
-			<div class="mt20">
+			<div class="mt20" v-show="count>1">
 				<!-- <span class="demonstration">直接前往</span> -->
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
-				 :page-size="10" layout="prev, pager, next, jumper" :total="100">
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="items.page"
+				 :page-size="10" layout="prev, pager, next, jumper" :total="count">
 				</el-pagination>
 			</div>
 		</div>
@@ -112,15 +112,18 @@
 
 <script>
 	import tools from '../../module/common.js'
+	import store from '../../vuex/store.js'
 	let R = tools.R
+	let U = tools.U
 	export default {
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 1, //分页第一页
-				payments: [],
+				// currentPage3: 1, //分页第一页
+				payments: [], //数据
+				count: 1, //分页
 				items: {
 					page: 1, //参数值   页码
 					limit: 10, //参数值 
@@ -133,7 +136,7 @@
 			};
 		},
 		methods: {
-			//接口
+			//列表接口
 			paymentList() {
 				R.post({
 					url: 'index/finance/waitPayment',
@@ -146,11 +149,42 @@
 						});
 						this.$router.push('/login')
 					}
-					console.log(res)
+					console.log(res.body)
 					if (res.body.status) {
 						this.payments = res.body.data
 					} else {
 						this.payments = []
+					}
+				})
+			},
+			//支付接口
+			pay(id) {
+				R.post({
+					url: 'index/finance/setPayment',
+					data: {
+						id
+					}
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+					}
+					console.log(res.body)
+					if (res.body.status) {
+						this.pay = res.body.data
+						this.$message({
+							message: res.body.msg,
+							type: 'success'
+						});
+						this.paymentList();
+					} else {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
 					}
 				})
 			},
@@ -185,32 +219,52 @@
 				}
 			},
 			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
+				// console.log(`每页 ${val} 条`);
+				this.items.page = val;
+				this.paymentList();
 			},
 			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
+				// console.log(`当前页: ${val}`);
+				this.items.page = val;
+				this.paymentList();
 			},
 			//清空内容 
 			delContent() {
-				this.items.key = ''
-				this.items.page= 1 //参数值   页码
-				this.items.key= '' //参数值 搜索内容
-				this.items.keyType= 1, ///参数值  
-				this.items.startTime= '' //参数值 开始时间
-				this.items.endTime= '' //参数值 结束时间
+				this.items.page = 1 //参数值   页码
+				this.items.key = '' //参数值 搜索内容
+				this.paymentList()
+			},
+			//日期转换
+			formatDate(now) {
+				var year = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var date = now.getDate();
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var second = now.getSeconds();
+				return year + "-" + month + "-" + date;
 			}
 		},
 		mounted() {
 			this.paymentList();
-			// this.handleCommand();
 		},
 		watch: {
 			value1() {
-				console.log(this.value1);
+				if (this.value1 == null) {
+					this.items.startTime = ""
+					this.items.endTime = ""
+				} else {
+					this.items.startTime = this.formatDate(this.value1[0])
+					this.items.endTime = this.formatDate(this.value1[1])
+				}
+				// console.log(this.items.startTime);
+				// console.log(this.items.endTime);
+				this.items.page = 1;
+				this.paymentList()
 			},
 			checkData: {
 				handler() { // 数据数组有变化将触发此函数
-					if (this.checkData.length == 3) {
+					if (this.checkData.length == this.payments.length) {
 						document.querySelector('#quan').checked = true;
 					} else {
 						document.querySelector('#quan').checked = false;
@@ -401,7 +455,7 @@
 		font-size: 14px;
 	}
 
-	.payment_list_two_detail a:nth-of-type(2),
+	.payment_list_two_detail p,
 	.payment_list_two_detail span {
 		height: 40px;
 		line-height: 40px;
