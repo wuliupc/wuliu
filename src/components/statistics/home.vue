@@ -51,6 +51,7 @@
 			$route(to,from){
 			  // console.log(to.path);
 				if(to.path=="/statistics_business") tools.S.set('user_active', 0);
+				if(to.path=="/statistics_authentication") this.active = 2;
 			 },
 			active() {
 				tools.S.set('active', this.active)

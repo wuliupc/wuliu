@@ -12,19 +12,41 @@
 			<p class="info_cell f14 c666 tl bg_white">到达地：{{info.dest.province}}{{info.dest.city}}{{info.dest.area}}{{info.dest.address}}</p>
 			<p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 			<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
-			<p class="info_cell f14 c666 tl" @click="show=true">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+			<p class="info_cell f14 c666 tl" @click="info.status=='货物待确认'?show=true:''">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		</div>
 		
 		<!-- 弹框 -->
 		<transition name="el-fade-in">
 			<div class="mask register_mask " v-show="show">
 				<img src="../../assets/img/x.png" @click="show=false">
-				<div class="infoq">
-					<p class="tc f14" style="padding-top: 4rem;">请输入12位销货方秘钥串</p>
-					<input type="text" class="input">
-					<el-button type="success" round class="f16">
-						立即匹配
-					</el-button>
+				<div class="queren">
+					<div v-show="!queren"><p class="tc f14" style="padding-top: 4rem;">请输入货物金额</p>
+					<input type="text" class="input" v-model="money">
+					<p style="margin-top: 0.5rem;">
+						<el-button type="success" round class="f16" @click="confirmGoods(info.id)">
+							确认
+						</el-button>
+						<el-button type="success" round class="f16" @click="show=false">
+							取消
+						</el-button>
+					</p>
+					</div>
+					<div v-show="queren">
+						<p class="tc f14" style="padding-top: 4rem;">请确认货物到达实际重量</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">毛重 {{info.arriveRough}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">皮重 {{info.arriveTare}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">净重 {{info.arriveSuttle}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">扣重 {{info.deductTon}}t</p>
+						<p style="margin-top: 0.5rem;">
+							<el-button type="success" round class="f16" @click="queren=!queren">
+								确认
+							</el-button>
+							<el-button type="success" round class="f16" @click="cancleGoods(info.id)">
+								拒绝
+							</el-button>
+						</p>
+					</div>
+					
 				</div>
 			</div>
 		</transition>
@@ -39,7 +61,9 @@
 	export default {
 		data() {
 			return {
+				queren:true,
 				show:false,
+				money:'',
 				info: {
 					order:{},
 					dest:{}
@@ -47,6 +71,74 @@
 			}
 		},
 		methods: {
+			confirmGoods(id){ //货物确认
+			if(this.money==""){
+				this.$message({
+					message:"请输入货物金额",
+					type: 'warning'
+				});
+				return false
+			}
+				R.post({
+					url: 'index/Api/confirmGoods',
+					data: {
+						id:id,
+						money:this.money
+					}
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if(res.body.status){
+						this.$message({
+							message: res.body.msg,
+							type: 'success'
+						});
+					}else{
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+					}
+				})
+			},
+			cancleGoods(id){ //货物拒绝
+				console.log(id)
+				R.post({
+					url: 'index/Api/cancleGoods',
+					data: {
+						id
+					}
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if(res.body.status){
+						this.info.status ="拒绝";
+						this.$message({
+							message: res.body.msg,
+							type: 'success'
+						});
+					}else{
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+					}
+					
+					
+				})
+			},
 			orderInfo(id) {
 				R.post({
 					url: 'index/api/orderInfo',
@@ -118,7 +210,7 @@
 		line-height: 54px;
 		padding: 0 15px;
 	}
-	.infoq{
-		
+	.queren{
+		background-image: url(../../assets/img/queren.png) !important;
 	}
 </style>

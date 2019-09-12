@@ -2,7 +2,7 @@
 	<div>
 		<div class="buy_body">
 			<div class="buy_add">
-				<button class="buy_btn white fr" @click="show=true">+ 添加</button>
+				<button class="buy_btn white fr" @click="add()">+ 添加</button>
 			</div>
 			<div class="buy_list bg_white flex c666 f14 tl line1" v-for="item in list">
 				<div>
@@ -17,7 +17,7 @@
 					<router-link :to="'/statistics_info?id='+item.id">查看详情</router-link>
 				</div>
 			</div>
-			
+
 			<div class="block" v-show="count>1">
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
 				 :page-size="10" layout="prev, pager, next, jumper" :total="count">
@@ -30,10 +30,32 @@
 				<img src="../../assets/img/x.png" @click="show=false">
 				<div class="pipei">
 					<p class="tc f14" style="padding-top: 4rem;">请输入12位销货方秘钥串</p>
-					<input type="text" class="input">
-					<el-button type="success" round class="f16">
-						立即匹配
-					</el-button>
+					<input type="text" class="input" v-model="key">
+					<p style="margin-top: 0.5rem;">
+						<el-button type="success" round class="f16" @click="show=false">
+							取消
+						</el-button>
+						<el-button type="success" round class="f16" @click="matchKey()">
+							匹配
+						</el-button>
+					</p>
+				</div>
+			</div>
+		</transition>
+		<!-- 实名认证 -->
+		<transition name="el-fade-in">
+			<div class="mask register_mask " v-show="nameshow">
+				<img src="../../assets/img/x.png" @click="nameshow=false">
+				<div class="">
+					<p class="tc f14" style="padding:4.5rem 0 1rem;">您还未实名认证，请进行实名认证</p>
+					<p style="margin-top: 0.5rem;">
+						<el-button type="success" round class="f16" @click="nameshow=false">
+							取消
+						</el-button>
+						<el-button type="success" round class="f16">
+							<router-link to="/statistics_authentication" class="white">确认</router-link>
+						</el-button>
+					</p>
 				</div>
 			</div>
 		</transition>
@@ -48,6 +70,8 @@
 		data() {
 			return {
 				show: false,
+				nameshow: false,
+				key: '',
 				items: {
 					type: 1, // 参数值 1为我要购货  2为购货记录
 					page: 1, // 参数值 默认 1
@@ -59,10 +83,59 @@
 				},
 				list: [],
 				currentPage3: 1,
-				count:1
+				count: 1
 			}
 		},
 		methods: {
+			matchKey() {
+				R.post({
+					url: 'index/Api/matchKey',
+					data: {
+						key: this.key
+					}
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if (res.body.status) {
+						this.show = false;
+						this.items.page = 1;
+						this.wantBuy();
+						this.$message({
+							message: res.body.msg,
+							type: 'success'
+						});
+					} else {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+					}
+
+				})
+			},
+			add() {
+				R.post('index/Api/checkReal').then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if (res.body.status) {
+						this.show = true
+					} else {
+						this.nameshow = true
+					}
+				})
+			},
 			wantBuy() {
 				R.post({
 					url: 'index/api/wantBuy',

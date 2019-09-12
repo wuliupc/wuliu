@@ -212,7 +212,8 @@
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		width: 352px;
-		height:381px;
+		min-height:371px;
+		padding-bottom: 10px;
 	}
 
 	.register_text {
