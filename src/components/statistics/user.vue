@@ -79,14 +79,14 @@
 		},
 		methods: {
 			getUserInfo() {
-				const loading = this.$loading({
-				          lock: true,
-				          text: 'Loading',
-				          spinner: 'el-icon-loading',
-				          background: 'rgba(0, 0, 0, 0.7)'
-				        });
+				// const loading = this.$loading({
+				//           lock: true,
+				//           text: 'Loading',
+				//           spinner: 'el-icon-loading',
+				//           background: 'rgba(0, 0, 0, 0.7)'
+				//         });
 				R.post('index/personal/getUserInfo').then(res => {
-					loading.close();
+					// loading.close();
 					if (res.body.code == 400 || res.body.code == 401) {
 						this.$message({
 							message: res.body.msg,

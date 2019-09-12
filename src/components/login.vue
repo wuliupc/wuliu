@@ -3,11 +3,14 @@
 		<div class="mask">
 			<div class="main bg_white">
 				<p class="c333 f26 tc">登录</p>
-				<div><input type="tel" placeholder="请输入手机号" maxlength="11"  v-model="mobile"/></div>
-				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" v-model="password" /> <img src="../assets/img/biyan.png" v-show="show"
-					 @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" /> </div>
-				<dir style="width: 80%;margin: 50px 0 30px;"><el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button></dir>
-				<dir style="width: 80%;margin: 50px 0 30px;"><el-button type="info"  class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button></dir>
+				<div><input type="tel" placeholder="请输入手机号" maxlength="11" v-model="mobile" /></div>
+				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" v-model="password" /> <img src="../assets/img/biyan.png"
+					 v-show="show" @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" />
+				</div>
+				<dir style="width: 80%;margin: 50px 0 30px;">
+					<el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button>
+					<el-button type="info" class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button>
+				</dir>
 				<p class="tc f14 c666 line1">
 					<router-link to="/register">立即注册</router-link>
 				</p>
@@ -24,9 +27,9 @@
 		data() {
 			return {
 				show: true,
-				mobile:'',
-				disabled:true,
-				password:'',
+				mobile: '',
+				disabled: true,
+				password: '',
 				items: {
 					mobile: '', //参数值 手机号
 					password: '' //参数值 密码
@@ -34,23 +37,23 @@
 
 			}
 		},
-		watch:{
-			mobile(){
+		watch: {
+			mobile() {
 				this.items.mobile = this.mobile
 				this.items.password = this.password
-				if(this.mobile&&this.password){
+				if (this.mobile && this.password) {
 					this.disabled = false
-				}else{
-				   this.disabled = true
+				} else {
+					this.disabled = true
 				}
 			},
-			password(){
+			password() {
 				this.items.mobile = this.mobile
 				this.items.password = this.password
-				if(this.mobile&&this.password){
+				if (this.mobile && this.password) {
 					this.disabled = false
-				}else{
-				   this.disabled = true
+				} else {
+					this.disabled = true
 				}
 			},
 		},
@@ -74,10 +77,10 @@
 						console.log(res.body)
 						msg = res.body.msg;
 						if (res.body.status) {
-							S.set('logindata',res.body.data)
+							S.set('logindata', res.body.data)
 							this.show = true
 							type = "success";
-							
+
 							if (res.body.data.role == 3) {
 								this.$router.push('/statistics_buy')
 							} else if (res.body.data.role == 4) {
@@ -92,7 +95,7 @@
 							message: msg,
 							type: type
 						});
-						
+
 					})
 					return false;
 				}
@@ -153,7 +156,7 @@
 	}
 
 	.login_btn {
-		display: block;
+		margin: 0 !important;
 		width: 100%;
 		height: 50px;
 		font-size: 20px;

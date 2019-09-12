@@ -14,7 +14,7 @@
 					<p>状态：{{item.status}}</p>
 				</div>
 				<div style="margin-right: 67px;">
-					<router-link to="/statistics_info">查看详情</router-link>
+					<router-link :to="'/statistics_info?id='+item.id">查看详情</router-link>
 				</div>
 			</div>
 			
@@ -24,7 +24,7 @@
 				</el-pagination>
 			</div>
 		</div>
-		<!-- 注册成功弹框 -->
+		<!-- 弹框 -->
 		<transition name="el-fade-in">
 			<div class="mask register_mask " v-show="show">
 				<img src="../../assets/img/x.png" @click="show=false">
@@ -43,7 +43,6 @@
 
 <script>
 	import tools from '../../module/common.js';
-	import store from '../../vuex/store.js'
 	let R = tools.R
 	export default {
 		data() {
@@ -127,9 +126,13 @@
 			},
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
+				this.items.page = val;
+				this.wantBuy();
 			},
 			handleCurrentChange(val) {
 				console.log(`当前页: ${val}`);
+				this.items.page = val;
+				this.wantBuy();
 			}
 		},
 		mounted() {
