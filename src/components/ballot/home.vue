@@ -11,10 +11,15 @@
 							<router-link to='/ballot_yopen' :class="ballot_active==1?'white':''">已开票</router-link>
 						</li>
 					</ul>
-					<div class="f14 c666 user flex">
-						<img src="../../assets/img/user.png" />
-						<p>13******99</p>
-					</div>
+				<el-dropdown @command="logoff()">
+				    <div class="f14 c666 user flex el-dropdown-link">
+				    	<img src="../../assets/img/user.png" />
+				    	<p>{{mobile}}</p><i class="el-icon-arrow-down el-icon--right"></i>
+				    </div>
+				  <el-dropdown-menu slot="dropdown" style="width: 120px" >
+				    <el-dropdown-item >注销登录</el-dropdown-item>
+				  </el-dropdown-menu>
+				</el-dropdown>
 				</div>
 
 			</el-header>
@@ -35,7 +40,8 @@
 		data() {
 			return {
 				show: true,
-				ballot_active: 0
+				ballot_active: 0,
+				mobile:tools.S.get('logindata').mobile
 			}
 		},
 		watch: {
@@ -44,22 +50,23 @@
 				//if(to.path=="/statistics_business") S.set('user_active', 0);
 			 },
 			ballot_active() {
-				tools.S.set('ballot_active', this.active)
+				tools.S.set('ballot_active', this.ballot_active)
 			}
 		},
 		methods:{
-			
+			logoff(){
+				tools.S.remove('logindata');
+				this.$router.push("/login")
+			},
 		},
 		mounted() {
 			 this.ballot_active = tools.S.get('ballot_active') || 0
-			 // let path = this.$route.path;
-			 // if(path=='/statistics_buy'||path=='/statistics_info'){
-				//  this.active = 0;
-			 // }else if(path=='/statistics_recode'||path=='/statistics_recodeinfo'){
-				//  this.active = 1; 
-			 // }else{
-				//  this.active = 2; 
-			 // }
+			 let path = this.$route.path;
+			 if(path=='/ballot_dopen'||path=='/ballot_info'){
+				 this.ballot_active = 0;
+			 }else{
+				 this.ballot_active = 1; 
+			 }
 		}
 	}
 </script>

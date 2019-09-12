@@ -18,7 +18,7 @@
 					<el-dropdown @command="logoff()">
 					    <div class="f14 c666 user flex el-dropdown-link">
 					    	<img src="../../assets/img/user.png" />
-					    	<p>13******99</p><i class="el-icon-arrow-down el-icon--right"></i>
+					    	<p>{{mobile}}</p><i class="el-icon-arrow-down el-icon--right"></i>
 					    </div>
 					  <el-dropdown-menu slot="dropdown" style="width: 120px" >
 					    <el-dropdown-item >注销登录</el-dropdown-item>
@@ -45,6 +45,7 @@
 			return {
 				show: true,
 				active: 0,
+				mobile:tools.S.get('logindata').mobile
 			}
 		},
 		watch: {
