@@ -1,7 +1,7 @@
 <template>
 	<div class="buy_body">
 		<div class="tl">
-		<!-- 	<div class="block mt20 ">
+			<!-- 	<div class="block mt20 ">
 				<el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
 				</el-date-picker>
 			</div> -->
@@ -17,9 +17,9 @@
 						<el-dropdown-item command="3">货物名称</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容">
-				<el-button type="success" class="recode_find bg_green">查询</el-button>
-				<el-button class="recode_find">清空</el-button>
+				<input type="text" class="sellter bg_white c999 sellterinput" placeholder="请输入要搜索的内容" v-model="items.key">
+				<el-button type="success" class="recode_find bg_green" @click="search()">查询</el-button>
+				<el-button class="recode_find" @click="clear()">清空</el-button>
 
 			</div>
 		</div>
@@ -32,194 +32,67 @@
 					</label>
 				</div>
 				<div class="payment_btn">
-					<button class="bg_green white">批量开票</button>
 					<button>下载表格</button>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f14 tl line1 mt20" style="min-height: 275px;">
+			<div class="payment_list bg_white c666 flex f14 tl line1 mt20" style="min-height: 298px;" v-for="(item,index) in list">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
 							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="apple" v-model="checkData">
+							<input class="checkItem" type="checkbox" :value="item.id" v-model="checkData">
 						</label>
 						<ul>
 							<li>12位销货方秘钥串</li>
-							<li>123456789123</li>
+							<li>{{item.key}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
+							<li style="padding-left: 13px;">{{item.saleName}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
+							<li style="padding-left: 13px;">{{item.carNumber}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
+							<li style="padding-left: 13px;">{{item.name}}</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
+							<li style="padding-left: 13px;">毛重{{item.arriveRough}}t 皮重{{item.arriveTare}}t 净重{{item.arriveSuttle}}t 扣重{{item.deductTon}}t</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">
 						<span></span>
 						<ul>
 							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
+							<li style="padding-left: 13px;">{{item.money}}元</li>
 						</ul>
 					</div>
-					
+
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
-						<router-link to="/ballot_yinfo" class="f14 c333">查看详情</router-link>
-						<router-link to="/ballot_yinfo" class="f14">开具发票</router-link>
+						<router-link  :to="'/ballot_yinfo?id='+item.id" class="f14 c333">查看详情</router-link>
 					</div>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
-				<div class="payment_list_one">
-					<div class="payment_list_one_lab">
-						<label>
-							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="banana" v-model="checkData">
-						</label>
-						<ul>
-							<li>位销货方秘钥串</li>
-							<li>123456789123</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
-						</ul>
-					</div>
-				</div>
-				<div class="payment_list_two">
-					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
-					</div>
-				</div>
-			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20">
-				<div class="payment_list_one">
-					<div class="payment_list_one_lab">
-						<label>
-							<!-- v-model 双向数据绑定命令 -->
-							<input class="checkItem" type="checkbox" value="orange" v-model="checkData">
-						</label>
-						<ul>
-							<li>位销货方秘钥串</li>
-							<li>123456789123</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>销货方姓名</li>
-							<li style="padding-left: 13px;">张晓晓</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货车端车牌号</li>
-							<li style="padding-left: 13px;">冀B·F6655</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物名称</li>
-							<li style="padding-left: 13px;">箱子</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达实际重量</li>
-							<li style="padding-left: 13px;">毛重5t 皮重5t 净重5t 扣吨5t</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物金额</li>
-							<li style="padding-left: 13px;">5000元</li>
-						</ul>
-					</div>
-					<div class="payment_list_two_lab">
-						<span></span>
-						<ul>
-							<li>货物到达时间</li>
-							<li style="padding-left: 13px;">2019.08.20 15:30:00</li>
-						</ul>
-					</div>
-				</div>
-				<div class="payment_list_two">
-					<div class="payment_list_two_detail">
-						<router-link to="/statistics_recodeinfo" class="f16 c333">查看详情</router-link>
-						<router-link to="/statistics_recodeinfo" class="f16">确认结款</router-link>
-					</div>
-				</div>
-			</div>
-			<div class="block">
-				<!-- <span class="demonstration">直接前往</span> -->
+			<div class="block mt10" v-show="count>1">
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3"
-				 :page-size="2" layout="prev, pager, next, jumper" :total="100">
+				 :page-size="10" layout="prev, pager, next, jumper" :total="count">
 				</el-pagination>
 			</div>
 		</div>
@@ -227,18 +100,84 @@
 </template>
 
 <script>
+	import tools from '../../module/common.js';
+	let R = tools.R
 	export default {
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				currentPage3: 5
+				items: {
+					page: 1, //参数值 页码 默认1
+					limit: 10, //参数值 每页数据条数 默认10
+					startTime: '', //参数值 开始时间
+					endTime: '', //参数值 结束时间
+					type: 2, //参数值 1为待开票 2 为已开票
+					keyType: 1, //参数值 1为密钥 2为销货方姓名 3为货车车牌 4为货物名称
+					key: '' //参数值 搜索框输入的内容
+				},
+				list: [],
+				currentPage3: 1,
+				count: 1
 			};
 		},
 		methods: {
+			allk(){ //批量开票
+				console.log(this.checkData)
+			},
+			search() {
+				this.items.page = 1;
+				this.ballotList();
+			},
+			clear() {
+				this.items.page = 1;
+				this.items.key = "";
+				this.ballotList();
+			},
+			ballotList() {
+				R.post({
+					url: 'index/Ballot/ballotList',
+					data: this.items
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if (res.body.status) {
+						this.count = res.body.count
+						this.list = res.body.data
+					} else {
+						this.list = []
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+					}
+
+
+				})
+			},
 			handleCommand(command) {
-				this.$message('click on item ' + command);
+				switch (command) {
+					case '0':
+						this.checkstr = "12位销货方秘钥串";
+						break;
+					case '1':
+						this.checkstr = "销货方姓名";
+						break;
+					case '2':
+						this.checkstr = "货车端车牌号";
+						break;
+					case '3':
+						this.checkstr = "货物名称";
+						break;
+				}
+				this.items.keyType = parseInt(command) + 1
 			},
 			checkAll(e) { // 点击全选事件函数
 				var checkObj = document.querySelectorAll('.checkItem'); // 获取所有checkbox项
@@ -253,11 +192,15 @@
 				}
 			},
 			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
+				//console.log(`每页 ${val} 条`);
+				this.items.page = val;
+				this.ballotList();
 			},
 			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
-			}
+				//console.log(`当前页: ${val}`);
+				this.items.page = val;
+				this.ballotList();
+			},
 		},
 		watch: {
 			value1() {
@@ -265,7 +208,7 @@
 			},
 			checkData: {
 				handler() { // 数据数组有变化将触发此函数
-					if (this.checkData.length == 3) {
+					if (this.checkData.length == this.list.length) {
 						document.querySelector('#quan').checked = true;
 					} else {
 						document.querySelector('#quan').checked = false;
@@ -273,6 +216,9 @@
 				},
 				deep: true // 深度监视
 			},
+		},
+		mounted() {
+			this.ballotList();
 		}
 	};
 </script>
