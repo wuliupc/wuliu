@@ -90,7 +90,7 @@
 							<li style="padding-left: 13px;">{{item.money}}元</li>
 						</ul>
 					</div>
-					
+
 				</div>
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
@@ -117,14 +117,14 @@
 				checkstr: '12位销货方秘钥串',
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
-				items:{
-					 page:1, //参数值 页码 默认1
-					 limit:10,  //参数值 每页数据条数 默认10
-					 startTime:'',  //参数值 开始时间
-					 endTime:'',  //参数值 结束时间
-					 type:1,  //参数值 1为待开票 2 为已开票
-					 keyType:1,  //参数值 1为密钥 2为销货方姓名 3为货车车牌 4为货物名称
-					 key:'' //参数值 搜索框输入的内容
+				items: {
+					page: 1, //参数值 页码 默认1
+					limit: 10, //参数值 每页数据条数 默认10
+					startTime: '', //参数值 开始时间
+					endTime: '', //参数值 结束时间
+					type: 1, //参数值 1为待开票 2 为已开票
+					keyType: 1, //参数值 1为密钥 2为销货方姓名 3为货车车牌 4为货物名称
+					key: '' //参数值 搜索框输入的内容
 				},
 				list: [],
 				currentPage3: 1,
@@ -132,14 +132,26 @@
 			};
 		},
 		methods: {
-			all_makeBallot(){ //批量开票
-				console.log(this.checkData)
+			all_makeBallot() { //批量开票
+				console.log(this.checkData.length)
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择开票数据',
+						type: 'warning',
+					});
+					return false
+				}
 				this.id = this.checkData.join(',')
 				this.makeBallot();
 			},
-			makeBallot(index){  //开具发票
-			if(index)this.id = this.list[index].id
-				R.post({url:'index/Ballot/makeBallot',data:{id:this.id}}).then(res=>{
+			makeBallot(index) { //开具发票
+				if (index==0||index) this.id = this.list[index].id
+				R.post({
+					url: 'index/Ballot/makeBallot',
+					data: {
+						id: this.id
+					}
+				}).then(res => {
 					if (res.body.code == 400 || res.body.code == 401) {
 						this.$message({
 							message: res.body.msg,
@@ -149,32 +161,34 @@
 						return false
 					}
 					if (res.body.status) {
-						 if(index){this.list.splice(index,1)}else{
-							 this.list =[]
-						 }
+						if (index == 0 || index) {
+							this.list.splice(index, 1)
+						} else {
+							this.list = []
+						}
 						this.$message({
 							message: res.body.msg,
 							type: 'success'
 						});
-					}else{
+					} else {
 						this.$message({
 							message: res.body.msg,
 							type: 'warning'
 						});
 					}
-					
+
 				})
 			},
-			search(){
-				this.items.page=1;
+			search() {
+				this.items.page = 1;
 				this.ballotList();
 			},
-			clear(){
-				this.items.page=1;
+			clear() {
+				this.items.page = 1;
 				this.items.key = "";
 				this.ballotList();
 			},
-			ballotList(){
+			ballotList() {
 				R.post({
 					url: 'index/Ballot/ballotList',
 					data: this.items
@@ -197,26 +211,26 @@
 							type: 'warning'
 						});
 					}
-				
-				
+
+
 				})
 			},
 			handleCommand(command) {
-			switch (command) {
-				case '0':
-					this.checkstr = "12位销货方秘钥串";
-					break;
-				case '1':
-					this.checkstr = "销货方姓名";
-					break;
-				case '2':
-					this.checkstr = "货车端车牌号";
-					break;
-				case '3':
-					this.checkstr = "货物名称";
-					break;
-			}
-			this.items.keyType = parseInt(command)+1
+				switch (command) {
+					case '0':
+						this.checkstr = "12位销货方秘钥串";
+						break;
+					case '1':
+						this.checkstr = "销货方姓名";
+						break;
+					case '2':
+						this.checkstr = "货车端车牌号";
+						break;
+					case '3':
+						this.checkstr = "货物名称";
+						break;
+				}
+				this.items.keyType = parseInt(command) + 1
 			},
 			checkAll(e) { // 点击全选事件函数
 				var checkObj = document.querySelectorAll('.checkItem'); // 获取所有checkbox项
@@ -241,22 +255,22 @@
 				this.ballotList();
 			},
 			formatDate(now) {
-			     var year=now.getFullYear(); 
-			     var month=now.getMonth()+1; 
-			     var date=now.getDate(); 
-			     var hour=now.getHours(); 
-			     var minute=now.getMinutes(); 
-			     var second=now.getSeconds(); 
-			     return year+"-"+month+"-"+date; 
-			} 
+				var year = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var date = now.getDate();
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var second = now.getSeconds();
+				return year + "-" + month + "-" + date;
+			}
 		},
 		watch: {
 			value1() {
 				// console.log(this.value1);
-				if(this.value1 == null){
+				if (this.value1 == null) {
 					this.items.startTime = ""
 					this.items.endTime = ""
-				}else{
+				} else {
 					this.items.startTime = this.formatDate(this.value1[0])
 					this.items.endTime = this.formatDate(this.value1[1])
 				}
@@ -273,7 +287,8 @@
 				},
 				deep: true // 深度监视
 			},
-		},mounted() {
+		},
+		mounted() {
 			this.ballotList();
 		}
 	};

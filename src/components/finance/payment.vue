@@ -32,12 +32,12 @@
 					</label>
 				</div>
 				<div class="payment_btn">
-					<button>批量结款</button>
+					<button @click="all_pay()">批量结款</button>
 					<button>下载表格</button>
 					<button>下载货车信息</button>
 				</div>
 			</div>
-			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" v-for="payment in payments">
+			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" v-for="(payment,index) in payments">
 				<div class="payment_list_one">
 					<div class="payment_list_one_lab">
 						<label>
@@ -96,7 +96,7 @@
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link :to="'/finance_payment_detail?id='+payment.id" class="f16 c333">查看详情</router-link>
-						<p class="f16" @click="pay(payment.id)" v-if="payment.status==5">确认结款</p>
+						<p class="f16" @click="pay(index)" v-if="payment.status==5">确认结款</p>
 					</div>
 				</div>
 			</div>
@@ -136,6 +136,19 @@
 			};
 		},
 		methods: {
+			//批量结款
+			all_pay() {
+				console.log(this.checkData.length)
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择结款数据',
+						type: 'warning',
+					});
+					return false
+				}
+				this.id = this.checkData.join(',')
+				this.pay();
+			},
 			//列表接口
 			paymentList() {
 				R.post({
@@ -158,11 +171,14 @@
 				})
 			},
 			//支付接口
-			pay(id) {
+			pay(index) {
+				if (index == 0 || index) {
+					this.id = this.payments[index].id
+				}
 				R.post({
 					url: 'index/finance/setPayment',
 					data: {
-						id
+						id: this.id
 					}
 				}).then(res => {
 					if (res.body.code == 400 || res.body.code == 401) {
@@ -171,19 +187,22 @@
 							type: 'warning'
 						});
 						this.$router.push('/login')
+						return false
 					}
-					console.log(res.body)
 					if (res.body.status) {
-						this.pay = res.body.data
+						if (index == 0 || index) {
+							this.payments.splice(index, 1)
+						} else {
+							this.paymentList();
+						}
 						this.$message({
 							message: res.body.msg,
 							type: 'success'
 						});
-						this.paymentList();
 					} else {
 						this.$message({
 							message: res.body.msg,
-							type: 'warning'
+							type: 'warning',
 						});
 					}
 				})

@@ -47,3 +47,4 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .center{top: 50%;left: 50%;transform: translate(-50%,-50%); }
 .relative{position: relative;}
 .absolute{position: absolute;}
+button{outline:none;}
