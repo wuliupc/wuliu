@@ -13,7 +13,7 @@
 			</div>
 			<div class="authen_file flex f14 c666">
 				<p>上传营业执照</p>
-				<div v-if="read"><img v-if="imageUrl" :src="imageUrl" class="avatar"></div>
+				<div v-if="read"><img v-if="imageUrl" :src="imageUrl" class="avatar" alt="暂无营业执照" /></div>
 				<div v-if="!read">
 					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<img :src="license" alt="营业执照">
+		<img :src="license" alt="暂无营业执照">
 	</div>
 </template>
 

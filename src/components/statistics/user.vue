@@ -97,6 +97,8 @@
 						this.$store.state.userinfo = res.body.data
 						this.userinfo = this.$store.state.userinfo
 					}
+				}).then(()=>{
+					this.$router.push('/statistics_business')
 				})
 			},
 			
