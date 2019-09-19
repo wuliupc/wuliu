@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<img :src="license" alt="暂无营业执照">
+		<img :src="license" alt="暂无营业执照" width="75%" v-if="license">
+		<p v-else>暂无营业执照</p>
 	</div>
 </template>
 
@@ -13,7 +14,7 @@
 			}
 		},store,
 		mounted() {
-			setTimeout(rs=>{this.license= this.$store.state.userinfo.license},50)
+			setTimeout(rs=>{this.license= this.$store.state.userinfo.license},100)
 		}
 	}
 </script>

@@ -10,7 +10,7 @@
 			<p class="info_cell f14 c666 tl bg_white">货物重量：毛重{{info.sendRough}}t 皮重{{info.sendTare}}t 净重{{info.sendSuttle}}t</p>
 			<p class="info_cell f14 c666 tl">始发地：{{info.order.startAddress||"暂无信息"}}</p>
 			<p class="info_cell f14 c666 tl bg_white">到达地：{{info.dest.province}}{{info.dest.city}}{{info.dest.area}}{{info.dest.address}}</p>
-			<p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+		    <router-link :to="'/map?id='+info.id"><p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>	
 			<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
 			<p class="info_cell f14 c666 tl" @click="info.status=='销货方通过'?show=true:''">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		</div>

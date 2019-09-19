@@ -6,15 +6,15 @@
 		</div>
 		<div v-else>
 			<div class="authen_file flex f14 c666">
-				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName" :readonly="read">
+				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName" :readonly="status!=1&&read">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="read">
+				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="status!=1&&read">
 			</div>
 			<div class="authen_file flex f14 c666">
 				<p>上传营业执照</p>
-				<div v-if="read"><img v-if="imageUrl" :src="imageUrl" class="avatar" alt="暂无营业执照" /></div>
-				<div v-if="!read">
+				<div v-if="status!=1&&read"><img v-if="imageUrl" :src="imageUrl" class="avatar" alt="暂无营业执照" /></div>
+				<div v-if="status==1||!read">
 					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
@@ -22,9 +22,22 @@
 					</el-upload>
 				</div>
 			</div>
+			<div class="authen_file flex f14 c666">
+				<p>审核未通过:</p>
+				<p v-for="item in refuse">{{item.resion}}</p>
+				
+				
+			</div>
+			
+			
+			
+			
 			<button class="f20 white bg_green border" @click="submit()" v-if="!read">提交认证</button>
+			<button class="f20 white bg_green border" @click="submit()" v-if="status==1">重新提交认证</button>
 			<button class="f20 white  border" v-if="status==0&&read">审核中...</button>
-			<button class="f20 white  border" v-if="status==1&&read">已通过审核</button>
+			<!-- <button class="f20 white  border" v-if="status==1&&read">审核未通过</button> -->
+			<button class="f20 white  border" v-if="status==2&&read">待完善</button>
+			<button class="f20 white  border" v-if="status==3&&read">已通过审核</button>
 			
 		</div>
 	</div>
@@ -44,6 +57,7 @@
 				show: false,
 				imageUrl: '',
 				status:"",
+				refuse:'',
 				items: {
 					businessName: '', //企业名称
 					businessNumber: '', //营业执照号
@@ -123,6 +137,9 @@
 					}).then(res => {
 						if (res.body.status) {
 							this.show = true
+							this.read = true;
+							this.status=0
+							
 						} else {
 							this.$message({
 								message: res.body.msg,
@@ -150,9 +167,11 @@
 					this.items.license = this.$store.state.userinfo.license
 					this.imageUrl = this.$store.state.userinfo.license
 					this.status = this.$store.state.userinfo.status
+					this.refuse =this.$store.state.refuse
+					console.log(this.$store.state)
 					this.read = true;
 				}
-			},50)
+			},100)
 			
 
 		}
