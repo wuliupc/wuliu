@@ -41,6 +41,10 @@
 			},
 			int(data) {
 				if (data.length === 0) {
+					this.$message({
+						message: '暂无位置信息！',
+						type: 'warning'
+					});
 					return;
 				}
 				var map = new BMap.Map("container");
