@@ -33,7 +33,7 @@
 				</div>
 				<div class="payment_btn">
 					<button class="bg_green white" @click="all_makeBallot()">批量开票</button>
-					<button>下载表格</button>
+					<button @click="dowonload()">下载表格</button>
 				</div>
 			</div>
 			<div class="payment_list bg_white c666 flex f14 tl line1 mt20" v-for="(item,index) in list">
@@ -132,8 +132,19 @@
 			};
 		},
 		methods: {
+			dowonload(){ //下载表格
+				// console.log(this.checkData.join(','))
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载数据',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href = `http://wuliu.aishangts.com/index/Ballotcommon/export/ids/${this.checkData.join(',')}`;
+			},
 			all_makeBallot() { //批量开票
-				console.log(this.checkData.length)
+				//console.log(this.checkData.length)
 				if (this.checkData.length == 0) {
 					this.$message({
 						message: '请选择开票数据',
