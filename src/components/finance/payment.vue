@@ -454,16 +454,13 @@
 	}
 
 	.payment_list_two {
-		border-left: 1px solid #e8e8e8;
-		border-bottom: 1px solid #e8e8e8;
-	}
-
-	.payment_list_two_detail {
-		margin-top: 111px;
+		min-height: 322px;
 		display: flex;
 		flex-flow: row wrap;
-		align-items: center;
-
+		align-items: center; 
+		justify-content: center;
+		border-left: 1px solid #e8e8e8;
+		border-bottom: 1px solid #e8e8e8;
 	}
 
 	.payment_list_two_detail a {

@@ -111,7 +111,7 @@ const routes = [{
 		path: '*',
 		redirect: '/login'
 	}, /*默认跳转路由*/
-	{
+	{ 
 		path: '/finance_index',
 		component: finance_index,
 		redirect: '/finance_payment',
