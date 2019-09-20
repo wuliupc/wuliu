@@ -14,15 +14,15 @@
 							<router-link to='/statistics_user' :class="active==2?'white':''">个人中心</router-link>
 						</li>
 					</ul>
-					
+
 					<el-dropdown @command="logoff()">
-					    <div class="f14 c666 user flex el-dropdown-link">
-					    	<img src="../../assets/img/user.png" />
-					    	<p>{{mobile}}</p><i class="el-icon-arrow-down el-icon--right"></i>
-					    </div>
-					  <el-dropdown-menu slot="dropdown" style="width: 120px" >
-					    <el-dropdown-item >注销登录</el-dropdown-item>
-					  </el-dropdown-menu>
+						<div class="f14 c666 user flex el-dropdown-link">
+							<img src="../../assets/img/user.png" />
+							<p>{{mobile}}</p><i class="el-icon-arrow-down el-icon--right"></i>
+						</div>
+						<el-dropdown-menu slot="dropdown" style="width: 120px">
+							<el-dropdown-item>注销登录</el-dropdown-item>
+						</el-dropdown-menu>
 					</el-dropdown>
 				</div>
 
@@ -45,44 +45,44 @@
 			return {
 				show: true,
 				active: 0,
-				mobile:tools.S.get('logindata').mobile
+				mobile: tools.S.get('logindata').mobile
 			}
 		},
 		watch: {
-			$route(to,from){
-			  // console.log(to.path);
-				if(to.path=="/statistics_business") tools.S.set('user_active', 0);
-				if(to.path=="/statistics_authentication") this.active = 2;
-			 },
+			$route(to, from) {
+				// console.log(to.path);
+				if (to.path == "/statistics_business") tools.S.set('user_active', 0);
+				if (to.path == "/statistics_authentication") this.active = 2;
+			},
 			active() {
 				tools.S.set('active', this.active)
 			}
 		},
-		methods:{
-			logoff(){
+		methods: {
+			logoff() {
 				tools.S.remove('logindata');
 				this.$router.push("/login")
 			},
 			beforeunloadFn(e) {
-			  console.log('刷新或关闭')
-			 }
+				console.log('刷新或关闭')
+			}
 		},
 		created() {
-		 window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
+			window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
 		},
 		mounted() {
-			 this.active = tools.S.get('active') || 0
-			 let path = this.$route.path;
-			 if(path=='/statistics_buy'||path=='/statistics_info'){
-				 this.active = 0;
-			 }else if(path=='/statistics_recode'||path=='/statistics_recodeinfo'){
-				 this.active = 1; 
-			 }else{
-				 this.active = 2; 
-			 }
+			this.active = tools.S.get('active') || 0
+			let path = this.$route.path;
+			if (path == '/statistics_buy' || path == '/statistics_info') {
+				this.active = 0;
+			} else if (path == '/statistics_recode' || path == '/statistics_recodeinfo') {
+				this.active = 1;
+			} else {
+				this.active = 2;
+			}
 		},
 		destroyed() {
-		 window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
+			window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
 		}
 
 	}

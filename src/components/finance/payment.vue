@@ -33,7 +33,7 @@
 				</div>
 				<div class="payment_btn">
 					<button @click="all_pay()">批量结款</button>
-					<button>下载表格</button>
+					<button @click="downTable()">下载表格</button>
 					<button>下载货车信息</button>
 				</div>
 			</div>
@@ -131,44 +131,16 @@
 					endTime: '', //参数值 结束时间
 					type: 1, //参数值 顶部菜单切换
 					key: '', //参数值 搜索内容
-					keyType: 1, ///参数值   	
+					keyType: 1, ///参数值
+					ids:'',  //请求参数ids  参数类型 string
 				}
 			};
 		},
 		methods: {
-			//批量结款
-			all_pay() {
-				console.log(this.checkData.length)
-				if (this.checkData.length == 0) {
-					this.$message({
-						message: '请选择结款数据',
-						type: 'warning',
-					});
-					return false
-				}
-				this.id = this.checkData.join(',')
-				this.pay();
-			},
-			//列表接口
-			paymentList() {
-				R.post({
-					url: 'index/finance/waitPayment',
-					data: this.items
-				}).then(res => {
-					if (res.body.code == 400 || res.body.code == 401) {
-						this.$message({
-							message: res.body.msg,
-							type: 'warning'
-						});
-						this.$router.push('/login')
-					}
-					console.log(res.body)
-					if (res.body.status) {
-						this.payments = res.body.data
-					} else {
-						this.payments = []
-					}
-				})
+			//下载表格
+			downTable(){
+				console.log(res)
+				window.location.href('http://wuliu.aishangts.com/index/Financecommon/export/ids/9')
 			},
 			//支付接口
 			pay(index) {
@@ -207,6 +179,41 @@
 					}
 				})
 			},
+			//批量结款
+			all_pay() {
+				// console.log(this.checkData.length)
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择结款数据',
+						type: 'warning',
+					});
+					return false
+				}
+				this.id = this.checkData.join(',')
+				this.pay();
+			},
+			//列表接口
+			paymentList() {
+				R.post({
+					url: 'index/finance/waitPayment',
+					data: this.items
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+					}
+					console.log(res.body)
+					if (res.body.status) {
+						this.payments = res.body.data
+					} else {
+						this.payments = []
+					}
+				})
+			},
+			
 			handleCommand(command) {
 				switch (command) {
 					case '0':

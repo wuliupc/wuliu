@@ -18,13 +18,13 @@
 						</li>
 					</ul>
 					<el-dropdown @command="logoff()">
-					    <div class="f14 c666 user flex el-dropdown-link">
-					    	<img src="../../assets/img/user.png" />
-					    	<p>13******99</p><i class="el-icon-arrow-down el-icon--right"></i>
-					    </div>
-					  <el-dropdown-menu slot="dropdown" style="width: 120px" >
-					    <el-dropdown-item >注销登录</el-dropdown-item>
-					  </el-dropdown-menu>
+						<div class="f14 c666 user flex el-dropdown-link">
+							<img src="../../assets/img/user.png" />
+							<p>{{mobile}}</p><i class="el-icon-arrow-down el-icon--right"></i>
+						</div>
+						<el-dropdown-menu slot="dropdown" style="width: 120px">
+							<el-dropdown-item>注销登录</el-dropdown-item>
+						</el-dropdown-menu>
 					</el-dropdown>
 				</div>
 
@@ -40,32 +40,32 @@
 
 <script>
 	import tools from '../../module/common.js'
-	let R = tools.R
-	let S = tools.S
+	// let R = tools.R
+	// let S = tools.S
 	export default {
 		name: 'app',
-		components: {
-		},
+		components: {},
 		data() {
 			return {
 				active: 0,
 				show: true,
+				mobile: tools.S.get('logindata').mobile
 			}
 		},
-		methods:{
-			logoff(){
+		methods: {
+			logoff() {
 				tools.S.remove('logindata');
 				this.$router.push("/login")
 			},
 			beforeunloadFn(e) {
-			  console.log('刷新或关闭')
-			 }
+				console.log('刷新或关闭')
+			}
 		},
 		watch: {
 
 		},
 		created() {
-		 window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
+			window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
 		},
 		mounted() {
 			this.active = tools.S.get('active') || 0
@@ -82,7 +82,7 @@
 			}
 		},
 		destroyed() {
-		 window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
+			window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
 		}
 	}
 </script>
@@ -122,5 +122,4 @@
 	.user {
 		align-items: center;
 	}
-
 </style>
