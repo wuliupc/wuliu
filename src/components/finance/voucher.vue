@@ -31,6 +31,10 @@
 						<input id="quan" type="checkbox" @click="checkAll($event)" class="checkItem"> <span>全选</span>
 					</label>
 				</div>
+				<div class="payment_btn">
+					<button @click="downTable()">下载表格</button>
+					<button @click="downCar()">下载货车信息</button>
+				</div>
 			</div>
 			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" v-for="item in voucher">
 				<div class="payment_list_one">
@@ -148,6 +152,28 @@
 			};
 		},
 		methods: {
+			//下载货车信息
+			downCar(){
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载货车信息',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+			},
+			//下载表格
+			downTable(){
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载表格数据',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
+			},
 			getid(id){ //获取打款凭证id
 				// console.log(id)
 				this.upFinace.id = id;
