@@ -16,8 +16,9 @@
 					<el-button type="success" class="code f14" @click="getSmsCode()" :disabled="text>0">{{text}}</el-button>
 				</div>
 				<div><input type="password" placeholder="请输入密码" v-model="items.password" /></div>
-				<div><input type="password" placeholder="请再次输入密码" v-model="items.rePassword"/></div>
-				<el-button type="success" class="login_btn register_btn" @click="register()">注册</el-button>
+
+				<div><input type="password" placeholder="请再次输入密码" v-model="items.rePassword" /></div>
+			<div><el-button type="success" class="login_btn register_btn" @click="register()">注册</el-button></div>	
 			</div>
 		</div>
 		<!-- 注册成功弹框 -->
@@ -127,7 +128,7 @@
 						url: 'index/Regist/regist',
 						data: this.items
 					}).then(res => {
-						console.log(res.body)
+						// console.log(res.body)
 						msg = res.body.msg;
 						if(res.body.status){
 						this.show = true

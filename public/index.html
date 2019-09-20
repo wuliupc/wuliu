@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=A8941oosKN3LZlGrZYMcaImQRltaCBgF"></script>
     <title>物流</title>
   </head>
   <body>
@@ -14,4 +15,17 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script type="text/javascript">
+  	(function(){
+  	    function w() {
+  	    var r = document.documentElement;
+  	    var a = r.getBoundingClientRect().width;//获取当前设备的宽度
+  	        r.style.fontSize = a/38.4 + "px"
+  	    }
+  	    w();
+  	    window.addEventListener("resize", function() {//监听横竖屏切换
+  	        w()
+  	    }, false);
+  	})();
+  </script>
 </html>

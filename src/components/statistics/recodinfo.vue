@@ -15,7 +15,7 @@
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车时间：{{info.timediff}}</p>
-		<p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+		 <router-link :to="'/map?id='+info.id"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
 		<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
 		<p class="info_cell f14 c666 tl">结款时间：{{info.payTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">结款凭证</p>

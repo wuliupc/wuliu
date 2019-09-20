@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 创建组件
+import map from '../components/map.vue'; //地图
 import login from '../components/login.vue'; //登录
 import register from '../components/register.vue'; //注册
 import statistics_home from '../components/statistics/home.vue'; //统计端首页
@@ -101,7 +102,11 @@ const routes = [{
 			path: '/statistics_recodeinfo',
 			component: statistics_recodeinfo
 		}]
-	}, {
+	},{
+		path: '/map',
+		component: map
+	},
+	{
 		path: '/register',
 		component: register
 	}, {

@@ -95,7 +95,9 @@
 						this.$router.push('/login')
 					} else {
 						this.$store.state.userinfo = res.body.data
+						this.$store.state.refuse = res.body.refuse
 						this.userinfo = this.$store.state.userinfo
+					    if(this.$route.path!='/statistics_business')this.$router.push('/statistics_business')
 					}
 				})
 			},
@@ -106,7 +108,7 @@
 			if (this.$store.state.userinfo == "") {
 				this.getUserInfo();
 			}
-			console.log(this.$store.state.userinfo)
+			// console.log(this.$route.path)
 		},
 	}
 </script>
