@@ -157,7 +157,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this. .join(',')}`
 			},
 			//支付接口
 			pay(index) {
