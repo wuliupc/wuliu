@@ -34,7 +34,7 @@
 				<div class="payment_btn">
 					<button @click="all_pay()">批量结款</button>
 					<button @click="downTable()">下载表格</button>
-					<button>下载货车信息</button>
+					<button @click="downCar()">下载货车信息</button>
 				</div>
 			</div>
 			<div class="payment_list bg_white c666 flex f16 tl line1 mt20" v-for="(payment,index) in payments">
@@ -137,10 +137,27 @@
 			};
 		},
 		methods: {
+			//下载货车信息
+			downCar(){
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载货车信息',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+			},
 			//下载表格
 			downTable(){
-				console.log(res)
-				window.location.href('http://wuliu.aishangts.com/index/Financecommon/export/ids/9')
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载表格数据',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
 			},
 			//支付接口
 			pay(index) {
