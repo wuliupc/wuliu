@@ -151,7 +151,7 @@
 		outline: none;
 		border: none;
 		margin-bottom: 12px;
-		width: 93%;
+		width: 87%;
 
 	}
 

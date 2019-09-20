@@ -15,4 +15,17 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script type="text/javascript">
+  	(function(){
+  	    function w() {
+  	    var r = document.documentElement;
+  	    var a = r.getBoundingClientRect().width;//获取当前设备的宽度
+  	        r.style.fontSize = a/38.4 + "px"
+  	    }
+  	    w();
+  	    window.addEventListener("resize", function() {//监听横竖屏切换
+  	        w()
+  	    }, false);
+  	})();
+  </script>
 </html>

@@ -17,7 +17,7 @@
 				</div>
 				<div><input type="password" placeholder="请输入密码" v-model="items.password" /></div>
 				<div><input type="password" placeholder="请再次输入密码" v-model="items.rePassword" /></div>
-				<el-button type="success" class="login_btn register_btn" @click="register()">注册</el-button>
+			<div><el-button type="success" class="login_btn register_btn" @click="register()">注册</el-button></div>	
 			</div>
 		</div>
 		<!-- 注册成功弹框 -->
