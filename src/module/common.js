@@ -1,4 +1,4 @@
-const URL = 'http://wuliu.aishangts.com/';
+const URL = 'http://api.ztwulian.com/';
 import VueEvent from './VueEvent.js'
 
 const tools = {

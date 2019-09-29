@@ -72,6 +72,7 @@
 			$route(to, from) {
 				//console.log(to.path);
 				if (to.path == "/statistics_business") this.user_active = 0;
+				this.getUserInfo();
 			},
 			user_active() {
 				tools.S.set('user_active', this.user_active)
@@ -97,7 +98,7 @@
 						this.$store.state.userinfo = res.body.data
 						this.$store.state.refuse = res.body.refuse
 						this.userinfo = this.$store.state.userinfo
-					    if(this.$route.path!='/statistics_business')this.$router.push('/statistics_business')
+					    // if(this.$route.path!='/statistics_business')this.$router.push('/statistics_business')
 					}
 				})
 			},
@@ -105,9 +106,9 @@
 		},
 		mounted() {
 			this.user_active = tools.S.get('user_active') || 0
-			if (this.$store.state.userinfo == "") {
+			// if (this.$store.state.userinfo == "") {
 				this.getUserInfo();
-			}
+			// }
 			// console.log(this.$route.path)
 		},
 	}
