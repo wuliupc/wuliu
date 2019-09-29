@@ -10,7 +10,7 @@
 			</div>
 			<div class="main bg_white register">
 				<p class="c333 f26 tc">注册</p>
-				<div><input type="text" placeholder="请输入购货方名称" v-model="items.name" /></div>
+				<div><input type="text" placeholder="请输入企业名称" v-model="items.name" /></div>
 				<div><input type="tel" placeholder="请输入手机号" maxlength="11" v-model="items.mobile" /></div>
 				<div class="flex"><input type="text" placeholder="请输入短信验证码" v-model="items.code" />
 					<el-button type="success" class="code f14" @click="getSmsCode()" :disabled="text>0">{{text}}</el-button>
