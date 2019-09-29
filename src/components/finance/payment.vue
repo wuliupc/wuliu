@@ -102,7 +102,7 @@
 			</div>
 			<div class="mt20" v-show="count>1">
 				<!-- <span class="demonstration">直接前往</span> -->
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="items.page"
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="items.page"
 				 :page-size="10" layout="prev, pager, next, jumper" :total="count">
 				</el-pagination>
 			</div>
@@ -157,7 +157,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this. .join(',')}`
+				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
 			},
 			//支付接口
 			pay(index) {
