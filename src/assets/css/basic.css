@@ -41,6 +41,7 @@ img,a,button,em,del,strong,var,label,cite,small,time,mark,code,textarea {display
 .mt80{margin-top: 80px;}
 .mb10{margin-bottom: 10px;}
 .mb55{margin-bottom: 55px;}
+.mr10{margin-right: 10px;}
 .line1{line-height: 1 !important;}
 .border{border-radius: 4px;}
 .translateY{top:50%;transform:translateY(-50%); }

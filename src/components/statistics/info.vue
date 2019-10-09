@@ -10,26 +10,33 @@
 			<p class="info_cell f14 c666 tl bg_white">货物重量：毛重{{info.sendRough}}t 皮重{{info.sendTare}}t 净重{{info.sendSuttle}}t</p>
 			<p class="info_cell f14 c666 tl">始发地：{{info.order.startAddress||"暂无信息"}}</p>
 			<p class="info_cell f14 c666 tl bg_white">到达地：{{info.dest.province}}{{info.dest.city}}{{info.dest.area}}{{info.dest.address}}</p>
-		    <router-link :to="'/map?id='+info.id"><p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>	
+			<router-link :to="'/map?id='+info.id">
+				<p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+			</router-link>
 			<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
-			<p class="info_cell f14 c666 tl" @click="info.status=='销货方通过'?show=true:''">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+			<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t
+				<el-button type="danger" round class="fr mt18 mr10" @click=more(2)>拒绝</el-button>
+				<el-button type="primary" round class="fr mt18 mr10" @click=more(1)>确认</el-button>
+			</p>
+			<!-- @click="info.status=='销货方通过'?show=true:''" -->
 		</div>
-		
+
 		<!-- 弹框 -->
 		<transition name="el-fade-in">
 			<div class="mask register_mask " v-show="show">
 				<img src="../../assets/img/x.png" @click="show=false">
 				<div class="queren">
-					<div v-show="!queren"><p class="tc f14" style="padding-top: 4rem;">请输入货物金额</p>
-					<input type="text" class="input" v-model="money">
-					<p style="margin-top: 0.5rem;">
-						<el-button type="success" round class="f16" @click="confirmGoods(info.id)">
-							确认
-						</el-button>
-						<el-button type="success" round class="f16" @click="show=false">
-							取消
-						</el-button>
-					</p>
+					<div v-show="!queren">
+						<p class="tc f14" style="padding-top: 4rem;">请输入货物金额</p>
+						<input type="text" class="input" v-model="money">
+						<p style="margin-top: 0.5rem;">
+							<el-button type="success" round class="f16" @click="confirmGoods(info.id)">
+								确认
+							</el-button>
+							<el-button type="success" round class="f16" @click="show=false">
+								取消
+							</el-button>
+						</p>
 					</div>
 					<div v-show="queren">
 						<p class="tc f14" style="padding-top: 4rem;">请确认货物到达实际重量</p>
@@ -46,13 +53,13 @@
 							</el-button>
 						</p>
 					</div>
-					
+
 				</div>
 			</div>
 		</transition>
 	</div>
 
-	
+
 </template>
 
 <script>
@@ -61,29 +68,59 @@
 	export default {
 		data() {
 			return {
-				queren:true,
-				show:false,
-				money:'',
+				queren: true,
+				show: false,
+				money: '',
 				info: {
-					order:{},
-					dest:{}
+					order: {},
+					dest: {}
 				}
 			}
 		},
 		methods: {
-			confirmGoods(id){ //货物确认
-			if(this.money==""){
-				this.$message({
-					message:"请输入货物金额",
-					type: 'warning'
-				});
-				return false
-			}
+			more(e) {
+				if(this.info.status=='销货方通过'){
+					if (e == 1) {
+						if (confirm('是否确认货物到达重量？')) {
+							this.show = true;
+							this.queren = false;
+						}
+					} else {
+						if (confirm('是否拒绝货物到达重量？')) {
+							this.cancleGoods(this.info.id)
+						}
+					}
+				}else{
+					if(this.info.status=='拒绝'){
+					this.$message({
+						message: '货物到达重量已拒绝',
+						type: 'warning'
+					});		
+					}else{
+						this.$message({
+							message: '货物到达重量已确认',
+							type: 'warning'
+						});	
+					}
+			
+				}
+				
+
+
+			},
+			confirmGoods(id) { //货物确认
+				if (this.money == "") {
+					this.$message({
+						message: "请输入货物金额",
+						type: 'warning'
+					});
+					return false
+				}
 				R.post({
 					url: 'index/Api/confirmGoods',
 					data: {
-						id:id,
-						money:this.money
+						id: id,
+						money: this.money
 					}
 				}).then(res => {
 					if (res.body.code == 400 || res.body.code == 401) {
@@ -94,12 +131,12 @@
 						this.$router.push('/login')
 						return false
 					}
-					if(res.body.status){
+					if (res.body.status) {
 						this.$message({
 							message: res.body.msg,
 							type: 'success'
 						});
-					}else{
+					} else {
 						this.$message({
 							message: res.body.msg,
 							type: 'warning'
@@ -107,7 +144,7 @@
 					}
 				})
 			},
-			cancleGoods(id){ //货物拒绝
+			cancleGoods(id) { //货物拒绝
 				console.log(id)
 				R.post({
 					url: 'index/Api/cancleGoods',
@@ -123,20 +160,20 @@
 						this.$router.push('/login')
 						return false
 					}
-					if(res.body.status){
-						this.info.status ="拒绝";
+					if (res.body.status) {
+						this.info.status = "拒绝";
 						this.$message({
 							message: res.body.msg,
 							type: 'success'
 						});
-					}else{
+					} else {
 						this.$message({
 							message: res.body.msg,
 							type: 'warning'
 						});
 					}
-					
-					
+
+
 				})
 			},
 			orderInfo(id) {
@@ -210,7 +247,8 @@
 		line-height: 54px;
 		padding: 0 15px;
 	}
-	.queren{
+
+	.queren {
 		background-image: url(../../assets/img/queren.png) !important;
 	}
 </style>
