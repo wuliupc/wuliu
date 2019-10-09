@@ -136,6 +136,9 @@
 							message: res.body.msg,
 							type: 'success'
 						});
+						this.info.status = "待结款";
+						this.show = false;
+						this.queren = true;
 					} else {
 						this.$message({
 							message: res.body.msg,

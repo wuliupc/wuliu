@@ -24,7 +24,7 @@
 			</div>
 			<div class="authen_file flex f14 c666" v-if="status==1&&read">
 				<p>审核未通过:</p>
-				<p v-for="item in refuse">{{item.resion}}</p>
+				<p >{{refuse.resion}}</p>
 			</div>
 
 
