@@ -34,7 +34,7 @@
 			<button class="f20 white bg_green border" @click="submit()" v-if="status==1">重新提交认证</button>
 			<button class="f20 white  border" v-if="status==0&&read">审核中...</button>
 			<!-- <button class="f20 white  border" v-if="status==1&&read">审核未通过</button> -->
-			<button class="f20 white  border" v-if="status==2&&read">待完善</button>
+			<button class="f20 white bg_green border" v-if="status==2&&read" @click="submit()">提交认证</button>
 			<button class="f20 white  border" v-if="status==3&&read">已通过审核</button>
 
 		</div>
