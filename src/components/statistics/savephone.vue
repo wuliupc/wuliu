@@ -12,7 +12,7 @@
 				<p>新手机号</p> <input type="tel" maxlength="11" placeholder="请输入新手机号" class="f12" v-model="items.newMobile">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>短信验证码</p>
+				<p style="white-space: nowrap;">短信验证码</p>
 				<dir class="flex" style="align-items: center;"><input type="text" placeholder="请输入验证码" class="f12" style="width: 107px;"
 					 v-model="items.code">
 					<el-button class="f12 white bg_green border" style="width: 80px;height:32px;margin: 0 0 0 40px;padding: 10px;"

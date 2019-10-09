@@ -6,10 +6,10 @@
 		</div>
 		<div v-else>
 			<div class="authen_file flex f14 c666">
-				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName" :readonly="status!=1&&read">
+				<p>公司名称</p> <input type="text" placeholder="请输入公司名称" class="f12" v-model="items.businessName" :readonly="status==3||status==0&&read">
 			</div>
 			<div class="authen_file flex f14 c666">
-				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="status!=1&&read">
+				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="status==3||status==0&&read">
 			</div>
 			<div class="authen_file flex f14 c666">
 				<p>上传营业执照</p>
