@@ -4,8 +4,8 @@
 			<p class="info_cell f14 c666 tl bg_white">12位销货方秘钥串：{{info.order.key}}</p>
 			<p class="info_cell f14 c666 tl">销货方姓名：{{info.saleName}}</p>
 			<p class="info_cell f14 c666 tl bg_white">销货方手机号：{{info.saleMobile}}</p>
-			<p class="info_cell f14 c666 tl">购货方名称：{{info.buyName}}</p>
-			<p class="info_cell f14 c666 tl bg_white">购货方手机号：{{info.buyMobile}}</p>
+			<p class="info_cell f14 c666 tl">货车方车牌号：{{info.carNumber}}</p>
+			<p class="info_cell f14 c666 tl bg_white">货车方手机号：{{info.carMobile}}</p>
 			<p class="info_cell f14 c666 tl">货物名称：{{info.order.name}}</p>
 			<p class="info_cell f14 c666 tl bg_white">货物重量：毛重{{info.sendRough}}t 皮重{{info.sendTare}}t 净重{{info.sendSuttle}}t</p>
 			<p class="info_cell f14 c666 tl">始发地：{{info.order.startAddress||"暂无信息"}}</p>

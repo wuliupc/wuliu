@@ -4,7 +4,7 @@
 			<el-aside width="210px" class="nav_left bg_white line1">
 				<img src="../../assets/img/headerimg.png" class="headerimg">
 				<p class="tc f12 c333 mt20">{{userinfo.mobile}}</p>
-				<p class="tc f12 c333 mt14">{{userinfo.name||"审核中..."}}</p>
+				<p class="tc f12 c333 mt14">{{userinfo.businessName||userinfo.name||"审核中..."}}</p>
 				<ul class="user_nav mt10">
 					<li :class="user_active==index?'active':''" v-for="(item,index) in navlist" @click="user_active=index">
 						<router-link :to="item.url" :class="user_active==index?'white':''">{{item.title}}</router-link>

@@ -2,6 +2,7 @@ const URL = 'http://api.ztwulian.com/';
 import VueEvent from './VueEvent.js'
 
 const tools = {
+	URL,
 	S: {
 		set(key, value) {
 			localStorage.setItem(key, JSON.stringify(value));

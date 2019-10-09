@@ -15,30 +15,28 @@
 				<p>上传营业执照</p>
 				<div v-if="status!=1&&read"><img v-if="imageUrl" :src="imageUrl" class="avatar" alt="暂无营业执照" /></div>
 				<div v-if="status==1||!read">
-					<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+					<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :show-file-list="false" :data='user'
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
 						<img src="../../assets/img/camera.png" v-else>
 					</el-upload>
 				</div>
 			</div>
-			<div class="authen_file flex f14 c666">
+			<div class="authen_file flex f14 c666" v-if="status==1&&read">
 				<p>审核未通过:</p>
 				<p v-for="item in refuse">{{item.resion}}</p>
-				
-				
 			</div>
-			
-			
-			
-			
+
+
+
+
 			<button class="f20 white bg_green border" @click="submit()" v-if="!read">提交认证</button>
 			<button class="f20 white bg_green border" @click="submit()" v-if="status==1">重新提交认证</button>
 			<button class="f20 white  border" v-if="status==0&&read">审核中...</button>
 			<!-- <button class="f20 white  border" v-if="status==1&&read">审核未通过</button> -->
 			<button class="f20 white  border" v-if="status==2&&read">待完善</button>
 			<button class="f20 white  border" v-if="status==3&&read">已通过审核</button>
-			
+
 		</div>
 	</div>
 
@@ -55,9 +53,11 @@
 			return {
 				read: false,
 				show: false,
+				URL: tools.URL,
 				imageUrl: '',
-				status:"",
-				refuse:'',
+				status: "",
+				refuse: '',
+				user:{},
 				items: {
 					businessName: '', //企业名称
 					businessNumber: '', //营业执照号
@@ -67,44 +67,33 @@
 		},
 		store,
 		methods: {
-			uploading(){
+			uploading() {
 				this.loading = this.$loading({
-				          lock: true,
-				          text: '上传中...',
-				          spinner: 'el-icon-loading',
-				          background: 'rgba(0, 0, 0, 0.7)'
-				        });
+					lock: true,
+					text: '上传中...',
+					spinner: 'el-icon-loading',
+					background: 'rgba(0, 0, 0, 0.7)'
+				});
 			},
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
-				let formData = new FormData();
-				formData.append('file', file.raw);
-				formData.append("uid", S.get('logindata').uid);
-				formData.append("token", S.get('logindata').token);
-
-				R.post({
-					url: 'index/personal/upThumb',
-					data: formData
-				}).then(res => {
 					this.loading.close();
-					if (res.body.status) {
-						this.items.license = res.body.url
+					if (res.status) {
+						this.items.license = res.url
 						this.$message({
-							message: res.body.msg,
+							message: res.msg,
 							type: "success"
 						});
 					} else {
 						this.$message({
-							message: res.body.msg,
+							message: res.msg,
 							type: "warning"
 						});
 
 					}
-
-				})
 			},
 			beforeAvatarUpload(file) {
-				const isJPG = file.type === 'image/jpeg'||file.type === 'image/png';
+				const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
 				const isLt2M = file.size / 1024 / 1024 < 2;
 				if (!isJPG) {
 					this.$message.error('上传图片只格式错误!');
@@ -138,8 +127,8 @@
 						if (res.body.status) {
 							this.show = true
 							this.read = true;
-							this.status=0
-							
+							this.status = 0
+
 						} else {
 							this.$message({
 								message: res.body.msg,
@@ -160,19 +149,21 @@
 			}
 		},
 		mounted() {
-			setTimeout(rs=>{
+			this.user.uid = S.get('logindata').uid
+			this.user.token = S.get('logindata').token
+			setTimeout(rs => {
 				if (this.$store.state.userinfo.businessName) {
 					this.items.businessName = this.$store.state.userinfo.businessName
 					this.items.businessNumber = this.$store.state.userinfo.businessNumber
 					this.items.license = this.$store.state.userinfo.license
 					this.imageUrl = this.$store.state.userinfo.license
 					this.status = this.$store.state.userinfo.status
-					this.refuse =this.$store.state.refuse
+					this.refuse = this.$store.state.refuse
 					console.log(this.$store.state)
 					this.read = true;
 				}
-			},100)
-			
+			}, 100)
+
 
 		}
 	};
