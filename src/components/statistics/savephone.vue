@@ -5,9 +5,9 @@
 			<p class="c666 f20">修改成功</p>
 		</div>
 		<div v-else>
-			<div class="authen_file flex f14 c666">
+			<!-- <div class="authen_file flex f14 c666">
 				<p>原手机号</p> <input type="tel" maxlength="11" placeholder="请输入原手机号" class="f12" v-model="items.mobile">
-			</div>
+			</div> -->
 			<div class="authen_file flex f14 c666">
 				<p>新手机号</p> <input type="tel" maxlength="11" placeholder="请输入新手机号" class="f12" v-model="items.newMobile">
 			</div>
@@ -35,7 +35,7 @@
 				show: false,
 				text: '发送验证码',
 				items: {
-					mobile: '', //参数值 原手机号
+					//mobile: '', //参数值 原手机号
 					newMobile: '', //参数值 新手机号
 					code: '' //参数值 短信验证码
 				}
@@ -87,13 +87,14 @@
 			},
 			submit() {
 					let msg, type;
-					if (this.items.mobile == "") {
-						msg = "请输入原手机号";
-						type = "warning"
-					} else if (!(/^1[3456789]\d{9}$/.test(this.items.mobile))) {
-						msg = "原手机号格式错误";
-						type = "warning"
-					}else if (this.items.newMobile == "") {
+					// if (this.items.mobile == "") {
+					// 	msg = "请输入原手机号";
+					// 	type = "warning"
+					// } else if (!(/^1[3456789]\d{9}$/.test(this.items.mobile))) {
+					// 	msg = "原手机号格式错误";
+					// 	type = "warning"
+					// }else 
+					 if (this.items.newMobile == "") {
 						msg = "请输入新手机号";
 						type = "warning"
 					} else if (!(/^1[3456789]\d{9}$/.test(this.items.newMobile))) {
