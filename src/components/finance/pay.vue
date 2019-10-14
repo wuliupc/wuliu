@@ -117,6 +117,7 @@
 			return {
 				checkstr: '12位销货方秘钥串',
 				value1: '',
+				URL: tools.URL,
 				checkData: [], // 双向绑定checkbox数据数组
 				// currentPage3: 1, //分页第一页
 				pays: [],   //数据
@@ -142,7 +143,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+				window.location.href=`${this.URL}index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
 			},
 			//下载表格
 			downTable(){
@@ -153,7 +154,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
+				window.location.href=`${this.URL}index/Financecommon/export/ids/${this.checkData.join(',')}`
 			},
 			handleCommand(command) {
 				switch (command) {

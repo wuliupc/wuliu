@@ -17,7 +17,7 @@
 		<router-link :to="'/map?id='+info.id"><p class="info_cell f14 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
 		<p class="info_cell f14 c666 tl">
 		<div class="shangchuan info_cell f14 c666 tl" >
-			<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+			<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :data='user'  :show-file-list="false"
 			 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 				<span class="f14" @click="getid(info.id)">上传结款凭证</span>
 			<img src="../../assets/img/rarraw.png" class="fr mt18" style="width: 13px; height: 22px;">
@@ -50,6 +50,8 @@
 		data(){
 			return{
 				show: false,
+				URL: tools.URL,
+				user:{},
 				info:{
 					order:{},
 					dest:{}
@@ -139,29 +141,18 @@
 			},
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
-				let formData = new FormData();
-				formData.append('file', file.raw);
-				formData.append("uid", S.get('logindata').uid);
-				formData.append("token", S.get('logindata').token);
-			
-				R.post({
-					url: 'index/personal/upThumb',
-					data: formData
-				}).then(res => {
 					this.loading.close();
-					if (res.body.status) {
-						this.upFinace.thumb = res.body.url
+					if (res.status) {
+						this.upFinace.thumb = res.url
 						// this.show = true
 						this.up()
 					} else {
 						this.$message({
-							message: res.body.msg,
+							message: res.msg,
 							type: "warning"
 						});
 			
 					}
-			
-				})
 			},
 			beforeAvatarUpload(file) {
 				const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -204,6 +195,8 @@
 		},
 		mounted() {
 			// console.log(this.$route.query);
+			this.user.uid = S.get('logindata').uid
+			this.user.token = S.get('logindata').token
 			this.voucherDetail(this.$route.query.id);
 		},
 	}

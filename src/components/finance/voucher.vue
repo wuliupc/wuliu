@@ -94,7 +94,7 @@
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link :to="'/finance_voucher_detail?id='+item.id" class="f14 c333">查看详情</router-link>
-						<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+						<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :data='user' :show-file-list="false"
 						 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 							<span class="f14" @click="getid(item.id)">上传结款凭证</span>
 						</el-upload>
@@ -131,6 +131,8 @@
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
+				URL: tools.URL,
+				user:{},
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
 				show: false,
@@ -161,7 +163,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+				window.location.href=`${this.URL}index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
 			},
 			//下载表格
 			downTable(){
@@ -172,7 +174,7 @@
 					});
 					return false
 				}
-				window.location.href=`http://wuliu.aishangts.com/index/Financecommon/export/ids/${this.checkData.join(',')}`
+				window.location.href=`${this.URL}index/Financecommon/export/ids/${this.checkData.join(',')}`
 			},
 			getid(id){ //获取打款凭证id
 				// console.log(id)
@@ -228,29 +230,20 @@
 			},
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
-				let formData = new FormData();
-				formData.append('file', file.raw);
-				formData.append("uid", S.get('logindata').uid);
-				formData.append("token", S.get('logindata').token);
-
-				R.post({
-					url: 'index/personal/upThumb',
-					data: formData
-				}).then(res => {
 					this.loading.close();
-					if (res.body.status) {
-						this.upFinace.thumb = res.body.url
+					if (res.status) {
+						this.upFinace.thumb = res.url
 						// this.show = true
 						this.up()
 					} else {
 						this.$message({
-							message: res.body.msg,
+							message: res.msg,
 							type: "warning"
 						});
 
 					}
 
-				})
+				
 			},
 			beforeAvatarUpload(file) {
 				const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -332,6 +325,8 @@
 			}
 		},
 		mounted() {
+			this.user.uid = S.get('logindata').uid
+			this.user.token = S.get('logindata').token
 			this.voucherList();
 		},
 		watch: {
