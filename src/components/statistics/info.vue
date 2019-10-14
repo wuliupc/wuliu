@@ -15,8 +15,8 @@
 			</router-link>
 			<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
 			<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t
-				<el-button type="danger" round class="fr mt18 mr10" @click='more(2)' v-if="info.status=='货物待确认'">拒绝</el-button>
-				<el-button type="primary" round class="fr mt18 mr10" @click='more(1)' v-if="info.status=='货物待确认'">确认</el-button>
+				<el-button type="danger" round class="fr mt18 mr10" @click='more(2)' v-if="info.status=='销货方通过'">拒绝</el-button>
+				<el-button type="primary" round class="fr mt18 mr10" @click='more(1)' v-if="info.status=='销货方通过'">确认</el-button>
 			</p>
 		</div>
 
@@ -88,7 +88,7 @@
 						message: '货物运输中',
 						type: 'warning'
 					});		
-				}else if(this.info.status=='货物待确认'){
+				}else if(this.info.status=='销货方通过'){
 					if (e == 1) {
 						if (confirm('是否确认货物到达重量？')) {
 							this.show = true;
