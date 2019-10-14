@@ -15,7 +15,9 @@
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车时间：{{info.timediff}}</p>
-		 <router-link :to="'/map?id='+info.id" target="_blank"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
+		<router-link :to="'/map?id='+info.id" target="_blank">
+			<p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p>
+		</router-link>
 		<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
 		<p class="info_cell f14 c666 tl">结款时间：{{info.payTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">结款凭证</p>
@@ -30,8 +32,8 @@
 		data() {
 			return {
 				info: {
-					order:{},
-					dest:{}
+					order: {},
+					dest: {}
 				}
 			}
 		},
@@ -79,6 +81,9 @@
 								break;
 							case 8:
 								res.body.data.status = "已完成"
+								break;
+							case 9:
+								res.body.data.status = "重量重新录入"
 								break;
 						}
 						this.info = res.body.data;

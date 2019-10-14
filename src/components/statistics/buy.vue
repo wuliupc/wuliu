@@ -180,6 +180,9 @@
 								case 8:
 									rs.status = "已完成"
 									break;
+								case 9:
+									rs.status = "重量重新录入"
+									break;
 							}
 
 						})

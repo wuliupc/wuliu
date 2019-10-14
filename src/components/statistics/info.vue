@@ -78,17 +78,17 @@
 		},
 		methods: {
 			more(e) {
-				if(this.info.status=='待发货'){
+				if (this.info.status == '待发货') {
 					this.$message({
 						message: '货物暂未发货',
 						type: 'warning'
-					});		
-				}else if(this.info.status=='运输中'){
+					});
+				} else if (this.info.status == '运输中') {
 					this.$message({
 						message: '货物运输中',
 						type: 'warning'
-					});		
-				}else if(this.info.status=='销货方通过'){
+					});
+				} else if (this.info.status == '销货方通过') {
 					if (e == 1) {
 						if (confirm('是否确认货物到达重量？')) {
 							this.show = true;
@@ -99,21 +99,21 @@
 							this.cancleGoods(this.info.id)
 						}
 					}
-				}else{
-					if(this.info.status=='拒绝'){
-					this.$message({
-						message: '货物到达重量已拒绝',
-						type: 'warning'
-					});		
-					}else{
+				} else {
+					if (this.info.status == '拒绝') {
+						this.$message({
+							message: '货物到达重量已拒绝',
+							type: 'warning'
+						});
+					} else {
 						this.$message({
 							message: '货物到达重量已确认',
 							type: 'warning'
-						});	
+						});
 					}
-			
+
 				}
-				
+
 
 
 			},
@@ -231,6 +231,9 @@
 								break;
 							case 8:
 								res.body.data.status = "已完成"
+								break;
+							case 9:
+								res.body.data.status = "重量重新录入"
 								break;
 						}
 						this.info = res.body.data;

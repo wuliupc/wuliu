@@ -65,16 +65,16 @@
 					end: '' //参数值 结束时间 2019-09-11
 				},
 				list: [],
-				count:1
+				count: 1
 			};
 		},
 		methods: {
-			search(){
-				this.items.page=1;
+			search() {
+				this.items.page = 1;
 				this.wantBuy();
 			},
-			clear(){
-				this.items.page=1;
+			clear() {
+				this.items.page = 1;
 				this.items.key = "";
 				this.wantBuy();
 			},
@@ -93,7 +93,7 @@
 						this.checkstr = "货物名称";
 						break;
 				}
-				this.items.keyType = parseInt(command)+1
+				this.items.keyType = parseInt(command) + 1
 				// this.$message('click on item ' + command);
 
 			},
@@ -141,11 +141,14 @@
 								case 8:
 									rs.status = "已完成"
 									break;
+								case 9:
+									rs.status = "重量重新录入"
+									break;
 							}
-			
+
 						})
-			
-			
+
+
 						this.list = res.body.data
 					} else {
 						this.list = [];
@@ -155,8 +158,8 @@
 							type: 'warning'
 						});
 					}
-			
-			
+
+
 				})
 			},
 			handleSizeChange(val) {
@@ -169,28 +172,28 @@
 				this.items.page = val;
 				this.wantBuy();
 			},
-			formatDate(now) { 
-			     var year=now.getFullYear(); 
-			     var month=now.getMonth()+1; 
-			     var date=now.getDate(); 
-			     var hour=now.getHours(); 
-			     var minute=now.getMinutes(); 
-			     var second=now.getSeconds(); 
-			     return year+"-"+month+"-"+date; 
-			} 
+			formatDate(now) {
+				var year = now.getFullYear();
+				var month = now.getMonth() + 1;
+				var date = now.getDate();
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var second = now.getSeconds();
+				return year + "-" + month + "-" + date;
+			}
 		},
 		watch: {
 			value1() {
-			//console.log(this.formatDate(this.value1[0]));
-			if(this.value1 == null){
-				this.items.start = ""
-				this.items.end = ""
-			}else{
-				this.items.start = this.formatDate(this.value1[0])
-				this.items.end = this.formatDate(this.value1[1])
-			}
-			this.items.page = 1;
-			this.wantBuy()
+				//console.log(this.formatDate(this.value1[0]));
+				if (this.value1 == null) {
+					this.items.start = ""
+					this.items.end = ""
+				} else {
+					this.items.start = this.formatDate(this.value1[0])
+					this.items.end = this.formatDate(this.value1[1])
+				}
+				this.items.page = 1;
+				this.wantBuy()
 			}
 		},
 		mounted() {
