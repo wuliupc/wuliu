@@ -106,6 +106,7 @@
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
+				URL: tools.URL,
 				value1: '',
 				checkData: [], // 双向绑定checkbox数据数组
 				items: {
@@ -132,7 +133,7 @@
 					});
 					return false
 				}
-				window.location.href = `http://wuliu.aishangts.com/index/Ballotcommon/export/ids/${this.checkData.join(',')}`;
+				window.location.href = `${this.URL}index/Ballotcommon/export/ids/${this.checkData.join(',')}`;
 			},
 			search() {
 				this.items.page = 1;
