@@ -13,8 +13,9 @@
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车时间：{{info.timediff}}</p>
-		<router-link :to="'/map?id='+info.id"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
-		<!-- <p class="info_cell f14 c666 tl bg_white">上传结款凭证<img src="../../assets/img/rarraw.png" class="fr mt18"></p> -->
+		<router-link :to="'/map?id='+info.id" target="_blank"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
+		<!-- <a class="info_cell f14 c666 tl bg_white" href="javascript:" @click="makeBallot()" >确认结款<img src="../../assets/img/rarraw.png" class="fr mt18"></a> -->
+		<a href="javascript:" v-if="info.status=='待结款'" @click="pay(info.id)"><p class="info_cell f14 c666 tl bg_white">确认结款<img src="../../assets/img/rarraw.png" class="fr mt18"></p></a>
 		
 	</div>
 </template>
@@ -32,6 +33,35 @@
 			}
 		},
 		methods:{
+			pay(id) {
+				R.post({
+					url: 'index/finance/setPayment',
+					data: {
+						id
+					}
+				}).then(res => {
+					if (res.body.code == 400 || res.body.code == 401) {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning'
+						});
+						this.$router.push('/login')
+						return false
+					}
+					if (res.body.status) {
+						this.info.status = '待上传凭证'
+						this.$message({
+							message: res.body.msg,
+							type: 'success'
+						});
+					} else {
+						this.$message({
+							message: res.body.msg,
+							type: 'warning',
+						});
+					}
+				})
+			},
 			//接口
 			paymentDetail(id){
 				R.post({
