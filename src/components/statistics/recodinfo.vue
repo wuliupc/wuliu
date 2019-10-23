@@ -15,7 +15,7 @@
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车时间：{{info.timediff}}</p>
-		<router-link :to="'/map?id='+info.id" target="_blank">
+		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank">
 			<p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 		</router-link>
 		<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
@@ -27,6 +27,7 @@
 
 <script>
 	import tools from '../../module/common.js';
+	import store from '../../vuex/store.js'
 	let R = tools.R
 	export default {
 		data() {
@@ -37,6 +38,7 @@
 				}
 			}
 		},
+		
 		methods: {
 			orderInfo(id) {
 				R.post({
@@ -87,6 +89,11 @@
 								break;
 						}
 						this.info = res.body.data;
+						if(res.body.data.order.is_sys==1){
+						     tools.S.set('content',JSON.parse(res.body.data.order.content)) 
+						}else{
+							this.$store.state.content = []
+						}
 					} else {
 						this.$message({
 							message: res.body.msg,
@@ -96,6 +103,7 @@
 				})
 			},
 		},
+		store,
 		mounted() {
 			// console.log(this.$route.query);
 			this.orderInfo(this.$route.query.id);

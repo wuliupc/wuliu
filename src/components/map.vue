@@ -6,6 +6,7 @@
 
 <script>
 	import tools from '../module/common.js';
+	import store from '../vuex/store.js'
 	let R = tools.R
 	export default {
 		data() {
@@ -13,6 +14,7 @@
 
 			}
 		},
+		store,
 		methods: {
 			getaddress(id) {
 				R.post({
@@ -78,7 +80,12 @@
 			}
 		},
 		mounted() {
-			this.getaddress(this.$route.query.id)
+			if(this.$route.query.is_sys==1){
+				this.int(tools.S.get('content'))
+			}else{
+				this.getaddress(this.$route.query.id)
+				
+			}
 			//console.log(this.$route.query);	
 		}
 	}
