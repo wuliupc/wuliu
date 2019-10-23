@@ -13,7 +13,7 @@
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车时间：{{info.timediff}}</p>
-		<router-link :to="'/map?id='+info.id" target="_blank"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
+		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank"><p class="info_cell f14 c666 tl">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
 		<!-- <a class="info_cell f14 c666 tl bg_white" href="javascript:" @click="makeBallot()" >确认结款<img src="../../assets/img/rarraw.png" class="fr mt18"></a> -->
 		<a href="javascript:" v-if="info.status=='待结款'" @click="pay(info.id)"><p class="info_cell f14 c666 tl bg_white">确认结款<img src="../../assets/img/rarraw.png" class="fr mt18"></p></a>
 		
@@ -110,6 +110,11 @@
 								break;
 						}
 						this.info = res.body.data
+						if(res.body.data.order.is_sys==1){
+						     tools.S.set('content',JSON.parse(res.body.data.order.content)) 
+						}else{
+							tools.S.set('content',[]) 
+						}
 					} else {
 						this.$message({
 							message: res.body.msg,

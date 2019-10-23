@@ -92,7 +92,7 @@
 						if(res.body.data.order.is_sys==1){
 						     tools.S.set('content',JSON.parse(res.body.data.order.content)) 
 						}else{
-							this.$store.state.content = []
+							tools.S.set('content',[]) 
 						}
 					} else {
 						this.$message({
