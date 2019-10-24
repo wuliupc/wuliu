@@ -26,7 +26,7 @@
 				<img src="../../assets/img/x.png" @click="show=false">
 				<div class="queren">
 					<div v-show="!queren">
-						<p class="tc f14" style="padding-top: 4rem;">请输入货物金额</p>
+						<p class="tc f14" style="padding-top: 4rem;">请输入货物金额（元）</p>
 						<input type="text" class="input" v-model="money">
 						<p style="margin-top: 0.5rem;">
 							<el-button type="success" round class="f16" @click="confirmGoods(info.id)">
