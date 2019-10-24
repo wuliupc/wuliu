@@ -12,6 +12,7 @@
 		<p class="info_cell f14 c666 tl">发货时间：{{info.sendTime}}</p>
 		<p class="info_cell f14 c666 tl bg_white">到达时间：{{info.arriveTime}}</p>
 		<p class="info_cell f14 c666 tl">行车时间：{{info.timediff}}</p>
+		<p class="info_cell f14 c666 tl ">行车路程：{{info.order.km||0}}公里</p>
 		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank"><p class="info_cell f14 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
 		<p class="info_cell f14 c666 tl">
 			已开票凭证：
