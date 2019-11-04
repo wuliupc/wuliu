@@ -16,15 +16,16 @@
 		<p class="info_cell f14 c666 tl">行车时间：{{info.timediff}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车路程：{{info.order.km||0}}公里</p>
 		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank"><p class="info_cell f14 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
+		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
+		</p>
 		<p class="info_cell f14 c666 tl">
-		<div class="shangchuan info_cell f14 c666 tl" >
-			<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :data='user'  :show-file-list="false"
+			<el-upload class="avatar-uploader" style="margin-top: 20px;" :action="URL+'index/personal/upThumb'" :data='user'  :show-file-list="false"
 			 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
-				<span class="f14" @click="getid(info.id)">上传结款凭证</span>
-			<img src="../../assets/img/rarraw.png" class="fr mt18" style="width: 13px; height: 22px;">
+			 <el-button @click="getid(info.id)" type="success ">上传结款凭证</el-button>
+				<!-- <span class="f14" @click="getid(info.id)"></span> -->
 			</el-upload>
 			<!-- 上传结款凭证 -->
-		</div>
 		</p>
 		<!-- 上传成功弹框 -->
 		<transition name="el-fade-in">
@@ -71,6 +72,10 @@
 			},
 		},
 		methods:{
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			getid(id){ //获取打款凭证id
 				console.log(id)
 				this.upFinace.id = id;

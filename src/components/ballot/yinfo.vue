@@ -7,6 +7,9 @@
 		<p class="info_cell f14 c666 tl bg_white">货物名称：{{info.order.name}}</p>
 		<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t</p>
 		<p class="info_cell f14 c666 tl bg_white">货物金额：{{info.money}}元</p>
+		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
+		</p>
 		<!-- <p class="info_cell f14 c666 tl">上传结款凭证<img src="../../assets/img/rarraw.png" class="fr mt18"></p> -->
 		<p class="info_cell f14 c666 tl bg_white"  @click="show=!show">开票信息<img src='../../assets/img/rarraw.png' class="fr mt18" v-show="!show">
 		<img src='../../assets/img/barraw.png' class="fr mt18" v-show="show"></p>
@@ -30,6 +33,7 @@
 <script>
 	import tools from '../../module/common.js';
 	let R = tools.R
+	let S = tools.S
 	export default {
 		data(){
 			return{
@@ -41,6 +45,10 @@
 			
 		},
 		methods:{
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			orderInfo(id) {
 				R.post({
 					url: 'index/api/orderInfo',

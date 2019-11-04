@@ -124,6 +124,9 @@ const routes = [{
 				path: '/finance_payment',
 				component: finance_payment,
 			}, {
+				path: '/carinfo',
+				component: () => import('@/components/finance/carinfo.vue'),
+			},{
 				path: '/finance_voucher',
 				component: finance_voucher
 			}, {

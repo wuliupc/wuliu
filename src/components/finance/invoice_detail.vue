@@ -14,6 +14,9 @@
 		<p class="info_cell f14 c666 tl">行车时间：{{info.timediff}}</p>
 		<p class="info_cell f14 c666 tl ">行车路程：{{info.order.km||0}}公里</p>
 		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank"><p class="info_cell f14 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
+		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
+		</p>
 		<p class="info_cell f14 c666 tl">
 			已开票凭证：
 		</p>
@@ -57,6 +60,10 @@
 			}
 		},
 		methods: {
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			handleOpen(key, keyPath) {
 				console.log(key, keyPath);
 			},

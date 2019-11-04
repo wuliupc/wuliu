@@ -8,6 +8,9 @@
 		<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t</p>
 		<p class="info_cell f14 c666 tl bg_white">货物金额：{{info.money}}元</p>
 		<p class="info_cell f14 c666 tl">货物到达时间：{{info.arriveTime}}</p>
+		<p class="info_cell f14 c666 tl bg_white">货车端车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
+		</p>
 		<!-- <p class="info_cell f14 c666 tl bg_white">上传结款凭证<img src="../../assets/img/rarraw.png" class="fr mt18"></p> -->
 		<a href="javascript:" class="info_cell f14 c666 tl "  @click="show=!show">开票信息<img src='../../assets/img/rarraw.png' class="fr mt18" v-show="!show">
 		<img src='../../assets/img/barraw.png' class="fr mt18" v-show="show"></a>
@@ -21,13 +24,15 @@
 			<p class="info_cell f14 c666 tl">银行账户：{{info.invoice.bankNumber}}</p>
 		</div>
 		</transition>
-		<a class="info_cell f14 c666 tl bg_white" href="javascript:" @click="makeBallot()" v-if="makeshow&&info.status==7">开具发票<img src="../../assets/img/rarraw.png" class="fr mt18"></a>
+		<!-- <a class="info_cell f14 c666 tl bg_white" href="javascript:" @click="makeBallot()" v-if="makeshow&&info.status==7">开具发票<img src="../../assets/img/rarraw.png" class="fr mt18"></a> -->
+	<el-button @click="makeBallot()" v-if="makeshow&&info.status==7" type="success" style="margin-top: 20px;">开具发票</el-button>
 	</div>
 </template>
 
 <script>
 	import tools from '../../module/common.js';
 	let R = tools.R
+	let S = tools.S
 	export default {
 		data(){
 			return{
@@ -40,6 +45,10 @@
 			
 		},
 		methods:{
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			makeBallot(){  //开具发票
 			
 				R.post({url:'index/Ballot/makeBallot',data:{id:this.info.id}}).then(res=>{

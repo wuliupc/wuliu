@@ -95,7 +95,8 @@
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link :to="'/ballot_info?id='+item.id" class="f14 c333">查看详情</router-link>
-						<a class="f14" href="javascript:" @click="makeBallot(index)">开具发票</a>
+						<el-link class="f14" type="success" @click="makeBallot(index)" :underline="false">开具发票</el-link>
+						<!-- <a class="f14" href="javascript:" @click="makeBallot(index)">开具发票</a> -->
 					</div>
 				</div>
 			</div>

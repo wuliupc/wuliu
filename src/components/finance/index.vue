@@ -77,7 +77,7 @@
 				this.active = 1;
 			} else if (path == '/finance_pay' || path == '/finance_paied_detail') {
 				this.active = 2;
-			} else {
+			} else if(path == '/finance_invoice' || path == '/finance_payment_detail'){
 				this.active = 3;
 			}
 		},
