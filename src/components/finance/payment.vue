@@ -96,7 +96,7 @@
 				<div class="payment_list_two">
 					<div class="payment_list_two_detail">
 						<router-link :to="'/finance_payment_detail?id='+payment.id" class="f16 c333">查看详情</router-link>
-						<p class="f16" @click="pay(index)" v-if="payment.status==5">确认结款</p>
+						<p class="f16" @click="pays(index)" v-if="payment.status==5">确认结款</p>
 					</div>
 				</div>
 			</div>
@@ -107,6 +107,13 @@
 				</el-pagination>
 			</div>
 		</div>
+		<el-dialog title="请输入结款金额" :visible.sync="dialogVisible" width="30%">
+			<el-input v-model="money" placeholder="请输入金额"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button type="success" plain @click="dialogVisible = false">取 消</el-button>
+				<el-button type="success" @click="pay()">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 
@@ -118,8 +125,10 @@
 	export default {
 		data() {
 			return {
+				dialogVisible: false,
 				checkstr: '12位销货方秘钥串',
 				value1: '',
+				money:'',
 				URL: tools.URL,
 				checkData: [], // 双向绑定checkbox数据数组
 				// currentPage3: 1, //分页第一页
@@ -133,13 +142,21 @@
 					type: 1, //参数值 顶部菜单切换
 					key: '', //参数值 搜索内容
 					keyType: 1, ///参数值
-					ids:'',  //请求参数ids  参数类型 string
+					ids: '', //请求参数ids  参数类型 string
 				}
 			};
 		},
 		methods: {
+			repmoney(obj){
+				obj = obj.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+				obj = obj.replace(/^\./g, ""); //验证第一个字符是数字
+				obj = obj.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+				obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+				obj = obj.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+				return obj;
+			},
 			//下载货车信息
-			downCar(){
+			downCar() {
 				if (this.checkData.length == 0) {
 					this.$message({
 						message: '请选择下载货车信息',
@@ -147,10 +164,10 @@
 					});
 					return false
 				}
-				window.location.href=`${this.URL}index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+				window.location.href = `${this.URL}index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
 			},
 			//下载表格
-			downTable(){
+			downTable() {
 				if (this.checkData.length == 0) {
 					this.$message({
 						message: '请选择下载表格数据',
@@ -158,17 +175,29 @@
 					});
 					return false
 				}
-				window.location.href=`${this.URL}index/Financecommon/export/ids/${this.checkData.join(',')}`
+				window.location.href = `${this.URL}index/Financecommon/export/ids/${this.checkData.join(',')}`
+			},
+			pays(index){
+				this.dialogVisible = true
+				this.id = this.payments[index].id
 			},
 			//支付接口
 			pay(index) {
 				if (index == 0 || index) {
 					this.id = this.payments[index].id
 				}
+				if(this.money==''){
+					this.$message({
+						message: '请输入结款金额！',
+						type: 'warning'
+					});
+					return false
+				}
 				R.post({
 					url: 'index/finance/setPayment',
 					data: {
-						id: this.id
+						id: this.id,
+						money:this.money
 					}
 				}).then(res => {
 					if (res.body.code == 400 || res.body.code == 401) {
@@ -180,6 +209,7 @@
 						return false
 					}
 					if (res.body.status) {
+						this.dialogVisible = false
 						if (index == 0 || index) {
 							this.payments.splice(index, 1)
 						} else {
@@ -208,7 +238,8 @@
 					return false
 				}
 				this.id = this.checkData.join(',')
-				this.pay();
+				this.dialogVisible = true
+				
 			},
 			//列表接口
 			paymentList() {
@@ -231,7 +262,7 @@
 					}
 				})
 			},
-			
+
 			handleCommand(command) {
 				switch (command) {
 					case '0':
@@ -293,6 +324,9 @@
 			this.paymentList();
 		},
 		watch: {
+			money(){
+				this.money = this.repmoney(this.money)
+			},
 			value1() {
 				if (this.value1 == null) {
 					this.items.startTime = ""
@@ -482,7 +516,7 @@
 		min-height: 322px;
 		display: flex;
 		flex-flow: row wrap;
-		align-items: center; 
+		align-items: center;
 		justify-content: center;
 		border-left: 1px solid #e8e8e8;
 		border-bottom: 1px solid #e8e8e8;

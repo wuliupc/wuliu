@@ -3,6 +3,9 @@
 		<p class="info_cell f14 c666 tl bg_white">12位销货方秘钥串：{{info.order.key}}</p>
 		<p class="info_cell f14 c666 tl">销货方姓名：{{info.saleName}}</p>
 		<p class="info_cell f14 c666 tl bg_white">销货方手机号：{{info.saleMobile}}</p>
+		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
+		</p>
 		<p class="info_cell f14 c666 tl">货物名称：{{info.order.name}}</p>
 		<p class="info_cell f14 c666 tl bg_white">货物重量：毛重{{info.sendRough}}t 皮重{{info.sendTare}}t 净重{{info.sendSuttle}}t</p>
 		<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣吨{{info.deductTon}}t</p>
@@ -16,9 +19,7 @@
 		<p class="info_cell f14 c666 tl">行车时间：{{info.timediff}}</p>
 		<p class="info_cell f14 c666 tl bg_white">行车路程：{{info.order.km||0}}公里</p>
 		<router-link :to="'/map?id='+info.id+'&is_sys='+info.order.is_sys" target="_blank"><p class="info_cell f14 c666 tl bg_white">生成完整路线图 <img src="../../assets/img/rarraw.png" class="fr mt18"></p></router-link>
-		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
-			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>
-		</p>
+		
 		<p class="info_cell f14 c666 tl">
 			<el-upload class="avatar-uploader" style="margin-top: 20px;" :action="URL+'index/personal/upThumb'" :data='user'  :show-file-list="false"
 			 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
