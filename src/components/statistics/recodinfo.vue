@@ -9,7 +9,8 @@
 		<p class="info_cell f14 c666 tl bg_white">货物金额：{{info.money}}元</p>
 		<p class="info_cell f14 c666 tl">货车司机姓名：{{info.carName}}</p>
 		<p class="info_cell f14 c666 tl bg_white">货车司机手机号：{{info.carMobile}}</p>
-		<p class="info_cell f14 c666 tl">车牌号：{{info.carNumber}}</p>
+		<p class="info_cell f14 c666 tl">车牌号：{{info.carNumber}}
+		<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button></p>
 		<p class="info_cell f14 c666 tl bg_white">始发地：{{info.order.startAddress||"暂无信息"}}</p>
 		<p class="info_cell f14 c666 tl">到达地：{{info.dest.province}}{{info.dest.city}}{{info.dest.area}}{{info.dest.address}}</p>
 		<p class="info_cell f14 c666 tl bg_white">发货时间：{{info.sendTime}}</p>
@@ -30,6 +31,7 @@
 	import tools from '../../module/common.js';
 	import store from '../../vuex/store.js'
 	let R = tools.R
+	let S = tools.S
 	export default {
 		data() {
 			return {
@@ -41,6 +43,10 @@
 		},
 		
 		methods: {
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			orderInfo(id) {
 				R.post({
 					url: 'index/api/orderInfo',

@@ -22,9 +22,18 @@
 				<el-button class="recode_find" @click="clear()">清空</el-button>
 
 			</div>
+			<div class="payment_btn mt20">
+				<button @click="downTable()">下载表格</button>
+				<button @click="downCar()">下载货车信息</button> 
+			</div>
 		</div>
 		<div class="buy_list bg_white flex c666 f14 tl line1 mt20" v-for="item in list">
-			<div>
+			<label>
+				<!-- v-model 双向数据绑定命令 -->
+				<input class="checkItem" type="checkbox" :value="item.id" v-model="checkData">
+			</label>
+			<div style="width: 80%;">
+				
 				<p>12位销货方秘钥串：{{item.key}}</p>
 				<p>销货方姓名：{{item.saleName}}</p>
 				<p>货物名称：{{item.name}}</p>
@@ -54,7 +63,9 @@
 		data() {
 			return {
 				checkstr: '12位销货方秘钥串',
+				checkData: [], // 双向绑定checkbox数据数组
 				value1: '',
+				URL: tools.URL,
 				items: {
 					type: 2, // 参数值 1为我要购货  2为购货记录
 					page: 1, // 参数值 默认 1
@@ -69,6 +80,28 @@
 			};
 		},
 		methods: {
+			//下载货车信息
+			downCar() {
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载货车信息',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href = `${this.URL}index/Financecommon/zipPhoto/ids/${this.checkData.join(',')}`
+			},
+			//下载表格
+			downTable() {
+				if (this.checkData.length == 0) {
+					this.$message({
+						message: '请选择下载表格数据',
+						type: 'warning',
+					});
+					return false
+				}
+				window.location.href = `${this.URL}index/Financecommon/export/ids/${this.checkData.join(',')}`
+			},
 			search() {
 				this.items.page = 1;
 				this.wantBuy();

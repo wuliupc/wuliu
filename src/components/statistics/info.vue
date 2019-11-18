@@ -4,7 +4,8 @@
 			<p class="info_cell f14 c666 tl bg_white">12位销货方秘钥串：{{info.order.key}}</p>
 			<p class="info_cell f14 c666 tl">销货方姓名：{{info.saleName}}</p>
 			<p class="info_cell f14 c666 tl bg_white">销货方手机号：{{info.saleMobile}}</p>
-			<p class="info_cell f14 c666 tl">货车方车牌号：{{info.carNumber}}</p>
+			<p class="info_cell f14 c666 tl">货车方车牌号：{{info.carNumber}}
+			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button></p>
 			<p class="info_cell f14 c666 tl bg_white">货车方手机号：{{info.carMobile}}</p>
 			<p class="info_cell f14 c666 tl">货物名称：{{info.order.name}}</p>
 			<p class="info_cell f14 c666 tl bg_white">货物重量：毛重{{info.sendRough}}t 皮重{{info.sendTare}}t 净重{{info.sendSuttle}}t</p>
@@ -64,6 +65,7 @@
 <script>
 	import tools from '../../module/common.js';
 	let R = tools.R
+	let S = tools.S
 	export default {
 		data() {
 			return {
@@ -77,6 +79,10 @@
 			}
 		},
 		methods: {
+			gocarinfo(){
+				S.set('carinfo',this.info);
+				this.$router.push('/carinfo')
+			},
 			more(e) {
 				if (this.info.status == '待发货') {
 					this.$message({
