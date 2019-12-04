@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 import map from '../components/map.vue'; //地图
 import login from '../components/login.vue'; //登录
 import register from '../components/register.vue'; //注册
+import forget from '../components/forget.vue'; //忘记密码
 import statistics_home from '../components/statistics/home.vue'; //统计端首页
 import statistics_buy from '../components/statistics/buy.vue';
 import statistics_recode from '../components/statistics/recode.vue';
@@ -55,8 +56,7 @@ const routes = [{
 		}, {
 			path: '/statistics_user',
 			component: statistics_user,
-			children: [
-				{
+			children: [{
 					path: '/statistics_fin_phone',
 					component: statistics_fin_phone
 				},
@@ -102,7 +102,7 @@ const routes = [{
 			path: '/statistics_recodeinfo',
 			component: statistics_recodeinfo
 		}]
-	},{
+	}, {
 		path: '/map',
 		component: map
 	},
@@ -110,13 +110,16 @@ const routes = [{
 		path: '/register',
 		component: register
 	}, {
+		path: '/forget',
+		component: forget
+	}, {
 		path: '/login',
 		component: login
 	}, {
 		path: '*',
 		redirect: '/login'
 	}, /*默认跳转路由*/
-	{ 
+	{
 		path: '/finance_index',
 		component: finance_index,
 		redirect: '/finance_payment',
@@ -126,7 +129,7 @@ const routes = [{
 			}, {
 				path: '/carinfo',
 				component: () => import('@/components/finance/carinfo.vue'),
-			},{
+			}, {
 				path: '/finance_voucher',
 				component: finance_voucher
 			}, {
@@ -135,7 +138,7 @@ const routes = [{
 			}, {
 				path: '/finance_invoice',
 				component: finance_invoice
-			},{
+			}, {
 				path: '/finance_invoice_detail',
 				component: finance_invoice_detail
 			},
@@ -145,13 +148,13 @@ const routes = [{
 			}, {
 				path: '/finance_pay_success',
 				component: finance_pay_success,
-			},{
+			}, {
 				path: '/finance_payment_detail',
 				component: finance_payment_detail,
-			},{
+			}, {
 				path: '/finance_paied_detail',
 				component: finance_paied_detail
-			},{
+			}, {
 				path: '/finance_voucher_detail',
 				component: finance_voucher_detail
 			}
@@ -164,10 +167,10 @@ const routes = [{
 		children: [{
 				path: '/ballot_dopen',
 				component: ballot_dopen,
-			},{
+			}, {
 				path: '/ballot_yopen',
 				component: ballot_yopen,
-			},{
+			}, {
 				path: '/ballot_info',
 				component: ballot_info,
 			},

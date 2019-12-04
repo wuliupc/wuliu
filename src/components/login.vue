@@ -7,6 +7,7 @@
 				<div><input :type="show?'password':'text'" placeholder="请输入登录密码" v-model="password" /> <img src="../assets/img/biyan.png"
 					 v-show="show" @click="show=!show" /><img src="../assets/img/yanjing.png" v-show="!show" @click="show=!show" />
 				</div>
+				<dir class="forget"><router-link to="/forget">忘记密码？</router-link></dir>
 				<dir style="width: 80%;margin: 50px 0 30px;">
 					<el-button type="info" disabled class="login_btn" v-show="disabled">立即登录</el-button>
 					<el-button type="info" class="login_btn bg_green" @click="login()" v-show="!disabled">立即登录</el-button>
@@ -115,6 +116,11 @@
 </script>
 
 <style>
+	.forget{
+		text-align: right;
+		display: block;
+		margin-right: 20px;
+	}
 	#login {
 		width: 100%;
 		background-image: url(../assets/img/1920x1080.png);
