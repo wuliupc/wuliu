@@ -25,7 +25,7 @@
 		<!-- <a href="javascript:" v-if="info.status=='待结款'" @click="pay(info.id)"><p class="info_cell f14 c666 tl bg_white">确认结款<img src="../../assets/img/rarraw.png" class="fr mt18"></p></a> -->
 		<el-button v-if="info.status=='待结款'" @click="dialogVisible = true" type="success">确认结款</el-button>
 <el-dialog title="请输入结款金额" :visible.sync="dialogVisible" width="30%">
-			<el-input v-model="money" placeholder="请输入金额"></el-input>
+			<el-input v-model="money" placeholder="请输入金额(单价/吨)"></el-input>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="success" plain @click="dialogVisible = false">取 消</el-button>
 				<el-button type="success" @click="pay(info.id)">确 定</el-button>

@@ -63,9 +63,9 @@
 		},
 		watch: {
 			$route(to, from) {
-				//console.log(this.$route.params); /*获取动态路由传值*/
-				this.items.type = this.$route.params.type
-				this.finance(this.$route.params.type)
+				//console.log(this.$route.query); /*获取动态路由传值*/
+				this.items.type = this.$route.query.type
+				this.finance(this.$route.query.type)
 			}
 		},
 		methods:{
@@ -171,8 +171,8 @@
 		},
 		mounted() {
 		//	console.log(this.$route.params); /*获取动态路由传值*/
-		this.items.type = this.$route.params.type
-		this.finance(this.$route.params.type)
+		this.items.type = this.$route.query.type
+		this.finance(this.$route.query.type)
 		}
 	}
 </script>

@@ -11,13 +11,35 @@
 			<div class="authen_file flex f14 c666">
 				<p>公司营业执照编号</p> <input type="text" placeholder="公司营业执照编号" class="f12" v-model="items.businessNumber" :readonly="status==3||status==0&&read">
 			</div>
-			<div class="authen_file flex f14 c666">
+			<div class="authen_file flex f14 c666 bg">
 				<p>上传营业执照</p>
 				<div v-if="status!=1&&read"><img v-if="imageUrl" :src="imageUrl" class="avatar" alt="暂无营业执照" /></div>
 				<div v-if="status==1||!read">
 					<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :show-file-list="false" :data='user'
 					 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
 						<img v-if="imageUrl" :src="imageUrl" class="avatar">
+						<img src="../../assets/img/camera.png" v-else>
+					</el-upload>
+				</div>
+			</div>
+			<div class="authen_file flex f14 c666 carbg">
+				<p>企业法人身份证正面</p>
+				<div v-if="status!=1&&read"><img v-if="cardImgA" :src="cardImgA" class="avatar" alt="暂无营业执照" /></div>
+				<div v-if="status==1||!read">
+					<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :show-file-list="false" :data='user'
+					 :on-success="cardImgAhandleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
+						<img v-if="cardImgA" :src="cardImgA" class="avatar">
+						<img src="../../assets/img/camera.png" v-else>
+					</el-upload>
+				</div>
+			</div>
+			<div class="authen_file flex f14 c666 carbg">
+				<p>企业法人身份证反面</p>
+				<div v-if="status!=1&&read"><img v-if="cardImgB" :src="cardImgB" class="avatar" alt="暂无营业执照" /></div>
+				<div v-if="status==1||!read">
+					<el-upload class="avatar-uploader" :action="URL+'index/personal/upThumb'" :show-file-list="false" :data='user'
+					 :on-success="cardImgBhandleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-progress="uploading">
+						<img v-if="cardImgB" :src="cardImgB" class="avatar">
 						<img src="../../assets/img/camera.png" v-else>
 					</el-upload>
 				</div>
@@ -55,13 +77,17 @@
 				show: false,
 				URL: tools.URL,
 				imageUrl: '',
+				cardImgA:'',
+				cardImgB:'',
 				status: "",
 				refuse: '',
 				user:{},
 				items: {
 					businessName: '', //企业名称
 					businessNumber: '', //营业执照号
-					license: '' //图片 
+					license: '' ,//图片 
+					cardImgA:'',
+					cardImgB:'',
 				}
 			};
 		},
@@ -74,6 +100,40 @@
 					spinner: 'el-icon-loading',
 					background: 'rgba(0, 0, 0, 0.7)'
 				});
+			},
+			cardImgAhandleAvatarSuccess(res, file){
+				this.cardImgA = URL.createObjectURL(file.raw);
+					this.loading.close();
+					if (res.status) {
+						this.items.cardImgA = res.url
+						this.$message({
+							message: res.msg,
+							type: "success"
+						});
+					} else {
+						this.$message({
+							message: res.msg,
+							type: "warning"
+						});
+				
+					}
+			},
+			cardImgBhandleAvatarSuccess(res, file){
+				this.cardImgB = URL.createObjectURL(file.raw);
+					this.loading.close();
+					if (res.status) {
+						this.items.cardImgB = res.url
+						this.$message({
+							message: res.msg,
+							type: "success"
+						});
+					} else {
+						this.$message({
+							message: res.msg,
+							type: "warning"
+						});
+				
+					}
 			},
 			handleAvatarSuccess(res, file) {
 				this.imageUrl = URL.createObjectURL(file.raw);
@@ -156,7 +216,11 @@
 					this.items.businessName = this.$store.state.userinfo.businessName
 					this.items.businessNumber = this.$store.state.userinfo.businessNumber
 					this.items.license = this.$store.state.userinfo.license
+					this.items.cardImgA = this.$store.state.userinfo.cardImgA
+					this.items.cardImgB = this.$store.state.userinfo.cardImgB
 					this.imageUrl = this.$store.state.userinfo.license
+					this.cardImgA = this.$store.state.userinfo.cardImgA
+					this.cardImgB = this.$store.state.userinfo.cardImgB
 					this.status = this.$store.state.userinfo.status
 					this.refuse = this.$store.state.refuse
 					console.log(this.$store.state)
@@ -195,11 +259,15 @@
 		padding: 0 19px;
 		border: 1px solid #DDDDDD;
 	}
-
+	.carbg>div{
+		background-image: url(../../assets/img/carbg.png);
+	}
+	.bg>div{
+		background-image: url(../../assets/img/business.png);
+	}
 	.authen_file>div {
 		width: 281px;
 		height: 173px;
-		background-image: url(../../assets/img/business.png);
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 	}

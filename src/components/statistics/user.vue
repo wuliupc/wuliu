@@ -54,11 +54,11 @@
 					},
 					{
 						title: '财务端信息',
-						url: '/statistics_financialinfo/4'
+						url: '/statistics_financialinfo?type=4'
 					},
 					{
 						title: '开票端信息',
-						url: '/statistics_financialinfo/5'
+						url: '/statistics_financialinfo?type=5'
 					},
 					// {
 					// 	title: '联系客服',

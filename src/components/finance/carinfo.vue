@@ -7,7 +7,6 @@
 		<p class="info_cell f14 c666 tl">身份证反面 ：</p>
 		<img :src="carinfo.user.cardImgB" alt="" style="width: 100%;">
 		<p class="info_cell f14 c666 tl bg_white">车牌号：{{carinfo.car.carNumber}}</p>
-		<p class="info_cell f14 c666 tl">驾驶证号：{{carinfo.car.driveNumber}}</p>
 		<p class="info_cell f14 c666 tl bg_white">驾驶证：</p>
 		<img :src="carinfo.car.driveImg" alt="" style="width: 100%;">
 		<p class="info_cell f14 c666 tl bg_white">行驶证：</p>

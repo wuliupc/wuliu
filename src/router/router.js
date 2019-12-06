@@ -69,7 +69,7 @@ const routes = [{
 					component: statistics_customer
 				},
 				{
-					path: '/statistics_financialinfo/:type',
+					path: '/statistics_financialinfo',
 					component: statistics_financialinfo
 				},
 				{
