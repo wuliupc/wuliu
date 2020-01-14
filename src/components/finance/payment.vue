@@ -75,7 +75,7 @@
 						<ul>
 							<li>货物到达实际重量</li>
 							<li style="padding-left: 13px;">毛重{{payment.arriveRough}}t 皮重{{payment.arriveTare}}t 净重{{payment.arriveSuttle}}t
-								扣吨{{payment.deductTon}}t</li>
+						扣水{{payment.deductWater}}t 扣杂{{payment.deductMix}}t 扣吨{{payment.deductTon}}t</li>
 						</ul>
 					</div>
 					<div class="payment_list_two_lab">

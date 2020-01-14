@@ -15,7 +15,7 @@
 				<p class="info_cell f14 c666 tl">实时地图<img src="../../assets/img/rarraw.png" class="fr mt18"></p>
 			</router-link>
 			<p class="info_cell f14 c666 tl bg_white">状态：{{info.status}}</p>
-			<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t
+			<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣水{{info.deductWater}}t 扣杂{{info.deductMix}}t 扣重{{info.deductTon}}t
 				<el-button type="danger" round class="fr mt18 mr10" @click='more(2)' v-if="info.status=='销货方通过'">拒绝</el-button>
 				<el-button type="primary" round class="fr mt18 mr10" @click='more(1)' v-if="info.status=='销货方通过'">确认</el-button>
 			</p>
@@ -42,8 +42,10 @@
 						<p class="tc f14" style="padding-top: 4rem;">请确认货物到达实际重量</p>
 						<p class="tc f14" style="margin-top: 0.5rem;">毛重 {{info.arriveRough}}t</p>
 						<p class="tc f14" style="margin-top: 0.5rem;">皮重 {{info.arriveTare}}t</p>
-						<p class="tc f14" style="margin-top: 0.5rem;">净重 {{info.arriveSuttle}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">扣水 {{info.deductWater}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">扣杂  {{info.deductMix}}t</p>
 						<p class="tc f14" style="margin-top: 0.5rem;">扣重 {{info.deductTon}}t</p>
+						<p class="tc f14" style="margin-top: 0.5rem;">净重 {{info.arriveSuttle}}t</p>
 						<p style="margin-top: 0.5rem;">
 							<el-button type="success" round class="f16" @click="queren=!queren">
 								确认

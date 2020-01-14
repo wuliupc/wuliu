@@ -38,7 +38,7 @@
 				<p>销货方姓名：{{item.saleName}}</p>
 				<p>货物名称：{{item.name}}</p>
 				<p>货物重量：毛重{{item.sendRough}}t 皮重{{item.sendTare}}t 净重{{item.sendSuttle}}t</p>
-				<p>货物到达实际重量：毛重{{item.arriveRough}}t 皮重{{item.arriveTare}}t 净重{{item.arriveSuttle}}t 扣重{{item.deductTon}}t</p>
+				<p>货物到达实际重量：毛重{{item.arriveRough}}t 皮重{{item.arriveTare}}t 净重{{item.arriveSuttle}}t 扣水{{item.deductWater}}t 扣杂{{item.deductMix}}t 扣重{{item.deductTon}}t</p>
 				<p>到达地：{{item.dest}}</p>
 				<p>状态：{{item.status}}</p>
 			</div>

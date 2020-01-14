@@ -5,7 +5,7 @@
 		<p class="info_cell f14 c666 tl bg_white">销货方手机号：{{info.saleMobile}}</p>
 		<p class="info_cell f14 c666 tl">货车端车牌号：{{info.carNumber}}</p>
 		<p class="info_cell f14 c666 tl bg_white">货物名称：{{info.order.name}}</p>
-		<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣重{{info.deductTon}}t</p>
+		<p class="info_cell f14 c666 tl">货物到达实际重量：毛重{{info.arriveRough}}t 皮重{{info.arriveTare}}t 净重{{info.arriveSuttle}}t 扣水{{info.deductWater}}t 扣杂{{info.deductMix}}t 扣重{{info.deductTon}}t</p>
 		<p class="info_cell f14 c666 tl bg_white">货物金额：{{info.money}}元</p>
 		<p class="info_cell f14 c666 tl ">货车端车牌号：{{info.carNumber}}
 			<el-button type="success " class="fr mt10" @click="gocarinfo()">查看车辆信息</el-button>

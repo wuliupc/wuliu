@@ -16,6 +16,7 @@
 					<router-link to="/register">立即注册</router-link>
 				</p>
 			</div>
+			<p style="    position: absolute;bottom: 10px;text-align: center;left: 45%;"><a href="http://www.beian.miit.gov.cn" style="color: #fff !important;">备案号：冀ICP备19028608号-1</a></p>
 		</div>
 	</div>
 </template>
